@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.jeecms.cms.entity.assist">
+	<class name="MisStatus2" table="mis_status2">
+		
+		<composite-id>
+		<key-property name="dataid" column="dataid" type="string" />
+		<key-property name="hjmc" column="hjmc" type="string" />
+		</composite-id>
+		<property name="fl" column="fl" type="string" />
+		<property name="bh" column="bh" type="string" />
+		<property name="blbm" column="blbm" type="string" />
+		<property name="jssj" column="jssj" type="timestamp" />
+		<property name="blsj" column="blsj" type="timestamp" />
+		<property name="bljg" column="bljg" type="string" />
+	</class>
+</hibernate-mapping>

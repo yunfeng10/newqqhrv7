@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>齐齐哈尔市自然资源局</title>
+    <link rel="stylesheet" href="/${res}/css/reset.css">
+    <link rel="stylesheet" href="/${res}/css/style.css">
+    <!-- <script src="/${res}/js/jQuery-1.11.3.min.js"></script> -->
+    <script src="${resSys}/jquery.js" type="text/javascript"></script>
+    <script src="/${res}/js/velocity.min.js"></script>
+    <script src="/${res}/js/swiper.js"></script>
+    <script src="/${res}/js/tab.js"></script>
+</head>
+<body>
+    [#include "../include/header.html"/]
+    <!-- 页面主体 -->
+    <div class="main w1100 clearfix online sub-wsbs">
+        <!-- 左侧栏目 -->
+        <div class="sidebar fl">
+            <h3 class="top">网上办事</h3>
+            <ul>
+                <li>
+                    <a href="http://zxsb.hljlr.gov.cn/Login.aspx" target="_blank" class="gicon-01">在线申报</a>
+                </li>
+                [@cms_channel id='148']
+                <li [#if channel.id==tag_bean.id] class="selected" [/#if]>
+                    <a href="${tag_bean.url}" class="gicon-02">办事指南</a>
+                </li>
+                [/@cms_channel]
+                [@cms_channel id='149']
+                <li [#if channel.id==tag_bean.id] class="selected" [/#if]>
+                    <a href="${tag_bean.url}" class="gicon-03">收费标准</a>
+                </li>
+                [/@cms_channel]
+                [@cms_channel id='314']
+                <li [#if channel.id==tag_bean.id] class="selected" [/#if]>
+                    <a href="${tag_bean.url}" class="gicon-04">文件下载</a>
+                </li>
+                [/@cms_channel]
+                [@cms_channel id='150']
+                <li [#if channel.id==tag_bean.id] class="selected" [/#if]>
+                    <a href="${tag_bean.url}" class="gicon-04">我要办事</a>
+                </li>
+                [/@cms_channel]
+            </ul>
+        </div>
+        <div class="right">
+            <div class="location">
+                当前位置：
+                	<a href="${base}/">首页</a> > 
+               		[#list channel.nodeList as n]
+               			<a href="${n.url}" target="_blank">${n.name}</a>
+               			[#if n_has_next] > [/#if]
+               		[/#list]
+            </div>
+            [@cms_content_page channelId=channel.id count='20' titLen='15' append='...'  orderBy='2'  dateFormat='yyyy-MM-dd'  channelOption='1']
+				<div class="arc-list">
+					<ul>
+						[#list tag_pagination.list as a]
+						<li>
+							<span class="fr">${a.date?string(dateFormat)}</span>
+							<a href="${a.url}" target=_blank>[@text_cut s=a.title len=titLen append=append/]</a>
+						</li>
+						[/#list]
+					</ul>
+				</div>
+				[@cms_pagination sysPage='1'/]
+			[/@cms_content_page]
+
+        </div>
+    </div>
+    <!-- 页面主体 end -->
+    [#include "../include/footer.html"/]
+    <script>
+        // 导航轮播图
+        new Swiper({
+            wrapper: $('#swiper-hd'),
+            timeLen: 5
+        })
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>齐齐哈尔市自然资源局</title>
+<link rel="stylesheet" href="/${res}/css/reset.css">
+<link rel="stylesheet" href="/${res}/css/style.css">
+<script src="${resSys}/jquery.js" type="text/javascript"></script>
+<script src="/${res}/js/velocity.min.js"></script>
+<script src="/${res}/js/swiper.js"></script>
+<script src="/${res}/js/tab.js"></script>
+<link rel="stylesheet"
+	href="/${res}/datatable/css/jquery.dataTables.css">
+<script src="/${res}/datatable/js/jquery.dataTables.js"></script>
+<style type="text/css">
+	.hiddenCol{
+		display:none;
+	}
+</style>
+</head>
+<body>
+	[#include "../include/header.html"/]
+	<!-- 页面主体 -->
+	<div class="main w1100 clearfix online">
+		<!-- 左侧栏目 -->
+		<div class="sidebar fl">
+			<h3 class="top">公众互动</h3>
+			<ul>
+				<li>[@cms_channel id='161'] <a href="${tag_bean.url}"
+					class="gicon-01">在线访谈</a> [/@cms_channel]
+				</li>
+				<li >[@cms_channel id='311'] <a
+					href="${tag_bean.url}" class="gicon-02">局长信箱</a> [/@cms_channel]
+				</li>
+				<li class="selected">[@cms_channel id='312'] <a href="${tag_bean.url}"
+					class="gicon-03">在线咨询</a> [/@cms_channel]
+				</li>
+				<li>[@cms_channel id='313'] <a href="${tag_bean.url}"
+					class="gicon-04">网上调查</a> [/@cms_channel]
+				</li>
+			</ul>
+		</div>
+		<div class="right">
+			<div class="location">
+				<!-- 当前位置：<a href="#">首页</a> > <a href="#">公众互动</a> > 局长信箱 -->
+					当前位置：
+                	<a href="${base}/">首页</a> > 
+               		[#list channel.nodeList as n]
+               			<a href="${n.url}" target="_blank">${n.name}</a>
+               			[#if n_has_next] > [/#if]
+               		[/#list]
+
+			</div>
+			<div class="desc">
+				<h4 class="colum-title">栏目说明</h4>
+				<ul>
+					<li>一、请您自觉遵守中华人民共和国宪法和法律。</li>
+					<li>二、您可以对国土资源局的工作提出意见或建议，也可以就国土资源有关法律、法规和政策问题进行咨询。</li>
+					<li>
+						三、您应对来信内容的真实性、客观性负责，信中不要有造谣、诽谤、攻击他人的内容和言论。否则，您将承担由此而引发的一切法律责任。</li>
+					<li>四、请勿发表任何形式的广告和推介企业产品或服务等内容。</li>
+					<li>五、请您真实、准确地填写您联系方式的信息，以便与您联系，我们将依法保护您的隐私权，保守您的联系方式等信息秘密。</li>
+					<li>六、您联系方式的信息如不真实、不准确，系统将不予接受无法受理。</li>
+				</ul>
+			</div>
+			<div class="form-box">
+				<form action="${base}/guestbook.jspx" method="post"
+					id="guestbookForm">
+					<input type="hidden" name="ctgId" value=4></>
+					<table width="100%">
+						<tr>
+							<td colspan="4">个人信息是否公开： <label><input type="radio"
+									value="True" name="grxxgk" checked> 公开</label> <label><input
+									type="radio" name="grxxgk" value="False"> 不公开</label>
+							</td>
+						</tr>
+						<tr>
+							<td width="120" align="right">姓 名：</td>
+							<td><input type="text" size="30" id="name" name="xm">
+								<em>*</em></td>
+							<td width="120" align="right">问题发生地址：</td>
+							<td><input type="text" size="30" id="wtaddr" name="wtfsd">
+								<em>*</em></td>
+						</tr>
+						<tr>
+							<td width="120" align="right">电 话：</td>
+							<td><input type="text" size="30" id="phone" name="phone">
+								<em>*</em></td>
+							<td width="120" align="right">通 讯 地 址：</td>
+							<td><input type="text" size="30" id="txaddr" name="txdz">
+								<em>*</em></td>
+						</tr>
+						<tr>
+							<td width="120" align="right">邮 编：</td>
+							<td><input type="text" size="30" id="yzcode" name="yb">
+								<em>*</em></td>
+							<td width="120" align="right">E-mail：</td>
+							<td><input type="text" size="30" id="email" name="email">
+								<em>*</em></td>
+						</tr>
+						<tr>
+							<td colspan="4">信息是否公开： <label><input type="radio"
+									value="True" name="xjsfgk" checked> 公开</label> <label><input
+									type="radio" name="xjsfgk" value="False"> 不公开</label>
+							</td>
+						</tr>
+						<tr>
+							<td width="120" align="right">标 题：</td>
+							<td colspan="3"><input type="text" size="50" id="title"
+								name="title"> <em>*</em></td>
+						</tr>
+						<tr>
+							<td width="120" align="right" valign="top">内 容：</td>
+							<td colspan="3"><textarea rows="6" cols="70" id="content"
+									name="content"></textarea> <em>*</em></td>
+						</tr>
+						<tr>
+							<td width="120" align="right">验证码：</td>
+							<td colspan="3"><input type="text" name="captcha" size="10"><img
+								id="guestbookCaptcha" src="${base}/captcha.svl"
+								onclick="this.src='${base}/captcha.svl?d='+new Date()" /></td>
+						</tr>
+						<tr>
+							<td colspan="4" class="tc"><input type="button" value="重 置 "
+								id="reset-btn"> <input type="submit" value="提 交 "
+								id="submit-btn"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="reply-box">
+				<h4 class="colum-title">
+					回复选登
+					<p id="detailcount"></p>
+				</h4>
+				<div class="search">
+					<strong class="fl">信件查询</strong>
+					<div class="fr">
+						<form action="#" method="GET">
+							姓名：<input type="text" id="q_xm"> 查询码：<input type="text"
+								id="q_cxm"> <input type="button" value=" 查 询 " id="query-btn">
+						</form>
+					</div>
+				</div>
+				<div class="list">
+					<table width="100%" id="dataTable">
+						<thead>
+							<tr>
+								<th class="hiddenCol"></th>
+								<th align="left">编号</th>
+								<th align="left">标题</th>
+								<th align="left">回复时间</th>
+								<th align="left">点击次数</th>
+							</tr>
+						<thead>
+					</table>
+				</div>
+				<div id="page_box"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 页面主体 end -->
+
+	<!-- 页面底部 end -->
+	<script>
+
+	// 表单
+	var phoneRegExp = /^1[34578]\d{9}$/, ybcodeRegExp = /^[1-9][0-9]{5}$/, emailRegExp = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+	var message = [ {
+		el : $('#name'),
+		msg : '姓名不能为空'
+	}, {
+		el : $('#wtaddr'),
+		msg : '问题发生地址不能为空'
+	}, {
+		el : $('#phone'),
+		msg : '电话不能为空',
+		reg : phoneRegExp,
+		msg2 : '电话格式不正确'
+	}, {
+		el : $('#txaddr'),
+		msg : '通讯地址不能为空'
+	}, {
+		el : $('#yzcode'),
+		msg : '邮编不能为空',
+		reg : ybcodeRegExp,
+		msg2 : '邮编格式不正确'
+	}, {
+		el : $('#email'),
+		msg : '邮箱不能为空',
+		reg : emailRegExp,
+		msg2 : '邮箱格式不正确'
+	}, {
+		el : $('#title'),
+		msg : '标题不能为空'
+	}, {
+		el : $('#content'),
+		msg : '内容不能为空'
+	} ];
+	// 提交事件
+	$('#submit-btn').on(
+			'click',
+			function(ev) {
+				ev.stopPropagation();
+				for (var i = 0; i < message.length; i++) {
+					var valText = $.trim(message[i].el.val())
+					if (valText == '') {
+						alert(message[i].msg)
+					} else if (typeof message[i].reg !== 'undefined'
+							&& !message[i].reg.test(valText)) {
+						alert(message[i].msg2)
+					} else {
+						continue
+					}
+					message[i].el.focus()
+					return false
+				}
+				var options = {
+					url : '../guestbook.jspx',
+					type : 'post',
+					dataType : 'json',
+					data : $("#guestbookForm").serialize(),
+					success : function(data) {
+						if (data.status == 0) {
+							alert("留言成功");
+							location.href = location.href;
+						} else if (data.status == 1) {
+							alert("验证码错误");
+							$("#guestbookCaptcha").click();
+						}
+					}
+				};
+				$.ajax(options);
+				return false;
+			});
+	// 重置事件
+	$('#reset-btn').on('click', function(ev) {
+		ev.stopPropagation()
+		for (var i = 0; i < message.length; i++) {
+			message[i].el.val('');
+		}
+		message[0].el.focus();
+	});
+	
+	var initDataTable = function(xm,cxm,rebuile){
+		if(rebuile){
+			oTable.fnDestroy(); 
+		}
+	    oTable = $('#dataTable').dataTable( {  
+	         "ajax": {  
+	             "url": "../dtguestbook.jspx",
+	             "type": "POST",
+	             "dataSrc": "aaData",   
+	             "data": function ( d ) {  
+	            	 d.xm = xm;  
+	            	 d.cxm = cxm;  
+	                 d.ctgId = 4;  
+	             }  
+	         }, 
+	         "aoColumns": [
+	             {    "mData": "dataId" ,
+	            	 "sClass":"hiddenCol",
+	                 "bSearchable": false,
+	                 "bStorable": false
+	             },{    "mData": "dataIndex",
+	                 "sWidth": "10%",
+	                 "bSearchable": false,
+	                 "bStorable": false
+	             },{"mData": "title", 
+	                 "sWidth": "50%",
+	                 "bSearchable": false,
+	                 "bStorable": false,
+	                 "fnRender":function(obj){
+	                	 return "aaa";
+	                 }
+	             },
+	             {    "mData": "createDate",
+	                 "sWidth": "20%",
+	                 "bSearchable": false,
+	                 "bStorable": false
+	             },
+	             {    "mData": "djcs" ,
+	                 "sWidth": "20%",
+	                 "bSearchable": false,
+	                 "bStorable": false
+	             }
+	         ],
+	         "bPaginate": true, //开关，是否显示分页器
+	         "lengthChange": false,
+	         "bServerSide": true,//服务器端分页
+	         "bSort": false, //开关，是否启用各列具有按列排序的功能
+	         "bSortClasses": false,
+	         "bFilter": false, //开关，是否启用客户端过滤器
+	         "sSearch" : false, //不过滤
+	         "sAjaxDataProp":  "rows",  //服务器端返回的json中对象数组对应的key
+	         "bAutoWidth": false, //自动设置宽度关闭
+	         "aoColumnDefs" : [ {
+			 　　　　　  sDefaultContent : '',
+			         　　aTargets : [ '_all' ]
+			         } ],
+	         "oLanguage": {
+	             "sProcessing": "正在加载中......",
+	             "sLengthMenu": "每页显示 _MENU_ 条记录",
+	             "sZeroRecords": "对不起，查询不到相关数据！",
+	             "sEmptyTable": "表中无数据存在！",
+	             "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+	             "sInfoFiltered": "数据表中共为 _MAX_ 条记录",
+	             "sInfoEmpty" : "显示0到0条记录",
+	             "sSearch": "搜索",
+	             "oPaginate": {
+	                 "sFirst": "首页",
+	                 "sPrevious": "上一页",
+	                 "sNext": "下一页",
+	                 "sLast": "末页"
+	             }
+	         } //多语言配置
+	     }); 
+	};
+	$(document).ready(function(){
+		var xm = $("#q_xm").val();  
+		var cxm = $("#q_cxm").val();
+		var oTable;
+		initDataTable(xm,cxm,false);
+
+		$("#dataTable").on("click","tr",function(){//给tr或者td添加click事件
+			var id = this.firstChild.innerHTML;
+			if(id){
+				window.location.href='../news_zxzx_detail.jspx?dataId='+id;
+			}
+				
+		});
+		$('#query-btn').on('click', function(ev) {
+			var xm = $("#q_xm").val();  
+			var cxm = $("#q_cxm").val();
+			initDataTable(xm,cxm,true);
+		});
+		var options = {
+				url : '../countguestbook.jspx?dataId=4',
+				dataType : 'json',
+				success : function(data) {
+					//有效信件 32封，回复 32 封，正在办理 0封
+					if(data.success){
+						var str="有效信件 "+data.total+"封，回复 "+data.reply+"封，正在办理"+data.notreply+"封";
+						$("#detailcount").html(str);
+					}
+				}
+			};
+			$.ajax(options);
+	});
+
+	</script>
+	[#include "../include/footer.html"/]
+</body>
+</html>

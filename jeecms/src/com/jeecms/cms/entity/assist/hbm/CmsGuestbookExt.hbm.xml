@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jeecms.cms.entity.assist">
+	<class name="CmsGuestbookExt" table="jc_guestbook_ext">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="guestbook_id">
+			<generator class="foreign"><param name="property">guestbook</param></generator>
+		</id>
+		<property name="title" column="title" type="string" not-null="false" length="255"/>
+		<property name="content" column="content" type="string" not-null="false"/>
+		<property name="reply" column="reply" type="string" not-null="false"/>
+		<property name="email" column="email" type="string" not-null="false" length="100"/>
+		<property name="phone" column="phone" type="string" not-null="false" length="100"/>
+		<property name="qq" column="qq" type="string" not-null="false" length="50"/>
+		<property name="grxxgk" column="grxxgk" type="string" not-null="false" length="200"/>
+		<property name="xm" column="xm" type="string" not-null="false" length="200"/>
+		<property name="wtfsd" column="wtfsd" type="string" not-null="false" length="200"/>
+		<property name="txdz" column="txdz" type="string" not-null="false" length="200"/>
+		<property name="yb" column="yb" type="string" not-null="false" length="200"/>
+		<property name="xjsfgk" column="xjsfgk" type="string" not-null="false" length="200"/>
+		<property name="cxm" column="cxm" type="string" not-null="false" length="200"/>
+		<property name="djcs" column="djcs" type="integer" not-null="false" length="11"/>
+		<one-to-one name="guestbook" class="CmsGuestbook" constrained="true"/>
+	</class>
+</hibernate-mapping>

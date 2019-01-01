@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jeecms.cms.entity.main">
+	<class name="Ysqgk" table="ysqgk">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="shenQingLeiXing" column="ShenQingLeiXing" type="java.lang.Integer"/>
+		<property name="gmXingMing" column="gmXingMing" type="string"/>
+		<property name="gmGongZuoDanWei" column="gmGongZuoDanWei" type="string"/>
+		<property name="gmZhengJianMingChen" column="gmZhengJianMingChen" type="string"/>
+		<property name="gmZhengJianHaoMa" column="gmZhengJianHaoMa" type="string"/>
+		<property name="gmLianXiDianHua" column="gmLianXiDianHua" type="string"/>
+		<property name="gmChuanZhen" column="gmChuanZhen" type="string"/>
+		<property name="gmLianXiDiZhi" column="gmLianXiDiZhi" type="string"/>
+		<property name="gmDianZiYouXiang" column="gmDianZiYouXiang" type="string"/>
+		<property name="gmYouZhengBianMa" column="gmYouZhengBianMa" type="string"/>
+		<property name="qtMingCheng" column="qtMingCheng" type="string"/>
+		<property name="qtFaRenDaiBiao" column="qtFaRenDaiBiao" type="string"/>
+		<property name="qtLianXiRenXingMing" column="qtLianXiRenXingMing" type="string"/>
+		<property name="qtJiGouDaiMa" column="qtJiGouDaiMa" type="string"/>
+		<property name="qtLianXiRenDianHua" column="qtLianXiRenDianHua" type="string"/>
+		<property name="qtChuanZhen" column="qtChuanZhen" type="string"/>
+		<property name="qtLianXiDiZhi" column="qtLianXiDiZhi" type="string"/>
+		<property name="qtDianZiYouXiang" column="qtDianZiYouXiang" type="string"/>
+		<property name="qtYouZhengBianMa" column="qtYouZhengBianMa" type="string"/>
+		<property name="shenQingShiJian" column="ShenQingShiJian" type="timestamp"/>
+		<property name="suoXuXinXiNeiRongMiaoShu" column="SuoXuXinXiNeiRongMiaoShu" type="string"/>
+		<property name="suoXuXinXiYongTu" column="SuoXuXinXiYongTu" type="string"/>
+		<property name="zhiDingTiGongFangShi" column="ZhiDingTiGongFangShi" type="string"/>
+		<property name="huoQuXinXiFangShi" column="HuoQuXinXiFangShi" type="string"/>
+		<property name="isApplyfree" column="IsApplyfree" type="java.lang.Integer"/>
+		<property name="reply" column="Reply" type="string"/>
+		<property name="searchNo" column="SearchNo" type="string"/>
+		
+		<list name="fileList" table="ysqgkfile">
+		<cache usage="read-write"/>
+			<key column="id"/>
+			<list-index column="priority"/>
+			<composite-element class="YsqgkFile">
+				<property name="attachmentPaths" column="attachmentPaths" type="string" />
+				<property name="attachmentNames" column="attachmentNames" type="string" />
+			</composite-element>
+		</list>
+	</class>
+</hibernate-mapping>

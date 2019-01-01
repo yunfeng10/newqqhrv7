@@ -1,0 +1,26 @@
+<!-- 国土资源系统 -->
+<div class="gtzy">
+    <div class="toper">
+        <h4 class="classify-title fl">
+            <i class="icon-07"></i>
+            <strong>友情连接</strong>
+        </h4>
+       <!--  <a href="#" class="more fr">更多></a> -->
+    </div>
+    <div class="list">
+        <ul class="clearfix">
+            <!-- <li><a href="#" title="">黑龙江省自然资源厅</a></li>
+            <li><a href="#" title="">黑龙江省自然资源厅</a></li>
+            <li><a href="#" title="">黑龙江省自然资源厅</a></li>
+            <li><a href="#" title="">黑龙江省自然资源厅</a></li>
+            <li><a href="#" title="">黑龙江省自然资源厅</a></li>
+            <li><a href="#" title="">黑龙江省自然资源厅</a></li>
+            <li><a href="#" title="">黑龙江省自然资源厅</a></li> -->
+            [@cms_friendlink_list]
+		        [#list tag_list as link]
+		        	<li><a href="${link.domain}" target="_blank">${link.name}</a></li> 
+		        [/#list]
+	        [/@cms_friendlink_list]
+        </ul>
+    </div>
+</div>

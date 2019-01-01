@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>齐齐哈尔市自然资源局</title>
+    <link rel="stylesheet" href="/${res}/css/reset.css">
+    <link rel="stylesheet" href="/${res}/css/style.css">
+    <!-- <script src="/${res}/js/jQuery-1.11.3.min.js"></script> -->
+    <script src="${resSys}/jquery.js" type="text/javascript"></script>
+    <script src="/${res}/js/velocity.min.js"></script>
+    <script src="/${res}/js/swiper.js"></script>
+    <script src="/${res}/js/tab.js"></script>
+</head>
+<body>
+    [#include "../include/header.html"/]
+    <!-- 页面主体 -->
+    <div class="main wp1080 clearfix xxgk">
+        <div class="left fl">
+            <div class="classify-01">
+                <ul class="clearfix">
+                    <li>
+                    	[@cms_channel id='82']
+                    		<a href="${tag_bean.url}" class="zicon-01">领导简介</a>
+						[/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='83']
+                        <a href="${tag_bean.url}" class="zicon-02">机构职能</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='84']
+                        <a href="${tag_bean.url}" class="zicon-03">组织结构</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='87']
+                        <a href="${tag_bean.url}" class="zicon-04">人事任免</a>
+                        [/@cms_channel]
+                    </li>
+                </ul>
+            </div>
+            <div class="classify-02">
+                <ul>
+                    <li>
+                    	[@cms_channel id='97']
+                        <a href="${tag_bean.url}" class="xicon-01">信息公开指南</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    	[@cms_channel id='98']
+                        <a href="${tag_bean.url}" class="xicon-02">信息公开年报</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    	[@cms_channel id='96']
+                        <a href="${tag_bean.url}" class="xicon-03">信息公开规定</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    	[@cms_channel id='95']
+                        <a href="${tag_bean.url}" class="xicon-04">信息公开目录</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    	[@cms_channel id='99']
+                        <a href="${tag_bean.url}" class="xicon-05">依申请公开</a>
+                        [/@cms_channel]
+                    </li>
+                </ul>
+            </div>
+            <div class="classify-03 bor">
+                <ul class="clearfix">
+                    <li>
+                    [@cms_channel id='91']
+                        <a href="${tag_bean.url}">统计信息</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='93']
+                        <a href="${tag_bean.url}">财务公开</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='100']
+                        <a href="${tag_bean.url}">规划计划</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='102']
+                        <a href="${tag_bean.url}">地质资料</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='108']
+                        <a href="${tag_bean.url}">行政处罚</a>
+                        [/@cms_channel]
+                    </li>
+                    <li>
+                    [@cms_channel id='109']
+                        <a href="${tag_bean.url}">地价信息</a>
+                        [/@cms_channel]
+                    </li>
+                    <li class="no-bor">
+                    [@cms_channel id='105']
+                        <a href="${tag_bean.url}">土地供应</a>
+                        [/@cms_channel]
+                    </li>
+                </ul>
+            </div>
+            <div class="zcjd">
+                <div class="colum-top">
+                    <span class="selected">
+                    [@cms_channel id='119']
+                        <a href="${tag_bean.url}">政策解读</a>
+                         [/@cms_channel]
+                    </span>
+                </div>
+                <div class="list">
+                    <ul>
+                    	[@cms_content_list channelId='119' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="right fr">
+            <div class="tpnews fl">
+                <div class="topper">
+                    <h4 class="classify-title fl">
+                        <i class="icon-08"></i>
+                        <strong>图片新闻</strong>
+                    </h4>
+                    [@cms_channel id='274']
+                    <a href="${tag_bean.url}" class="more fr">更多></a>
+                    [/@cms_channel]
+                </div>
+                <!-- 轮播图 -->
+                <div class="swiper slider" id="swiper-01">
+                    <div class="swiper-wrapper">
+                        [@cms_content_list channelId='274' orderBy='4' count='5' titLen='22' channelOption='0' dateFormat='yyyy-MM-dd']
+                	[#list tag_list as a]
+                		<div class="swiper-slide">
+		                    <a href="${a.url}" class="box">
+		                        <img src="${a.typeImg!}" alt="">
+		                        <h4>
+		                            <span class="cut_text_overflow">[@text_cut s=a.title len=titLen /]</span>
+		                        </h4>
+		                    </a>
+		                </div>
+                	[/#list]
+                [/@cms_content_list]
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="gzdt fr">
+                <div class="topper">
+                    <h4 class="classify-title fl">
+                        <i class="icon-09"></i>
+                        <strong>工作动态</strong>
+                    </h4>
+                    [@cms_channel id='275']
+                    <a href="${tag_bean.url}" class="more fr">更多></a>
+                    [/@cms_channel]
+                </div>
+                <div class="list">
+                    <ul>
+                    [@cms_content_list channelId='275' count='9' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="colum fl">
+                <div class="colum-top">
+                    <span class="selected">
+                    [@cms_channel id='89']
+                        <a href="${tag_bean.url}">通知公告</a>
+                        [/@cms_channel]
+                    </span>
+                </div>
+                <div class="list">
+                    <ul>
+                    	[@cms_content_list channelId='89' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="colum fr">
+                <div class="colum-top">
+                    <span class="selected">
+                    [@cms_channel id='93']
+                        <a href="${tag_bean.url}">财务公开</a>
+                         [/@cms_channel]
+                    </span>
+                </div>
+                <div class="list">
+                    <ul>
+                        [@cms_content_list channelId='93' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="zcfg clearfix">
+                <div class="topper">
+                    <h4 class="classify-title fl">
+                        <i class="icon-03"></i>
+                        <strong>政策法规</strong>
+                    </h4>
+                    [@cms_channel id='101']
+                    <a href="${tag_bean.url}" class="more fr">更多></a>
+                    [/@cms_channel]
+                </div>
+                <div class="colum fl">
+                    <div class="colum-top" id="tab01-top">
+                        <span class="selected">
+                        [@cms_channel id='115']
+                            <a href="${tag_bean.url}">国家性政策法规</a>
+                            [/@cms_channel]
+                        </span>
+                        <span>
+                        [@cms_channel id='116']
+                            <a href="${tag_bean.url}">地方性政策法规</a>
+                            [/@cms_channel]
+                        </span>
+                    </div>
+                    <div class="list" id="tab01-box">
+                        <!-- ul 选项卡对用的容器 -->
+                        <ul>
+                            [@cms_content_list channelId='115' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                        </ul>
+                        <!-- ul 选项卡对用的容器 -->
+                        <ul>
+                            [@cms_content_list channelId='116' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                        </ul>
+                    </div>
+                </div>
+                <div class="colum fr">
+                    <div class="colum-top" id="tab02-top">
+                        <span class="selected">
+                        [@cms_channel id='117']
+                            <a href="${tag_bean.url}">规范性文件</a>
+                             [/@cms_channel]
+                        </span>
+                        <span>
+                        [@cms_channel id='119']
+                            <a href="${tag_bean.url}">政策解读</a>
+                             [/@cms_channel]
+                        </span>
+                        <span>
+                        [@cms_channel id='118']
+                            <a href="${tag_bean.url}">规章</a>
+                             [/@cms_channel]
+                        </span>
+                    </div>
+                    <div class="list" id="tab02-box">
+                        <!-- ul 选项卡对用的容器 -->
+                        <ul>
+                            [@cms_content_list channelId='117' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                        </ul>
+                        <!-- ul 选项卡对用的容器 -->
+                        <ul>
+                            [@cms_content_list channelId='118' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                        </ul>
+                        <!-- ul 选项卡对用的容器 -->
+                        <ul>
+                           [@cms_content_list channelId='118' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="colum fl">
+                <div class="topper" id="tab03-top">
+                    <span class="selected">
+                    [@cms_channel id='133']
+                    <a href="${tag_bean.url}">土地供应</a>
+                     [/@cms_channel]
+                    </span>
+                    <span>
+                    [@cms_channel id='134']
+                    <a href="${tag_bean.url}">土地出让公告</a>
+                     [/@cms_channel]
+                    </span>
+                </div>
+                <div class="list" id="tab03-box">
+                    <!-- ul 选项卡对用的容器 -->
+                    <ul>
+                        [@cms_content_list channelId='133' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                    <!-- ul 选项卡对用的容器 -->
+                    <ul>
+                       [@cms_content_list channelId='134' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                </div>
+            </div>
+            <div class="colum fr">
+                <div class="topper" id="tab04-top">
+                    <span class="selected">
+                    [@cms_channel id='137']
+                    <a href="${tag_bean.url}">矿业权出让公告</a>
+                    [/@cms_channel]
+                    </span>
+                    <span>
+                    [@cms_channel id='139']
+                    <a href="${tag_bean.url}">矿业权出让转让</a>
+                    [/@cms_channel]
+                    </span>
+                </div>
+                <div class="list" id="tab04-box">
+                    <!-- ul 选项卡对用的容器 -->
+                    <ul>
+                        [@cms_content_list channelId='137' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                    <!-- ul 选项卡对用的容器 -->
+                    <ul>
+                        [@cms_content_list channelId='139' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                </div>
+            </div>
+            <div class="colum fl">
+                <div class="topper">
+                [@cms_channel id='127']
+                    <span class="selected"><a href="${tag_bean.url}">建设用地审批</a></span>
+                    [/@cms_channel]
+                </div>
+                <div class="list">
+                    <ul>
+                        [@cms_content_list channelId='127' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                </div>
+            </div>
+            <div class="colum fr">
+                <div class="topper">
+                [@cms_channel id='126']
+                    <span class="selected"><a href="${tag_bean.url}">采矿权审批结果</a></span>
+                    [/@cms_channel]
+                </div>
+                <div class="list">
+                    <ul>
+                       [@cms_content_list channelId='126' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+							[#list tag_list as a]
+							<li class="cut_text_overflow">
+	                            <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                        </li>
+							[/#list]
+						[/@cms_content_list]
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 页面主体 end -->
+    [#include "../include/footer.html"/]
+
+    <script>
+        // 导航轮播图
+        new Swiper({
+            wrapper: $('#swiper-hd'),
+            timeLen: 5
+        })
+        // 页面轮播图
+        new Swiper({
+            wrapper: $('#swiper-01')
+        });
+        
+        new Tab({
+            tabList: $('#tab01-top > span'),
+            tabBox: $('#tab01-box > ul')
+        });
+        new Tab({
+            tabList: $('#tab02-top > span'),
+            tabBox: $('#tab02-box > ul')
+        });
+        new Tab({
+            tabList: $('#tab03-top > span'),
+            tabBox: $('#tab03-box > ul')
+        });
+        new Tab({
+            tabList: $('#tab04-top > span'),
+            tabBox: $('#tab04-box > ul')
+        });
+    </script>
+</body>
+</html>

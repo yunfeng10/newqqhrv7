@@ -1,0 +1,29 @@
+<!-- 头部，可被 include -->
+    <div class="header zl-header">
+        <div class="head w1100 clearfix">
+            <div class="zl-logo"></div>
+        </div>
+    </div>
+    <!-- 头部 end -->
+    <!-- 导航，可被 include -->
+    <div class="naver">
+        <ul class="w1100 clearfix">
+            <li><a href="${base}/">网站首页</a></li>
+            [@cms_channel id='173']
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">专栏首页</a></li>
+            [/@cms_channel]
+            [@cms_channel id='267']
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">部门概况</a></li>
+            [/@cms_channel]
+            [@cms_channel id='268']
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">通知公告</a></li>
+            [/@cms_channel]
+            [@cms_channel id='269']
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">图片新闻</a></li>
+            [/@cms_channel]
+            [@cms_channel id='270']
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">工作动态</a></li>
+            [/@cms_channel]
+        </ul>
+    </div>
+    <!-- 导 end -->

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.jeecms.cms.entity.assist">
+	<class name="MisResult" table="mis_result">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="dataid" column="dataid" type="string" />
+		<property name="fl" column="fl" type="string" />
+		<property name="bh" column="bh" type="string" />
+		<property name="xmmc" column="xmmc" type="string" />
+		<property name="sqsj" column="sqsj" type="timestamp" />
+		<property name="blzt" column="blzt" type="string" />
+		<property name="sqdw" column="sqdw" type="string" />
+		<property name="xmlx" column="xmlx" type="string" />
+		<property name="sqhpzmj" column="sqhpzmj" type="string" />
+		<property name="pzsj" column="pzsj" type="timestamp" />
+		<property name="pzwh" column="pzwh" type="string" />
+		<property name="ztc" column="ztc" type="string" />
+		<property name="dqmlzt" column="dqmlzt" type="string" />
+		
+	</class>
+</hibernate-mapping>

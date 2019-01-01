@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>齐齐哈尔市自然资源局</title>
+    <link rel="stylesheet" href="/${res}/css/reset.css">
+	<link rel="stylesheet" href="/${res}/css/style.css">
+	<script src="${resSys}/jquery.js" type="text/javascript"></script>
+	<script src="/${res}/js/velocity.min.js"></script>
+	<script src="/${res}/js/swiper.js"></script>
+	<script src="/${res}/js/tab.js"></script>
+</head>
+<body>
+    [#include "../include/third_header.html"/]
+    <!-- 页面主体 -->
+    <div class="main w1100 clearfix zl-sub-main">
+        <div class="left fl">
+            <div class="location">
+                当前位置：
+                	<a href="${base}/">首页</a> > 
+               		[#list channel.nodeList as n]
+               			<a href="${n.url}" target="_blank">${n.name}</a>
+               			[#if n_has_next] > [/#if]
+               		[/#list]
+            </div>
+            [@cms_content_page channelId=channel.id count='20' titLen='15' append='...'  orderBy='2'  dateFormat='yyyy-MM-dd'  channelOption='1']
+				<div class="arc-list">
+					<ul>
+						[#list tag_pagination.list as a]
+						<li>
+							<span class="fr">${a.date?string(dateFormat)}</span>
+							<a href="${a.url}" target=_blank>[@text_cut s=a.title len=titLen append=append/]</a>
+						</li>
+						[/#list]
+					</ul>
+				</div>
+				[@cms_pagination sysPage='1'/]
+			[/@cms_content_page]
+            
+        </div>
+        <div class="right">
+            <div class="top">栏目名称</div>
+            <ul class="aside">
+                <li class="selected">
+                	[@cms_channel id='267']
+                    <a href="${tag_bean.url}">全部</a>
+                    [/@cms_channel]
+                </li>
+                <li>
+                	[@cms_channel id='272']
+                    <a href="${tag_bean.url}">机构设置</a>
+                    [/@cms_channel]
+                </li>
+                <li>
+                	[@cms_channel id='273']
+                    <a href="${tag_bean.url}">人员管理</a>
+                    [/@cms_channel]
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 页面主体 end -->
+    [#include "../include/footer.html"/]
+
+    <script>
+        
+    </script>
+</body>
+</html>

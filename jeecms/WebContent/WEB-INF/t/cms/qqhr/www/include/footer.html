@@ -1,0 +1,38 @@
+<!-- 页面底部，可被 include -->
+    <div class="footer">
+        <div class="foot w1100">
+            <div class="ft-links fl">
+                <a href="http://121.43.68.40/exposure/jiucuo.html?site_code=2302000015&url=http%3A%2F%2Fwww.hljqqhelr.gov.cn%2F" target="_blank">
+                    <img src="/${res}/img/ft-01.png">
+                </a>
+                <a href="http://bszs.conac.cn/sitename?method=show&id=0AE0909229DC28A9E053012819ACAB0E" target="_blank">
+                    <img src="/${res}/img/ft-02.png">
+                </a>
+            </div>
+            <div class="ft-box fr">
+                <ul class="clearfix">
+                    <li>版权所有：齐齐哈尔市自然资源局</li>
+                    <li>主办单位：齐齐哈尔市自然资源局</li>
+                    <li>技术支持：齐齐哈尔市自然资源信息中心</li>
+                    <li>备案号：黑ICP备10002328号</li>
+                    <li>黑公网安备：23020202000004号</li>
+                    <li>网站标识码：2302000015</li>
+                    <li>联系方式：0452-2741730</li>
+                    <li>pv总量：<i><span id="pv"></span></i></li>
+                    <li>总访问量：<i><span id="visitor"></span></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script src="${resSys}/front.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function() {
+		Cms.siteFlow("${base}", location.href, document.referrer);
+		$.cookie("_site_id_cookie", "${site.id!}", {
+			path : '${base}'
+		});
+	});
+</script>
+<!-- 页面底部 end -->
+
+   

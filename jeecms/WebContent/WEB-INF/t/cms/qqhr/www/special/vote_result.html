@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>齐齐哈尔市自然资源局</title>
+    <link rel="stylesheet" href="/${res}/css/reset.css">
+    <link rel="stylesheet" href="/${res}/css/style.css">
+    <script src="${resSys}/jquery.js" type="text/javascript"></script>
+    <script src="/${res}/js/velocity.min.js"></script>
+    <script src="/${res}/js/swiper.js"></script>
+</head>
+<body>
+    [#include "../include/header.html"/]
+    <!-- 页面主体 -->
+    <div class="main wp1080 clearfix">
+        <div class="location">
+			当前位置：<a href="${base}/">首页</a> > 投票结果
+        </div>
+        [#if status?? && status!=0]
+        <h4 class="vote-title">
+        	[#if status==1]
+            <em style="color: #f00">投票ID不能为空</em>
+            [#elseif status==2]
+            <em style="color: #f00">投票项不能为空  </em>
+            [#elseif status==100]
+            <em style="color: #f00">投票主题不存在</em>
+            [#elseif status==101]
+            <em style="color: #f00">投票项不合法</em>
+            [#elseif status==501]
+            <em style="color: #f00">需要登录才能投票</em>
+            [#elseif status==200]
+            <em style="color: #f00">投票主题已经关闭</em>
+            [#elseif status==201]
+            <em style="color: #f00">投票的选项个数大于允许的个数</em>
+            [#elseif status==202]
+            <em style="color: #f00">投票还没有开始</em>
+            [#elseif status==203]
+            <em style="color: #f00">投票已经结束</em>
+            [#elseif status==204]
+            <em style="color: #f00">您已经投过票了，请勿重复投票！<!--，同一会员不能重复投票--></em>
+            [#elseif status==205]
+            <em style="color: #f00">您已经投过票，请勿重复投票！了<!--，，同一IP不能重复投票--></em>
+            [#elseif status==206]
+            <em style="color: #f00">您已经投过票了，请勿重复投票！<!--，，同一COOKIE不能重复投票--></em>
+            [#else]
+            <em style="color: #f00">投票失败  </em>
+            [/#if]
+            </h4>
+        [#else]
+        	<h4 class="vote-title">
+            	投票主题：<em style="color: #f00">${vote.title?html}</em>，
+            	总参与分数：<em style="color: #f00">${vote.totalCount}</em>
+        	</h4>
+        	[#list vote.subtopics as subTopic]
+        		<div class="vote-result-item">
+        			[#if subTopic.isText]
+        				<h4 class="colum-title">${subTopic_index+1}. ${subTopic.title?html} <a href="${base}/vote_reply_view.jspx?subId=${subTopic.id}" target="_blank">查看回复结果</a></h4>
+        			[/#if]
+        			[#if subTopic.isRadio||subTopic.isMulti]
+        				<h4 class="colum-title">${subTopic_index+1}. ${subTopic.title?html}</h4>
+        				<ul>
+        				[#list subTopic.voteItems as item]
+        					<li>
+        						<h4>${item_index+1}. ${item.title?html} - (${item.voteCount}票)</h4>
+			                    <h5>
+			                        <div class="progress-bar__outer">
+			                            <div class="progress-bar__inner" style="width: ${item.percent}%;">
+			                                <div class="progress-bar__innerText">${item.percent}%</div>
+			                            </div>
+			                        </div>
+			                    </h5>
+        					</li>
+        				[/#list]
+        				</ul>
+        			[/#if]
+        		</div>
+        	[/#list]
+        [/#if]
+        
+    </div>
+    <!-- 页面主体 end -->
+    [#include "../include/footer.html"/]
+    <script>
+        // 导航轮播图
+        new Swiper({
+            wrapper: $('#swiper-hd'),
+            timeLen: 5
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>齐齐哈尔市自然资源局</title>
+    <link rel="stylesheet" href="/${res}/css/reset.css">
+    <link rel="stylesheet" href="/${res}/css/style.css">
+    <!-- <script src="/${res}/js/jQuery-1.11.3.min.js"></script> -->
+    <script src="${resSys}/jquery.js" type="text/javascript"></script>
+    <script src="/${res}/js/velocity.min.js"></script>
+    <script src="/${res}/js/swiper.js"></script>
+    <script src="/${res}/js/tab.js"></script>
+</head>
+<body>
+    [#include "../include/header.html"/]
+    <!-- 页面主体 -->
+    <div class="main wp1080 clearfix ysqgk">
+        <div class="location">
+            当前位置：<a href="#">首页</a> > <a href="#">信息公开</a> > 依申请公开
+        </div>
+        <div class="desc">
+            <h4 class="colum-title">相关事项</h4>
+            <ul>
+                <li>
+                    <a href="#" class="link">齐齐哈尔市国土资源局依申请公开的有关事项</a>
+                </li>
+            </ul>
+            <h4 class="colum-title">栏目说明</h4>
+            <ul>
+                <li>
+                    一、按要求填写政务信息公开申请表，申请人身份、联系方式等要真实有效，所申请的政务信息内容描述清楚，每个申请表只申请一项政务信息。对没有申请人信息或联系方式有误或不真实的申请，将不予答复。
+                </li>
+                <li>
+                    二、申请同一政府信息内容，成功递交一次均可，对于同一申请人就同一内容反复提出公开申请的，可以不重复答复。
+                </li>
+                <li>
+                    三、申请表内容应真实有效，同时申请人对申请材料的真实性负责。
+                </li>
+                <li>
+                    四、救济途径：公民、法人或者其他组织认为行政机关在政府信息公开工作中的具体行政行为侵犯其合法权益的， 可以依法申请行政复议或者提起行政诉讼。
+                </li>
+            </ul>
+        </div>
+        <div class="tab-top" id="tab-top">
+            <span class="selected">依申请公开</span>
+            <span>查询进度</span>
+        </div>
+        <div class="tab-box" id="tab-box">
+            <div class="item">
+                <form id="dataForm">
+                    <table width="100%">
+                        <tr>
+                            <th rowspan="6" align="center" width="60">
+                                <p>申<br>请<br>人<br>信<br>息</p>
+                            </th>
+                            <td colspan="4">
+                                <label><input type="radio" name="shenQingLeiXing" id="shenQingLeiXing0" value="0" checked> 公民</label>　
+                                <label><input type="radio" name="shenQingLeiXing" id="shenQingLeiXing1" value="1"> 法人/其他组织</label>
+                            </td>
+                        </tr>
+                        <tr class="gr">
+                            <td width="120" align="right">姓 名：</td>
+                            <td><input type="text" size="30" id="name" name="gmXingMing"> <em>*</em></td>
+                            <td width="120" align="right">工作单位：</td>
+                            <td><input type="text" size="30" id="work" name="gmGongZuoDanWei"> <em>*</em></td>
+                        </tr>
+                        <tr class="gr">
+                            <td width="120" align="right">证件名称：</td>
+                            <td>
+                                <select id="zjmc" name="gmZhengJianMingChen">
+                                    <option selected value="">------ 证件名称 ------</option>
+                                    <option value="身份证">------ 身份证 ------</option>
+                                    <option value="军官证">------ 军官证 ------</option>
+                                    <option value="其他">------ 其他 ------</option>
+                                </select>
+                                <em>*</em>
+                            </td>
+                            <td width="120" align="right">证件号码：</td>
+                            <td><input type="text" size="30" id="zjhm" name="gmZhengJianHaoMa"> <em>*</em></td>
+                        </tr>
+                        <tr class="gr">
+                            <td width="120" align="right">通信地址：</td>
+                            <td><input type="text" size="30" id="txaddr" name="gmLianXiDiZhi"> <em>*</em></td>
+                            <td width="120" align="right">邮政编码：</td>
+                            <td><input type="text" size="30" id="yzcode" name="gmYouZhengBianMa"> <em>*</em></td>
+                        </tr>
+                        <tr class="gr">
+                            <td width="120" align="right">联系电话：</td>
+                            <td><input type="text" size="30" id="phone" name="gmLianXiDianHua"> <em>*</em></td>
+                            <td width="120" align="right">传 真：</td>
+                            <td><input type="text" size="30" id="fax" name="gmChuanZhen"></td>
+                        </tr>
+                        <tr class="gr">
+                            <td width="120" align="right">电子邮箱：</td>
+                            <td><input type="text" size="30" id="email" name="gmDianZiYouXiang"> <em>*</em></td>
+                            <td width="120" align="right">申请时间：</td>
+                            <td><input type="text" size="30" id="sqtime" readonly> <em>*</em></td>
+                        </tr>
+                        
+                        <tr class="qt" style="display:none">
+                            <td width="120" align="right">组织名称：</td>
+                            <td><input type="text" size="30" id="qtMingCheng" name="qtMingCheng"> <em>*</em></td>
+                            <td width="120" align="right">法人代表：</td>
+                            <td><input type="text" size="30" id="qtFaRenDaiBiao" name="qtFaRenDaiBiao"> <em>*</em></td>
+                        </tr>
+                        <tr class="qt" style="display:none">
+                            <td width="120" align="right">联系人姓名：</td>
+                            <td><input type="text" size="30" id="qtLianXiRenXingMing" name="qtLianXiRenXingMing"> <em>*</em></td>
+                            <td width="120" align="right">机构代码：</td>
+                            <td><input type="text" size="30" id="qtJiGouDaiMa" name="qtJiGouDaiMa"> <em>*</em></td>
+                        </tr>
+                        <tr class="qt" style="display:none">
+                            <td width="120" align="right">联系人电话：</td>
+                            <td><input type="text" size="30" id="qtLianXiRenDianHua" name="qtLianXiRenDianHua"> <em>*</em></td>
+                            <td width="120" align="right">传真：</td>
+                            <td><input type="text" size="30" id="qtChuanZhen" name="qtChuanZhen"> </td>
+                        </tr>
+                        <tr class="qt" style="display:none">
+                            <td width="120" align="right">联系地址：</td>
+                            <td><input type="text" size="30" id="qtLianXiDiZhi" name="qtLianXiDiZhi"> <em>*</em></td>
+                            <td width="120" align="right">电子邮箱：</td>
+                            <td><input type="text" size="30" id="qtDianZiYouXiang" name="qtDianZiYouXiang"> <em>*</em></td>
+                        </tr>
+                        <tr class="qt" style="display:none">
+                            <td width="120" align="right">邮政编码：</td>
+                            <td><input type="text" size="30" id="qtYouZhengBianMa" name="qtYouZhengBianMa"> <em>*</em></td>
+                            <td width="120" align="right"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2" align="center">
+                                <p>所<br>需<br>信<br>息</p>
+                            </th>
+                            <td width="120">所需信息的描述：不超过500字</td>
+                            <td colspan="3"><textarea rows="5" cols="100" id="content" name="suoXuXinXiNeiRongMiaoShu"></textarea> <em>*</em></td>
+                        </tr>
+                        <tr>
+                            <td width="120">所需信息的用途：不超过500字</td>
+                            <td colspan="3"><textarea rows="5" cols="100" id="purpose" name="suoXuXinXiYongTu"></textarea> <em>*</em></td>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p>所<br>需<br>信<br>息<br>情<br>况</p>
+                                <input type="hidden" id="avalue" name="zhiDingTiGongFangShi" value="">
+                                <input type="hidden" id="bvalue" name="huoQuXinXiFangShi" value="">
+                            </th>
+                            <td colspan="2">
+                                <span>所需信息的指定提供方式（可选）</span><br>
+                                <label><input type="checkbox" name="aaa" id="a1"> 纸质</label><br>
+                                <label><input type="checkbox" checked name="aaa" id="a2"> 电子邮件</label><br>
+                                <label><input type="checkbox" name="aaa" id="a3"> 光盘</label><br>
+                                <label><input type="checkbox" name="aaa" id="a4"> 磁盘</label>
+                            </td>
+                            <td colspan="2">
+                                <span>获取信息的方式（可选）</span><br>
+                                <label><input type="checkbox" name="bbb" id="b1"> 邮寄</label><br>
+                                <label><input type="checkbox" name="bbb" id="b2"> 快递</label><br>
+                                <label><input type="checkbox" checked name="bbb" id="b3"> 电子邮件</label><br>
+                                <label><input type="checkbox" name="bbb" id="b4"> 传真</label><br>
+                                <label><input type="checkbox" name="bbb" id="b5"> 自行领取/当场阅读/抄条</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p>验<br>证<br>码</p>
+                            </th>
+                            <td colspan="4">
+                            <input type="text" name="captcha" size="10"><img
+								id="addCaptcha" src="${base}/captcha.svl"
+								onclick="this.src='${base}/captcha.svl?d='+new Date()" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="tc">
+                                <input type="button" value="重 置 " id="reset-btn">
+                                <input type="submit" value="提 交 " id="submit-btn">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                
+            </div>
+            <div class="item">
+                <form>
+                    <table width="100%">
+                        <tr>
+                            <td width="120" align="right">申请类型：</td>
+                            <td>
+                                <label><input type="radio" id="queryType0" name="queryType" value="0" checked> 公民</label>　
+                                <label><input type="radio" id="queryType1" name="queryType" value="1"> 法人/其他组织</label>
+                            </td>
+                        </tr>
+                        <tr class="qgr">
+                            <td align="right">姓 名：</td>
+                            <td><input type="text" size="30" id="name"></td>
+                        </tr>
+                        <tr class="qqt" style="display:none">
+                            <td align="right">机构名称：</td>
+                            <td><input type="text" size="30" id="name"></td>
+                        </tr>
+                        <tr>
+                            <td align="right">查询号：</td>
+                            <td><input type="text" size="30" id="cxcode"></td>
+                        </tr>
+                        <tr>
+                            <td align="right">&nbsp;</td>
+                            <td>
+                                <input type="submit" value="查 询 ">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <!-- 控制此 div 的显示隐藏 -->
+                <div class="resault">
+                    <h4 class="colum-title">查询结果</h4>
+                    <p>无结果</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 页面主体 end -->
+    [#include "../include/footer.html"/]
+    <script>
+        // 导航轮播图
+        new Swiper({
+            wrapper: $('#swiper-hd'),
+            timeLen: 5
+        })
+
+        new Tab({
+            tabList: $('#tab-top > span'),
+            tabBox: $('#tab-box > .item'),
+            eventType: 'click'
+        })
+        var setHiddenValue = function(){
+        	var avalue="";
+        	if ($("#a1").get(0).checked) {
+        		avalue="1";
+        	}else{
+        		avalue="0";
+        	}
+        	if ($("#a2").get(0).checked) {
+        		avalue=avalue+",1";
+        	}else{
+        		avalue=avalue+",0";
+        	}
+        	if ($("#a3").get(0).checked) {
+        		avalue=avalue+",1";
+        	}else{
+        		avalue=avalue+",0";
+        	}
+        	if ($("#a4").get(0).checked) {
+        		avalue=avalue+",1";
+        	}else{
+        		avalue=avalue+",0";
+        	}
+        	var bvalue = "";
+        	if ($("#b1").get(0).checked) {
+        		bvalue="1";
+        	}else{
+        		bvalue="0";
+        	}
+        	if ($("#b2").get(0).checked) {
+        		bvalue=bvalue+",1";
+        	}else{
+        		bvalue=bvalue+",0";
+        	}
+        	if ($("#b3").get(0).checked) {
+        		bvalue=bvalue+",1";
+        	}else{
+        		bvalue=bvalue+",0";
+        	}
+        	if ($("#b4").get(0).checked) {
+        		bvalue=bvalue+",1";
+        	}else{
+        		bvalue=bvalue+",0";
+        	}
+        	if ($("#b5").get(0).checked) {
+        		bvalue=bvalue+",1";
+        	}else{
+        		bvalue=bvalue+",0";
+        	}
+        	$("#avalue").val(avalue);
+        	$("#bvalue").val(bvalue);
+        	
+        };
+        // 表单
+        var $sqTime = $('#sqtime');
+        var phoneRegExp  = /^1[34578]\d{9}$/,
+            ybcodeRegExp = /^[1-9][0-9]{5}$/,
+            emailRegExp  = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+        var message = [
+            { el: $('#name'), msg: '姓名不能为空' },
+            { el: $('#work'), msg: '工作单位不能为空' },
+            { el: $('#zjmc'), msg: '请选择证件名称' },
+            { el: $('#zjhm'), msg: '证件号码不能为空' },
+            { el: $('#phone'), msg: '电话不能为空', reg: phoneRegExp, msg2: '电话格式不正确' },
+            { el: $('#txaddr'), msg: '通讯地址不能为空' },
+            { el: $('#yzcode'), msg: '邮政编码不能为空', reg: ybcodeRegExp, msg2: '邮政编码格式不正确' },
+            { el: $('#email'), msg: '邮箱不能为空', reg: emailRegExp, msg2: '邮箱格式不正确' },
+            { el: $('#content'), msg: '所需信息的描述不能为空' },
+            { el: $('#purpose'), msg: '所需信息的用途不能为空' }
+        ];
+        var message2 = [
+                       { el: $('#qtMingCheng'), msg: '组织名称不能为空' },
+                       { el: $('#qtFaRenDaiBiao'), msg: '法人代表不能为空' },
+                       { el: $('#qtLianXiRenXingMing'), msg: '联系人姓名不能为空' },
+                       { el: $('#qtJiGouDaiMa'), msg: '机构代码不能为空' },
+                       { el: $('#qtLianXiRenDianHua'), msg: '联系人电话不能为空', reg: phoneRegExp, msg2: '电话格式不正确' },
+                       { el: $('#qtYouZhengBianMa'), msg: '邮政编码不能为空', reg: ybcodeRegExp, msg2: '邮政编码格式不正确' },
+                       { el: $('#qtDianZiYouXiang'), msg: '邮箱不能为空', reg: emailRegExp, msg2: '邮箱格式不正确' },
+                       { el: $('#qtLianXiDiZhi'), msg: '联系地址不能为空' },
+                       { el: $('#content'), msg: '所需信息的描述不能为空' },
+                       { el: $('#purpose'), msg: '所需信息的用途不能为空' }
+                   ];
+        
+        // 提交事件
+        $('#submit-btn').on('click', function(ev){
+            ev.stopPropagation();
+            setHiddenValue();
+            var type = $("input[name='shenQingLeiXing']:checked").val();
+            if(type==0){
+            	for (var i = 0; i < message.length; i++){
+                    var valText = $.trim(message[i].el.val())
+                    if (valText == ''){
+                        alert(message[i].msg)
+                    } else if (typeof message[i].reg !== 'undefined' && !message[i].reg.test(valText)){
+                        alert(message[i].msg2)
+                    } else {
+                        continue
+                    }
+                    message[i].el.focus()
+                    return false
+                }
+            }else{
+            	for (var i = 0; i < message2.length; i++){
+                    var valText = $.trim(message2[i].el.val())
+                    if (valText == ''){
+                        alert(message2[i].msg)
+                    } else if (typeof message2[i].reg !== 'undefined' && !message2[i].reg.test(valText)){
+                        alert(message2[i].msg2)
+                    } else {
+                        continue
+                    }
+                    message2[i].el.focus()
+                    return false
+                }
+            }
+            var options = {
+					url : '../saveysqgk.jspx',
+					type : 'post',
+					dataType : 'json',
+					data : $("#dataForm").serialize(),
+					success : function(data) {
+						if (data.status == 0) {
+							alert("申请成功");
+							location.href = location.href;
+						} else if (data.status == 1) {
+							alert("验证码错误");
+							$("#addCaptcha").click();
+						}
+					}
+				};
+				$.ajax(options);
+        });
+        // 重置事件
+        $('#reset-btn').on('click', function(ev){
+        	location.reload();
+        });
+        
+        // 日期格式化
+        function dateFtt(fmt, date){
+            var o = {
+                "M+" : date.getMonth() + 1,                   //月份   
+                "d+" : date.getDate(),                        //日   
+                "h+" : date.getHours(),                       //小时   
+                "m+" : date.getMinutes(),                     //分   
+                "s+" : date.getSeconds(),                     //秒   
+                "q+" : Math.floor((date.getMonth() + 3) / 3), //季度   
+                "S"  : date.getMilliseconds()                 //毫秒   
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("("+ k +")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        $sqTime.val(dateFtt("yyyy-MM-dd", new Date()));
+        
+        var changeAddPageView = function(i){
+        	if(i==0){
+        		$("tr.gr").show();
+        		$("tr.qt").hide();
+        	}else{
+        		$("tr.gr").hide();
+        		$("tr.qt").show();
+        	}
+        	
+        };
+        var changeQueryPageView = function(i){
+        	if(i==0){
+        		$("tr.qgr").show();
+        		$("tr.qqt").hide();
+        	}else{
+        		$("tr.qgr").hide();
+        		$("tr.qqt").show();
+        	}
+        };
+        $(document).ready(function(){
+    		$("#shenQingLeiXing0").on('click',function(){
+    			changeAddPageView(0);
+    		});
+    		$("#shenQingLeiXing1").on('click',function(){
+    			changeAddPageView(1);
+    		});
+    		$("#queryType0").on('click',function(){
+    			changeQueryPageView(0);
+    		});
+    		$("#queryType1").on('click',function(){
+    			changeQueryPageView(1);
+    		});
+    	});
+    </script>
+</body>
+</html>
