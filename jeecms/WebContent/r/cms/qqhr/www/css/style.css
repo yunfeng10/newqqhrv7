@@ -936,6 +936,13 @@ h2.big-title a {
     padding: 8px;
     vertical-align: middle;
 }
+.online .form-box table tr td img {
+	display: inline-block;
+	margin-left: 5px;
+	vertical-align: middle;
+	position: relative;
+	top: -5px;
+}
 .online .form-box input,
 .online .form-box textarea {
     padding: 2px 0 2px 5px;
@@ -1049,6 +1056,13 @@ h2.big-title a {
     padding: 8px;
     line-height: 18px;
     vertical-align: middle;
+}
+.ysqgk .tab-box table tr td img {
+	display: inline-block;
+	margin-left: 5px;
+	vertical-align: middle;
+	position: relative;
+	top: -5px;
 }
 .ysqgk .tab-box table tr th {
     background-color: #f0f0f0;
