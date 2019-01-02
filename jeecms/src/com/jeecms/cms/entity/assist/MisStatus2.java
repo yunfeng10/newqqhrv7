@@ -62,5 +62,11 @@ public class MisStatus2 implements Serializable {
 		this.dataid = dataid;
 	}
 	
-	
+	private String flvalue;
+	public String getFlvalue() {
+		return flvalue;
+	}
+	public void setFlvalue(String flvalue) {
+		this.flvalue = flvalue;
+	}
 }

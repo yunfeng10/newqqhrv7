@@ -24,7 +24,9 @@
             <h4 class="colum-title">相关事项</h4>
             <ul>
                 <li>
-                    <a href="#" class="link">齐齐哈尔市国土资源局依申请公开的有关事项</a>
+                	[@cms_channel id='327']
+                    <a href="${tag_bean.url}" class="link">齐齐哈尔市国土资源局依申请公开的有关事项</a>
+                    [/@cms_channel]
                 </li>
             </ul>
             <h4 class="colum-title">栏目说明</h4>
@@ -182,7 +184,7 @@
                 
             </div>
             <div class="item">
-                <form>
+                <form id="queryForm">
                     <table width="100%">
                         <tr>
                             <td width="120" align="right">申请类型：</td>
@@ -193,20 +195,20 @@
                         </tr>
                         <tr class="qgr">
                             <td align="right">姓 名：</td>
-                            <td><input type="text" size="30" id="name"></td>
+                            <td><input type="text" size="30" name="queryName" id="queryName"></td>
                         </tr>
                         <tr class="qqt" style="display:none">
                             <td align="right">机构名称：</td>
-                            <td><input type="text" size="30" id="name"></td>
+                            <td><input type="text" size="30" name="queryJgdm" id="queryJgdm"></td>
                         </tr>
                         <tr>
                             <td align="right">查询号：</td>
-                            <td><input type="text" size="30" id="cxcode"></td>
+                            <td><input type="text" size="30" name="querySearchNo" id="querySearchNo"></td>
                         </tr>
                         <tr>
                             <td align="right">&nbsp;</td>
                             <td>
-                                <input type="submit" value="查 询 ">
+                                <input type="button" value="查 询 " id="queryBtn">
                             </td>
                         </tr>
                     </table>
@@ -420,6 +422,48 @@
     		});
     		$("#queryType1").on('click',function(){
     			changeQueryPageView(1);
+    		});
+    		$("#queryBtn").on('click',function(){
+    			var type=$("input[name='queryType']:checked").val();
+    			var param = "";
+    			var searchNo="";
+    			if(type==0){
+    				param=$("#queryName").val();
+    				if(!param){
+    					alert("请输入姓名");
+    					return;
+    				}
+    			}else{
+    				param=$("#queryJgdm").val();
+    				if(!param){
+    					alert("请输入机构名称");
+    					return;
+    				}
+    			}
+    			searchNo = $("#querySearchNo").val();
+    			if(!searchNo){
+    				alert("请输入查询码");
+					return;
+    			}
+    			var options = {
+	                    url: '../queryysqgk.jspx',
+	                    type: 'post',
+	                    dataType: 'json',
+	                    data: $("#queryForm").serialize(),
+	                    success:  function (data) {
+		                	if(data.status==0) {
+		                		if(data.dataId==0){
+		                			alert("未查询到数据");
+		                		}else{
+		                			window.location.href='../ysqgkdetail.jspx?id='+data.dataId;
+		                		}
+			                   	
+			                } else{	
+			                	alert("未查询到数据");
+			                }
+	                    }
+	                };
+	                $.ajax(options);
     		});
     	});
     </script>

@@ -134,6 +134,15 @@ public class MisResult implements Serializable {
 	public void setDataid(String dataid) {
 		this.dataid = dataid;
 	}
+	private String flvalue;
+
+	public String getFlvalue() {
+		return flvalue;
+	}
+
+	public void setFlvalue(String flvalue) {
+		this.flvalue = flvalue;
+	}
 	
 	
 }

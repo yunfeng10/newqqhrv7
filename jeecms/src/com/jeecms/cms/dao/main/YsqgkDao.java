@@ -15,4 +15,6 @@ public interface YsqgkDao {
 	public void delete(int id);
 	
 	public Ysqgk updateByUpdater(Updater<Ysqgk> updater);
+	
+	int queryYsqgkId(int queryType, String queryName, String queryJgdm, String querySearchNO);
 }

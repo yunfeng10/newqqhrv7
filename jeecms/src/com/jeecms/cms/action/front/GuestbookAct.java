@@ -327,7 +327,12 @@ public class GuestbookAct {
 
 	@RequestMapping(value = "/ysqgkdetail.jspx", method = RequestMethod.GET)
 	public String ysqgkDetail(int id, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
-		return "";
+		CmsSite site = CmsUtils.getSite(request);
+		ysqgkMng.setYsqgkData(id, model);
+		FrontUtils.frontData(request, model, site);
+		FrontUtils.frontPageData(request, model);
+
+		return site.getSolutionPath() + "/channel/news_ysqgk_detail.html";
 	}
 
 	@RequestMapping(value = "/saveysqgk.jspx", method = RequestMethod.POST)
@@ -358,9 +363,14 @@ public class GuestbookAct {
 	}
 
 	@RequestMapping(value = "/queryysqgk.jspx", method = RequestMethod.POST)
-	public void queryYsqgk(int type, String param, String searchNo, HttpServletRequest request,
-			HttpServletResponse response, ModelMap model) {
-		
+	public void queryYsqgk(int queryType, String queryName, String queryJgdm, String querySearchNo, HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) throws JSONException {
+		JSONObject json = new JSONObject();
+		int dataId = ysqgkMng.queryYsqgkId(queryType, queryName, queryJgdm, querySearchNo);
+		json.put("success", true);
+		json.put("status", 0);
+		json.put("dataId", dataId);
+		ResponseUtils.renderJson(response, json.toString());
 	}
 
 }

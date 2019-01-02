@@ -19,5 +19,6 @@
 		<property name="bldd" column="bldd" type="string" />
 		<property name="cnqx" column="cnqx" type="string" />
 		<property name="dqblbm" column="dqblbm" type="string" />
+		<property name="flvalue" column="flvalue" type="string" />
 	</class>
 </hibernate-mapping>

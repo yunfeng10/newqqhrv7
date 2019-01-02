@@ -20,6 +20,6 @@
 		<property name="pzwh" column="pzwh" type="string" />
 		<property name="ztc" column="ztc" type="string" />
 		<property name="dqmlzt" column="dqmlzt" type="string" />
-		
+		<property name="flvalue" column="flvalue" type="string" />
 	</class>
 </hibernate-mapping>

@@ -142,6 +142,7 @@ public class MisDataMngimpl implements MisDataMng {
 		MisResult result = misReaultDao.findByDataId(dataId);
 		if(result!=null){
 			model.addAttribute("fl", result.getFl());
+			model.addAttribute("flvalue", result.getFlvalue());
 			model.addAttribute("bh", result.getBh());
 			model.addAttribute("sqdw", result.getSqdw());
 			model.addAttribute("xmmc", result.getXmmc());
@@ -164,6 +165,7 @@ public class MisDataMngimpl implements MisDataMng {
 		if(misStatus1!=null){
 			List<MisStatus2> list = misStatus2Dao.findByDataId(dataId);
 			model.addAttribute("fl", misStatus1.getFl());
+			model.addAttribute("flvalue", misStatus1.getFlvalue());
 			model.addAttribute("bh", misStatus1.getBh());
 			model.addAttribute("sbdw", misStatus1.getSbdw());
 			model.addAttribute("xmmc", misStatus1.getXmmc());
