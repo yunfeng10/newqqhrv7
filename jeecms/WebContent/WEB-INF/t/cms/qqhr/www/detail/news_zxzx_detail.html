@@ -16,7 +16,11 @@
     <!-- 页面主体 -->
     <div class="main wp1080 clearfix">
         <div class="location">
-            当前位置：<a href="#">首页</a> > <a href="#">公众互动</a> > 在线咨询
+            当前位置：<a href="${base}/">首页</a> > 
+            [@cms_channel id='73']
+            <a href="${tag_bean.url}">公众互动</a> 
+            [/@cms_channel] 
+            > 在线咨询
         </div>
         <div class="letter">
         	<input type="hidden" id="grxxgk" value="${grxxgk}" >

@@ -251,8 +251,14 @@ public class ContentMngImpl implements ContentMng, ChannelDeleteChecker {
 		if (attachmentPaths != null && attachmentPaths.length > 0) {
 			for (int i = 0, len = attachmentPaths.length; i < len; i++) {
 				if (!StringUtils.isBlank(attachmentPaths[i])) {
+					String attachFileName="";
+					try{
+						attachFileName = attachmentFilenames[i];
+					}catch(Exception e){
+						
+					}
 					bean.addToAttachmemts(attachmentPaths[i],
-							attachmentNames[i], attachmentFilenames[i]);
+							attachmentNames[i], attachFileName);
 				}
 			}
 		}
@@ -290,7 +296,12 @@ public class ContentMngImpl implements ContentMng, ChannelDeleteChecker {
 			userStep = 0;
 		} else {
 			CmsSite site = bean.getSite();
-			userStep = user.getCheckStep(site.getId());
+			if(site==null){
+				userStep=2;
+			}else{
+				userStep = user.getCheckStep(site.getId());
+			}
+			
 		}
 		// 流程处理
 		if(contribute!=null&&contribute){

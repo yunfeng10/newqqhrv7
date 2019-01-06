@@ -18,7 +18,11 @@
     <!-- 页面主体 -->
     <div class="main wp1080 clearfix ysqgk">
         <div class="location">
-            当前位置：<a href="#">首页</a> > <a href="#">信息公开</a> > 依申请公开
+            当前位置：<a href="${base}/">首页</a> > 
+            [@cms_channel id='71']
+            <a href="${tag_bean.url}">信息公开</a> 
+            [/@cms_channel]
+             > 依申请公开
         </div>
         <div class="desc">
             <h4 class="colum-title">相关事项</h4>
@@ -356,7 +360,7 @@
 					data : $("#dataForm").serialize(),
 					success : function(data) {
 						if (data.status == 0) {
-							alert("申请成功");
+							alert("申请成功您的查询码为:"+data.searchno);
 							location.href = location.href;
 						} else if (data.status == 1) {
 							alert("验证码错误");

@@ -224,7 +224,7 @@
 					data : $("#guestbookForm").serialize(),
 					success : function(data) {
 						if (data.status == 0) {
-							alert("留言成功");
+							alert("留言成功您的查询码为:"+data.searchno);
 							location.href = location.href;
 						} else if (data.status == 1) {
 							alert("验证码错误");

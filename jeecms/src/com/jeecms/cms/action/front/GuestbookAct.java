@@ -236,6 +236,7 @@ public class GuestbookAct {
 		cmsGuestbookMng.save(member, siteId, ctgId, ip, title, content, email, phone, qq, grxxgk, xm, wtfsd, txdz, yb,
 				xjsfgk, cxm, djcs);
 		json.put("success", true);
+		json.put("searchno", cxm);
 		json.put("status", 0);
 		ResponseUtils.renderJson(response, json.toString());
 	}
@@ -357,6 +358,7 @@ public class GuestbookAct {
 		ysqgk.setSearchNo(this.getRandomString(20));
 		ysqgk.setShenQingShiJian(new Date());
 		ysqgkMng.save(ysqgk);
+		json.put("searchno", ysqgk.getSearchNo());
 		json.put("success", true);
 		json.put("status", 0);
 		ResponseUtils.renderJson(response, json.toString());

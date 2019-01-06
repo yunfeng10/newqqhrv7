@@ -1,6 +1,7 @@
 package com.jeecms.cms.entity.main.base;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 /**
@@ -114,7 +115,7 @@ public abstract class BaseContent  implements Serializable {
 	private java.util.Set<com.jeecms.core.entity.CmsGroup> viewGroups;
 	private java.util.List<com.jeecms.cms.entity.main.ContentTag> tags;
 	private java.util.List<com.jeecms.cms.entity.main.ContentPicture> pictures;
-	private java.util.List<com.jeecms.cms.entity.main.ContentAttachment> attachments;
+	private java.util.List<com.jeecms.cms.entity.main.ContentAttachment> attachments = new ArrayList<com.jeecms.cms.entity.main.ContentAttachment>();
 	private java.util.Set<com.jeecms.cms.entity.main.ContentTxt> contentTxtSet;
 	private java.util.Set<com.jeecms.cms.entity.main.ContentCheck> contentCheckSet;
 	private java.util.Map<java.lang.String, java.lang.String> attr;

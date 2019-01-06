@@ -224,4 +224,6 @@
 	<bean id="misDataMng" class="com.jeecms.cms.manager.assist.impl.MisDataMngimpl"/>
 	<bean id="ysqgkDao" class="com.jeecms.cms.dao.main.impl.YsqgkDaoImpl"/>
 	<bean id="ysqgkMng" class="com.jeecms.cms.manager.assist.impl.YsqgkMngImpl"/>
+	<bean id="transferDataDao" class="com.jeecms.cms.dao.main.impl.TransferDataDaoImpl"/>
+	
 </beans>

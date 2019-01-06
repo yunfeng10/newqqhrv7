@@ -26,7 +26,11 @@
     <!-- 页面主体 -->
     <div class="main wp1080 clearfix">
         <div class="location">
-            当前位置：<a href="#">首页</a> > <a href="#">网上办事</a> > 办理结果查询
+            当前位置：<a href="${base}/">首页</a> > 
+            [@cms_channel id='72']
+            <a href="${tag_bean.url}">网上办事</a> 
+            [/@cms_channel]
+            > 办理结果查询
         </div>
         <div class="letter">
             <h4 class="colum-title">${flvalue!''}</h4>

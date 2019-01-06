@@ -23,7 +23,13 @@
             	[@cms_channel_list parentId=channel.id]
 					[#list tag_list as c2]
        				<li [#if channel.id==c2.id] class="selected" [/#if]>
-	                    <a href="${c2.url}">${c2.name}</a>
+       					[#if c2.id=172]
+       						<a href="http://zd.hljlr.gov.cn/component/query/?view=main&city=1011451&1498715649=true">${c2.name}</a>
+       					[/#if]
+       					[#if c2.id!=172]
+       						<a href="${c2.url}">${c2.name}</a>
+       					[/#if]
+	                    
 	                </li>
  					[/#list] 
 				[/@cms_channel_list]
@@ -41,7 +47,7 @@
                		[/#list]
             </div>
             
-			[@cms_content_page channelId=channel.id count='20' titLen='15' append='...'  orderBy='2'  dateFormat='yyyy-MM-dd'  channelOption='1']
+			[@cms_content_page channelId=channel.id count='20' titLen='40' append='...'  orderBy='2'  dateFormat='yyyy-MM-dd'  channelOption='1']
 				<div class="arc-list">
 					<ul>
 						[#list tag_pagination.list as a]

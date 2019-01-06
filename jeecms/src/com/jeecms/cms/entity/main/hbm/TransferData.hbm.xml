@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jeecms.cms.entity.main">
+	<class name="TransferData" table="document">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="docid" type="java.lang.Integer" column="DOCID"><generator class="identity"/></id>
+		<property name="doctype" column="DOCTYPE" type="java.lang.Integer"/>
+		<property name="doctitle" column="DOCTITLE" type="string"/>
+		<property name="docpuburl" column="DOCPUBURL" type="string"/>
+		<property name="docpubtime" column="DOCPUBTIME" type="timestamp" not-null="true" length="19"/>
+		<property name="docpubhtmlcon" column="DOCPUBHTMLCON" type="string"/>
+		<property name="docfilename" column="DOCFILENAME" type="string"/>
+		<property name="newchannelid" column="newchannelid" type="java.lang.Integer"/>
+		<property name="newdocid" column="newdocid" type="java.lang.Integer"/>
+		
+	</class>
+</hibernate-mapping>

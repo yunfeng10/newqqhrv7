@@ -2,6 +2,11 @@ package com.jeecms.cms.entity.main;
 
 import static com.jeecms.common.web.Constants.SPT;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -69,8 +74,8 @@ public class Content extends BaseContent implements ContentInterface {
 		 */
 		contribute
 	};
-	
-	public static int DATA_CONTENT=0;
+
+	public static int DATA_CONTENT = 0;
 
 	private DateFormat df = new SimpleDateFormat("/yyyyMMdd");
 
@@ -95,8 +100,8 @@ public class Content extends BaseContent implements ContentInterface {
 		if (getStaticContent()) {
 			return getUrlStatic(false, 1);
 		} else {
-//			return getUrlDynamic(null);
-			//此处共享了别站信息需要绝句路径，做了更改 于2012-7-26修改
+			// return getUrlDynamic(null);
+			// 此处共享了别站信息需要绝句路径，做了更改 于2012-7-26修改
 			return getUrlDynamic(true);
 		}
 	}
@@ -133,8 +138,7 @@ public class Content extends BaseContent implements ContentInterface {
 				int index = filename.indexOf(".", filename.lastIndexOf("/"));
 				if (index != -1) {
 					url.append(filename.subSequence(0, index)).append("_");
-					url.append(pageNo).append(
-							filename.subSequence(index, filename.length()));
+					url.append(pageNo).append(filename.subSequence(index, filename.length()));
 				} else {
 					url.append(filename).append("_").append(pageNo);
 				}
@@ -200,9 +204,8 @@ public class Content extends BaseContent implements ContentInterface {
 		if (StringUtils.isBlank(rule)) {
 			return null;
 		}
-		String url = StaticPageUtils.staticUrlRule(rule, model.getId(), model
-				.getPath(), channel.getId(), channel.getPath(), getId(),
-				getReleaseDate());
+		String url = StaticPageUtils.staticUrlRule(rule, model.getId(), model.getPath(), channel.getId(),
+				channel.getPath(), getId(), getReleaseDate());
 		return url;
 	}
 
@@ -246,7 +249,7 @@ public class Content extends BaseContent implements ContentInterface {
 		}
 		set.add(check);
 	}
-	
+
 	public void addToChannels(Channel channel) {
 		Set<Channel> channels = getChannels();
 		if (channels == null) {
@@ -255,7 +258,7 @@ public class Content extends BaseContent implements ContentInterface {
 		}
 		channels.add(channel);
 	}
-	
+
 	public void removeSelfAddToChannels(Channel channel) {
 		Set<Channel> channels = getChannels();
 		if (channels == null) {
@@ -265,7 +268,6 @@ public class Content extends BaseContent implements ContentInterface {
 		channels.remove(getChannel());
 		channels.add(channel);
 	}
-	
 
 	public void addToTopics(CmsTopic topic) {
 		Set<CmsTopic> topics = getTopics();
@@ -386,18 +388,15 @@ public class Content extends BaseContent implements ContentInterface {
 			Byte channelStep = getChannel().getFinalStepExtends();
 			boolean checked = getStatus() == ContentCheck.CHECKED;
 			// 如果内容审核级别大于用户审核级别，或者内容已经审核且用户审核级别小于栏目审核级别。
-			if (getCheckStep() > userStep
-					|| (checked && userStep < channelStep)) {
+			if (getCheckStep() > userStep || (checked && userStep < channelStep)) {
 				return false;
 			} else {
 				return true;
 			}
-		} else if (AfterCheckEnum.BACK_UPDATE == after
-				|| AfterCheckEnum.KEEP_UPDATE == after) {
+		} else if (AfterCheckEnum.BACK_UPDATE == after || AfterCheckEnum.KEEP_UPDATE == after) {
 			return true;
 		} else {
-			throw new RuntimeException("AfterCheckEnum '" + after
-					+ "' did not handled");
+			throw new RuntimeException("AfterCheckEnum '" + after + "' did not handled");
 		}
 	}
 
@@ -428,18 +427,15 @@ public class Content extends BaseContent implements ContentInterface {
 			Byte channelStep = getChannel().getFinalStepExtends();
 			boolean checked = getStatus() == ContentCheck.CHECKED;
 			// 如果内容审核级别大于用户审核级别，或者内容已经审核且用户审核级别小于栏目审核级别。
-			if (getCheckStep() > userStep
-					|| (checked && userStep < channelStep)) {
+			if (getCheckStep() > userStep || (checked && userStep < channelStep)) {
 				return false;
 			} else {
 				return true;
 			}
-		} else if (AfterCheckEnum.BACK_UPDATE == after
-				|| AfterCheckEnum.KEEP_UPDATE == after) {
+		} else if (AfterCheckEnum.BACK_UPDATE == after || AfterCheckEnum.KEEP_UPDATE == after) {
 			return true;
 		} else {
-			throw new RuntimeException("AfterCheckEnum '" + after
-					+ "' did not handled");
+			throw new RuntimeException("AfterCheckEnum '" + after + "' did not handled");
 		}
 	}
 
@@ -472,7 +468,7 @@ public class Content extends BaseContent implements ContentInterface {
 		}
 		// 保存后立即生成静态化，如果这些值为null，则需要在模板中增加判断，使模板编写变得复杂。
 		if (getChannels() == null) {
-			System.out.println("content.id=="+getId());
+			System.out.println("content.id==" + getId());
 			setChannels(new HashSet<Channel>());
 		}
 		if (getTopics() == null) {
@@ -490,24 +486,18 @@ public class Content extends BaseContent implements ContentInterface {
 		if (getAttachments() == null) {
 			setAttachments(new ArrayList<ContentAttachment>());
 		}
-		if(getScore()==null){
+		if (getScore() == null) {
 			setScore(0);
 		}
 	}
 
 	public int getPageCount() {
 		int txtCount = getTxtCount();
-		/*图片集合应该特殊处理，不能作为文章本身分页依据
-		if (txtCount <= 1) {
-			List<ContentPicture> pics = getPictures();
-			if (pics != null) {
-				int picCount = pics.size();
-				if (picCount > 1) {
-					return picCount;
-				}
-			}
-		}
-		*/
+		/*
+		 * 图片集合应该特殊处理，不能作为文章本身分页依据 if (txtCount <= 1) { List<ContentPicture>
+		 * pics = getPictures(); if (pics != null) { int picCount = pics.size();
+		 * if (picCount > 1) { return picCount; } } }
+		 */
 		return txtCount;
 	}
 
@@ -681,34 +671,33 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
-	
-	public String getTypeImgWhole(){
+
+	public String getTypeImgWhole() {
 		if (!StringUtils.isBlank(getTypeImg())) {
-			CmsSite site=getSite();
-			return site.getProtocol()+site.getDomain()+":"+site.getPort()+getTypeImg();
+			CmsSite site = getSite();
+			return site.getProtocol() + site.getDomain() + ":" + site.getPort() + getTypeImg();
 		} else {
 			return getTitle();
 		}
 	}
-	
-	public String getTitleImgWhole(){
+
+	public String getTitleImgWhole() {
 		if (!StringUtils.isBlank(getTitleImg())) {
-			CmsSite site= getSite();
-			return site.getProtocol()+site.getDomain()+":"+site.getPort()+getTitleImg();
+			CmsSite site = getSite();
+			return site.getProtocol() + site.getDomain() + ":" + site.getPort() + getTitleImg();
 		} else {
 			return getTitle();
 		}
 	}
-	
-	public String getContentImgWhole(){
+
+	public String getContentImgWhole() {
 		if (!StringUtils.isBlank(getContentImg())) {
-			CmsSite site= getSite();
-			return site.getProtocol()+site.getDomain()+":"+site.getPort()+getContentImgWhole();
+			CmsSite site = getSite();
+			return site.getProtocol() + site.getDomain() + ":" + site.getPort() + getContentImgWhole();
 		} else {
 			return getTitle();
 		}
 	}
-	
 
 	public String getLink() {
 		ContentExt ext = getContentExt();
@@ -727,7 +716,7 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
-	
+
 	public Boolean getNeedRegenerate() {
 		ContentExt ext = getContentExt();
 		if (ext != null) {
@@ -736,7 +725,7 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
-	
+
 	public void setNeedRegenerate(Boolean isNeed) {
 		ContentExt ext = getContentExt();
 		if (ext != null) {
@@ -788,7 +777,7 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
-	
+
 	public Integer getViewsMonth() {
 		ContentCount count = getContentCount();
 		if (count != null) {
@@ -797,6 +786,7 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
+
 	public Integer getViewsWeek() {
 		ContentCount count = getContentCount();
 		if (count != null) {
@@ -805,6 +795,7 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
+
 	public Integer getViewDay() {
 		ContentCount count = getContentCount();
 		if (count != null) {
@@ -822,13 +813,13 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
-	
+
 	public Integer getCommentsCheckedNum() {
 		Set<CmsComment> comments = getComments();
-		int num=0;
+		int num = 0;
 		if (comments != null) {
-			for(CmsComment comment:comments){
-				if(comment.getChecked()){
+			for (CmsComment comment : comments) {
+				if (comment.getChecked()) {
 					num++;
 				}
 			}
@@ -837,16 +828,16 @@ public class Content extends BaseContent implements ContentInterface {
 			return 0;
 		}
 	}
-	
-	public boolean hasCommentUser(CmsUser user){
-		Set<CmsComment>comments=getComments();
-		if(comments==null){
+
+	public boolean hasCommentUser(CmsUser user) {
+		Set<CmsComment> comments = getComments();
+		if (comments == null) {
 			return false;
 		}
-		Iterator<CmsComment>it=comments.iterator();
-		while(it.hasNext()){
-			CmsComment comment=it.next();
-			if(comment.getCommentUser()!=null&&comment.getCommentUser().equals(user)){
+		Iterator<CmsComment> it = comments.iterator();
+		while (it.hasNext()) {
+			CmsComment comment = it.next();
+			if (comment.getCommentUser() != null && comment.getCommentUser().equals(user)) {
 				return true;
 			}
 		}
@@ -870,7 +861,7 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
-	
+
 	public Byte getCheckStep() {
 		ContentCheck check = getContentCheck();
 		if (check != null) {
@@ -915,7 +906,7 @@ public class Content extends BaseContent implements ContentInterface {
 			return null;
 		}
 	}
-	
+
 	public String getDesc() {
 		return getDescription();
 	}
@@ -956,7 +947,7 @@ public class Content extends BaseContent implements ContentInterface {
 	public Integer getSiteId() {
 		return getSite().getId();
 	}
-	
+
 	public String getSiteName() {
 		return getSite().getName();
 	}
@@ -964,139 +955,139 @@ public class Content extends BaseContent implements ContentInterface {
 	public String getSiteUrl() {
 		return getSite().getUrl();
 	}
-	
-	public String getCompanyName(){
+
+	public String getCompanyName() {
 		return getSite().getSiteCompany().getName();
 	}
-	
-	public String getCompanyAddr(){
+
+	public String getCompanyAddr() {
 		return getSite().getSiteCompany().getAddress();
 	}
-	
-	public String getCompanyScale(){
+
+	public String getCompanyScale() {
 		return getSite().getSiteCompany().getScale();
 	}
-	
-	public String getCompanyNature(){
+
+	public String getCompanyNature() {
 		return getSite().getSiteCompany().getNature();
 	}
-	
-	public String getCompanyIndustry(){
+
+	public String getCompanyIndustry() {
 		return getSite().getSiteCompany().getIndustry();
 	}
-	
-	public String getCompanyDesc(){
+
+	public String getCompanyDesc() {
 		return getSite().getSiteCompany().getDescription();
 	}
-	
-	public String getCompanyContact(){
+
+	public String getCompanyContact() {
 		return getSite().getSiteCompany().getContact();
 	}
-	
-	public Integer[]getChannelIds(){
-		Set<Channel>channels=getChannels();
+
+	public Integer[] getChannelIds() {
+		Set<Channel> channels = getChannels();
 		return Channel.fetchIds(channels);
 	}
-	
-	public Integer[]getChannelIdsWithoutChannel(){
-		Set<Channel>channels=getChannels();
+
+	public Integer[] getChannelIdsWithoutChannel() {
+		Set<Channel> channels = getChannels();
 		channels.remove(getChannel());
 		return Channel.fetchIds(channels);
 	}
-	
-	public Integer[]getTopicIds(){
-		Set<CmsTopic>topics=getTopics();
+
+	public Integer[] getTopicIds() {
+		Set<CmsTopic> topics = getTopics();
 		return CmsTopic.fetchIds(topics);
 	}
-	
-	public Integer[]getViewGroupIds(){
-		Set<CmsGroup>groups =getViewGroups();
+
+	public Integer[] getViewGroupIds() {
+		Set<CmsGroup> groups = getViewGroups();
 		return CmsGroup.fetchIds(groups);
 	}
-	
-	public String[]getAttachmentPaths(){
-		List<ContentAttachment>attList=getAttachments();
-		if(attList==null||attList.size()<=0){
+
+	public String[] getAttachmentPaths() {
+		List<ContentAttachment> attList = getAttachments();
+		if (attList == null || attList.size() <= 0) {
 			return null;
 		}
-		String[]attachmentPaths=new String[attList.size()];
-		for(int i=0;i<attachmentPaths.length;i++){
-			attachmentPaths[i]=attList.get(i).getPath();
+		String[] attachmentPaths = new String[attList.size()];
+		for (int i = 0; i < attachmentPaths.length; i++) {
+			attachmentPaths[i] = attList.get(i).getPath();
 		}
 		return attachmentPaths;
 	}
-	
-	public String[]getAttachmentNames(){
-		List<ContentAttachment>attList=getAttachments();
-		if(attList==null||attList.size()<=0){
+
+	public String[] getAttachmentNames() {
+		List<ContentAttachment> attList = getAttachments();
+		if (attList == null || attList.size() <= 0) {
 			return null;
 		}
-		String[]attachmentNames=new String[attList.size()];
-		for(int i=0;i<attachmentNames.length;i++){
-			attachmentNames[i]=attList.get(i).getName();
+		String[] attachmentNames = new String[attList.size()];
+		for (int i = 0; i < attachmentNames.length; i++) {
+			attachmentNames[i] = attList.get(i).getName();
 		}
 		return attachmentNames;
 	}
-	
-	public String[]getAttachmentFileNames(){
-		List<ContentAttachment>attList=getAttachments();
-		if(attList==null||attList.size()<=0){
+
+	public String[] getAttachmentFileNames() {
+		List<ContentAttachment> attList = getAttachments();
+		if (attList == null || attList.size() <= 0) {
 			return null;
 		}
-		String[]attachmentFileNames=new String[attList.size()];
-		for(int i=0;i<attachmentFileNames.length;i++){
-			attachmentFileNames[i]=attList.get(i).getFilename();
+		String[] attachmentFileNames = new String[attList.size()];
+		for (int i = 0; i < attachmentFileNames.length; i++) {
+			attachmentFileNames[i] = attList.get(i).getFilename();
 		}
 		return attachmentFileNames;
 	}
-	
-	public String[]getPicPaths(){
-		List<ContentPicture>pics=getPictures();
-		if(pics==null||pics.size()<=0){
+
+	public String[] getPicPaths() {
+		List<ContentPicture> pics = getPictures();
+		if (pics == null || pics.size() <= 0) {
 			return null;
 		}
-		String[]picPaths=new String[pics.size()];
-		for(int i=0;i<picPaths.length;i++){
-			picPaths[i]=pics.get(i).getImgPath();
+		String[] picPaths = new String[pics.size()];
+		for (int i = 0; i < picPaths.length; i++) {
+			picPaths[i] = pics.get(i).getImgPath();
 		}
 		return picPaths;
 	}
-	
-	public String[]getPicDescs(){
-		List<ContentPicture>pics=getPictures();
-		if(pics==null||pics.size()<=0){
+
+	public String[] getPicDescs() {
+		List<ContentPicture> pics = getPictures();
+		if (pics == null || pics.size() <= 0) {
 			return null;
 		}
-		String[]picDescs=new String[pics.size()];
-		for(int i=0;i<picDescs.length;i++){
-			picDescs[i]=pics.get(i).getDescription();
+		String[] picDescs = new String[pics.size()];
+		for (int i = 0; i < picDescs.length; i++) {
+			picDescs[i] = pics.get(i).getDescription();
 		}
 		return picDescs;
 	}
-	
-	public String[]getTagArray(){
-		List<ContentTag>tags=getTags();
-		if(tags==null||tags.size()<=0){
+
+	public String[] getTagArray() {
+		List<ContentTag> tags = getTags();
+		if (tags == null || tags.size() <= 0) {
 			return null;
 		}
-		String[]tagArrar=new String[tags.size()];
-		for(int i=0;i<tagArrar.length;i++){
-			tagArrar[i]=tags.get(i).getName();
+		String[] tagArrar = new String[tags.size()];
+		for (int i = 0; i < tagArrar.length; i++) {
+			tagArrar[i] = tags.get(i).getName();
 		}
 		return tagArrar;
 	}
-	
+
 	public Double getScoreAvg() {
-		Integer scoreTotal=0;
-		if(getScoreRecordSet()!=null){
-			for(CmsScoreRecord r:getScoreRecordSet()){
-				scoreTotal+=r.getCount();
+		Integer scoreTotal = 0;
+		if (getScoreRecordSet() != null) {
+			for (CmsScoreRecord r : getScoreRecordSet()) {
+				scoreTotal += r.getCount();
 			}
 		}
-		if(scoreTotal==0){
+		if (scoreTotal == 0) {
 			return 0.0;
-		}else{
-			return getScore()*1.0/scoreTotal;
+		} else {
+			return getScore() * 1.0 / scoreTotal;
 		}
 	}
 
@@ -1111,52 +1102,52 @@ public class Content extends BaseContent implements ContentInterface {
 	public Boolean getTarget() {
 		return null;
 	}
-	
-	public boolean getNew(){
-		Date releaseDate=getReleaseDate();
-		Date today=Calendar.getInstance().getTime();
-		int between=DateUtils.getDaysBetweenDate(releaseDate, today);
-		Integer dayNew=getSite().getConfig().getConfigAttr().getDayNew();
-		if(dayNew==0){
+
+	public boolean getNew() {
+		Date releaseDate = getReleaseDate();
+		Date today = Calendar.getInstance().getTime();
+		int between = DateUtils.getDaysBetweenDate(releaseDate, today);
+		Integer dayNew = getSite().getConfig().getConfigAttr().getDayNew();
+		if (dayNew == 0) {
 			return false;
-		}else{
-			return dayNew-between>0?true:false;
+		} else {
+			return dayNew - between > 0 ? true : false;
 		}
 	}
-	
-	public Content cloneWithoutSet() {  
-        Content content = new Content();  
-        content.setSortDate(getSortDate());
-        content.setTopLevel(getTopLevel());
-        content.setHasTitleImg(getHasTitleImg());
-        content.setRecommend(getRecommend());
-        content.setStatus(getStatus());
-        content.setViewsDay(getViewDay());
-        content.setCommentsDay(getCommentsDay());
-        content.setDownloadsDay(getDownloadsDay());
-        content.setUpsDay(getUpsDay());
-        content.setType(getType());
-        content.setSite(getSite());
-        content.setUser(getUser());
-        content.setChannel(getChannel());
-        content.setModel(getModel());
-        Map<String,String>attrs=getAttr();
-        if(attrs!=null&&!attrs.isEmpty()){
-        	Map<String,String>newAttrs=new HashMap<String, String>();
-        	String key;
-            Set<String>keyset=attrs.keySet();
-            Iterator<String>keyIt=keyset.iterator();
-            while(keyIt.hasNext()){
-            	key=keyIt.next();
-            	newAttrs.put(key, attrs.get(key));
-            }
-            content.setAttr(newAttrs);
-        }
-      //content.setContentExt(getContentExt());
-        return content;  
-    }  
-	
-	public void clear(){
+
+	public Content cloneWithoutSet() {
+		Content content = new Content();
+		content.setSortDate(getSortDate());
+		content.setTopLevel(getTopLevel());
+		content.setHasTitleImg(getHasTitleImg());
+		content.setRecommend(getRecommend());
+		content.setStatus(getStatus());
+		content.setViewsDay(getViewDay());
+		content.setCommentsDay(getCommentsDay());
+		content.setDownloadsDay(getDownloadsDay());
+		content.setUpsDay(getUpsDay());
+		content.setType(getType());
+		content.setSite(getSite());
+		content.setUser(getUser());
+		content.setChannel(getChannel());
+		content.setModel(getModel());
+		Map<String, String> attrs = getAttr();
+		if (attrs != null && !attrs.isEmpty()) {
+			Map<String, String> newAttrs = new HashMap<String, String>();
+			String key;
+			Set<String> keyset = attrs.keySet();
+			Iterator<String> keyIt = keyset.iterator();
+			while (keyIt.hasNext()) {
+				key = keyIt.next();
+				newAttrs.put(key, attrs.get(key));
+			}
+			content.setAttr(newAttrs);
+		}
+		// content.setContentExt(getContentExt());
+		return content;
+	}
+
+	public void clear() {
 		getCollectUsers().clear();
 	}
 
@@ -1175,17 +1166,34 @@ public class Content extends BaseContent implements ContentInterface {
 	/**
 	 * Constructor for required fields
 	 */
-	public Content(java.lang.Integer id,
-			com.jeecms.core.entity.CmsSite site, java.util.Date sortDate,
-			java.lang.Byte topLevel, java.lang.Boolean hasTitleImg,
-			java.lang.Boolean recommend, java.lang.Byte status,
-			java.lang.Integer viewsDay, java.lang.Short commentsDay,
-			java.lang.Short downloadsDay, java.lang.Short upsDay) {
+	public Content(java.lang.Integer id, com.jeecms.core.entity.CmsSite site, java.util.Date sortDate,
+			java.lang.Byte topLevel, java.lang.Boolean hasTitleImg, java.lang.Boolean recommend, java.lang.Byte status,
+			java.lang.Integer viewsDay, java.lang.Short commentsDay, java.lang.Short downloadsDay,
+			java.lang.Short upsDay) {
 
-		super(id, site, sortDate, topLevel, hasTitleImg, recommend, status,
-				viewsDay, commentsDay, downloadsDay, upsDay);
+		super(id, site, sortDate, topLevel, hasTitleImg, recommend, status, viewsDay, commentsDay, downloadsDay,
+				upsDay);
 	}
 
 	/* [CONSTRUCTOR MARKER END] */
+
+	public Content expandClone() {
+		Content outer = null;
+		try { // 将该对象序列化成流,因为写在流里的是对象的一个拷贝，而原对象仍然存在于JVM里面。所以利用这个特性可以实现对象的深拷贝
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			oos.writeObject(this);
+			// 将流序列化成对象
+			ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+			ObjectInputStream ois = new ObjectInputStream(bais);
+			outer = (Content) ois.readObject();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		outer.setSite(this.getSite());
+		return outer;
+	}
 
 }

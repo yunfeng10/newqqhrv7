@@ -42,7 +42,7 @@
                 	[#list tag_list as a]
                 		<div class="swiper-slide">
 		                    <a href="${a.url}" class="box">
-		                        <img src="${a.typeImg!}" alt="">
+		                        <img src="${a.typeImg!'/r/cms/qqhr/www/img/pic-01.jpg'}" alt="">
 		                        <h4>
 		                            <span class="cut_text_overflow">[@text_cut s=a.title len=titLen /]</span>
 		                        </h4>
@@ -142,7 +142,7 @@
                             <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li>
                             <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li>
                             <li class="cut_text_overflow"><a href="#" title=""#>群众办事百项堵点疏解行动——请你来投票</a></li> -->
-                            [@cms_content_list channelId='89' count='8' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+                            [@cms_content_list channelId='89' count='4' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 								[#list tag_list as a]
 									<li class="cut_text_overflow"><a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a></li>
 								[/#list]
@@ -342,13 +342,17 @@
         <div class="special-column">
             <ul>
                 <li>
-                    <a href="#" title="党建专栏"><img src="/${res}/img/ad-01.jpg"></a>
+                	[@cms_channel id='162']
+                    <a href="${tag_bean.url}" title="党建专栏"><img src="/${res}/img/ad-01.jpg"></a>
+                    [/@cms_channel]
                 </li>
                 <li>
                     <a href="http://zd.hljlr.gov.cn/component/query/?view=main&city=1011451&1498715649=true" title="征地信息公共平台"><img src="/${res}/img/ad-02.jpg"></a>
                 </li>
                 <li>
-                    <a href="http://www.hljqqhelr.gov.cn/ztxx/dsctddc/" title="第三次土地调查新闻栏"><img src="/${res}/img/ad-03.jpg"></a>
+                	[@cms_channel id='173']
+                    <a href="${tag_bean.url}" title="第三次土地调查新闻栏"><img src="/${res}/img/ad-03.jpg"></a>
+                	[/@cms_channel]
                 </li>
             </ul>
         </div>
@@ -422,8 +426,10 @@
                          [@cms_content_list channelId='314' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 						
 							[#list tag_list as a]
+							<li>
 								<a href="${a.url}" class="cut_text_overflow" title="">[@text_cut s=a.title len=titLen append=append/]</a>
 	                        	<span>${a.date?string(dateFormat)}</span>
+	                        	</li>
 							[/#list]
 							
 						[/@cms_content_list]
@@ -453,8 +459,10 @@
                         [@cms_content_list channelId='148' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 						
 							[#list tag_list as a]
+							<li>
 								<a href="${a.url}" class="cut_text_overflow" title="">[@text_cut s=a.title len=titLen append=append/]</a>
 	                        	<span>${a.date?string(dateFormat)}</span>
+	                        	</li>
 							[/#list]
 							
 						[/@cms_content_list]

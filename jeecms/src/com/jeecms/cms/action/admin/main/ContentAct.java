@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.jeecms.cms.dao.main.TransferDataDao;
 import com.jeecms.cms.entity.main.Channel;
 import com.jeecms.cms.entity.main.CmsModel;
 import com.jeecms.cms.entity.main.CmsModelItem;
@@ -38,6 +38,8 @@ import com.jeecms.cms.entity.main.ContentCheck;
 import com.jeecms.cms.entity.main.ContentExt;
 import com.jeecms.cms.entity.main.ContentTxt;
 import com.jeecms.cms.entity.main.ContentType;
+import com.jeecms.cms.entity.main.OldFileUtil;
+import com.jeecms.cms.entity.main.TransferData;
 import com.jeecms.cms.entity.main.Content.ContentStatus;
 import com.jeecms.cms.manager.assist.CmsFileMng;
 import com.jeecms.cms.manager.main.ChannelMng;
@@ -405,6 +407,231 @@ public class ContentAct{
 		return "content/edit";
 	}
 
+	@RequiresPermissions("content:o_savet")
+	@RequestMapping("/content/o_save.dot")
+	public String savet(Content bean,ContentExt ext, ContentTxt txt,
+			Boolean copyimg,Integer sendType,Integer selectImg,String weixinImg,
+			Integer[] channelIds, Integer[] topicIds, Integer[] viewGroupIds,
+			String[] attachmentPaths, String[] attachmentNames,
+			String[] attachmentFilenames, String[] picPaths, String[] picDescs,
+			Integer channelId, Integer typeId, String tagStr, Boolean draft,
+			Integer cid, Integer modelId,Integer oldtype,Integer olddocid,HttpServletRequest request, ModelMap model) {
+		WebErrors errors = validateSave(bean, channelId, request);
+		/*if (errors.hasErrors()) {
+			return errors.showErrorPage(model);
+		}*/
+		if(oldtype!=null){
+			List<TransferData> oldDataList = transferDataDao.query(channelId,oldtype, olddocid);
+			if(oldtype==10){
+				for(TransferData oldData:oldDataList){
+					Content copyBean= bean.cloneWithoutSet();
+					ContentExt copyext = ext.expandClone();
+					ContentTxt copytxt =txt.expandClone();
+					
+					copyext.setTitle(oldData.getDoctitle());
+					copyext.setReleaseDate(oldData.getDocpubtime());
+					copyBean.setSortDate(oldData.getDocpubtime());
+					copytxt.setTxt(oldData.getDocpubhtmlcon());
+					// 加上模板前缀
+					CmsSite site = CmsUtils.getSite(request);
+					CmsUser user = CmsUtils.getUser(request);
+					String tplPath = site.getTplPath();
+					if (!StringUtils.isBlank(copyext.getTplContent())) {
+						copyext.setTplContent(tplPath + copyext.getTplContent());
+					}
+					copyBean.setAttr(RequestUtils.getRequestMap(request, "attr_"));
+					String[] tagArr = StrUtils.splitAndTrim(tagStr, ",", MessageResolver
+							.getMessage(request, "content.tagStr.split"));
+					if(copytxt!=null&&copyimg!=null&&copyimg){
+						copytxt=copyContentTxtImg(copytxt, site);
+					}
+					copyBean = manager.save(copyBean, copyext, copytxt,channelIds, topicIds, viewGroupIds,
+							tagArr, attachmentPaths, attachmentNames, attachmentFilenames,
+							picPaths, picDescs, channelId, typeId, draft,false, user, false);
+					//微信消息发送
+					weiXinSvc.sendMessage(sendType, selectImg, weixinImg, copyBean, copyext, copytxt);
+					//处理附件
+					fileMng.updateFileByPaths(attachmentPaths,picPaths,copyext.getMediaPath(),copyext.getTitleImg(),copyext.getTypeImg(),copyext.getContentImg(),true,copyBean);
+					log.info("save Content id={}", copyBean.getId());
+					cmsLogMng.operating(request, "content.log.save", "id=" + copyBean.getId()
+							+ ";title=" + copyBean.getTitle());
+					if (cid != null) {
+						model.addAttribute("cid", cid);
+					}
+					oldData.setNewdocid(copyext.getId());
+					transferDataDao.save(oldData);
+				}
+				
+			}else if(oldtype==20){
+				for(TransferData oldData:oldDataList){
+					Content copyBean= bean.cloneWithoutSet();
+					ContentExt copyext = ext.expandClone();
+					ContentTxt copytxt =txt.expandClone();
+					//处理数据 begin
+					copyext.setTitle(oldData.getDoctitle());
+					copyext.setReleaseDate(oldData.getDocpubtime());
+					copyBean.setSortDate(oldData.getDocpubtime());
+					String html=oldData.getDocpubhtmlcon();
+					html=OldFileUtil.replaceFiePath(html);
+					copytxt.setTxt(html);
+					//BeanUtils.copyProperties(copyext,bean.getContentExt());
+					//BeanUtils.copyProperties(copytxt,bean.getContentTxt());
+					//处理数据 end
+					
+					// 加上模板前缀
+					CmsSite site = CmsUtils.getSite(request);
+					CmsUser user = CmsUtils.getUser(request);
+					String tplPath = site.getTplPath();
+					if (!StringUtils.isBlank(copyext.getTplContent())) {
+						copyext.setTplContent(tplPath + copyext.getTplContent());
+					}
+					copyBean.setAttr(RequestUtils.getRequestMap(request, "attr_"));
+					String[] tagArr = StrUtils.splitAndTrim(tagStr, ",", MessageResolver
+							.getMessage(request, "content.tagStr.split"));
+					if(copytxt!=null&&copyimg!=null&&copyimg){
+						copytxt=copyContentTxtImg(copytxt, site);
+					}
+					copyBean = manager.save(copyBean, copyext, copytxt,channelIds, topicIds, viewGroupIds,
+							tagArr, attachmentPaths, attachmentNames, attachmentFilenames,
+							picPaths, picDescs, channelId, typeId, draft,false, user, false);
+					//微信消息发送
+					weiXinSvc.sendMessage(sendType, selectImg, weixinImg, copyBean, copyext, copytxt);
+					//处理附件
+					fileMng.updateFileByPaths(attachmentPaths,picPaths,copyext.getMediaPath(),copyext.getTitleImg(),copyext.getTypeImg(),copyext.getContentImg(),true,copyBean);
+					log.info("save Content id={}", copyBean.getId());
+					cmsLogMng.operating(request, "content.log.save", "id=" + copyBean.getId()
+							+ ";title=" + copyBean.getTitle());
+					if (cid != null) {
+						model.addAttribute("cid", cid);
+					}
+				}
+			}else if(oldtype==30){
+				for(TransferData oldData:oldDataList){
+					Content copyBean= bean.cloneWithoutSet();
+					ContentExt copyext = ext.expandClone();
+					ContentTxt copytxt =txt.expandClone();
+					//处理数据 begin
+					copyext.setTitle(oldData.getDoctitle());
+					copyext.setReleaseDate(oldData.getDocpubtime());
+					copyBean.setSortDate(oldData.getDocpubtime());
+					ext.setLink(oldData.getDocpuburl());
+					//BeanUtils.copyProperties(copyext,bean.getContentExt());
+					//BeanUtils.copyProperties(copytxt,bean.getContentTxt());
+					//处理数据 end
+					
+					// 加上模板前缀
+					CmsSite site = CmsUtils.getSite(request);
+					CmsUser user = CmsUtils.getUser(request);
+					String tplPath = site.getTplPath();
+					if (!StringUtils.isBlank(copyext.getTplContent())) {
+						copyext.setTplContent(tplPath + copyext.getTplContent());
+					}
+					copyBean.setAttr(RequestUtils.getRequestMap(request, "attr_"));
+					String[] tagArr = StrUtils.splitAndTrim(tagStr, ",", MessageResolver
+							.getMessage(request, "content.tagStr.split"));
+					if(copytxt!=null&&copyimg!=null&&copyimg){
+						copytxt=copyContentTxtImg(copytxt, site);
+					}
+					copyBean = manager.save(copyBean, copyext, copytxt,channelIds, topicIds, viewGroupIds,
+							tagArr, attachmentPaths, attachmentNames, attachmentFilenames,
+							picPaths, picDescs, channelId, typeId, draft,false, user, false);
+					//微信消息发送
+					weiXinSvc.sendMessage(sendType, selectImg, weixinImg, copyBean, copyext, copytxt);
+					//处理附件
+					fileMng.updateFileByPaths(attachmentPaths,picPaths,copyext.getMediaPath(),copyext.getTitleImg(),copyext.getTypeImg(),copyext.getContentImg(),true,copyBean);
+					log.info("save Content id={}", copyBean.getId());
+					cmsLogMng.operating(request, "content.log.save", "id=" + copyBean.getId()
+							+ ";title=" + copyBean.getTitle());
+					if (cid != null) {
+						model.addAttribute("cid", cid);
+					}
+					//return add(cid,modelId, request, model);
+				}
+			}else if(oldtype==40){
+				for(TransferData oldData:oldDataList){
+					String[] attachmentPathsNew = {"/oldfile/"+oldData.getDocfilename()} ;
+					String[] attachmentNamesNew = {oldData.getDoctitle()};
+					String[] attachmentFilenamesNew = {};
+					Content copyBean= bean.cloneWithoutSet();
+					ContentExt copyext = ext.expandClone();
+					ContentTxt copytxt =txt.expandClone();
+					//处理数据 begin
+					copyext.setTitle(oldData.getDoctitle());
+					copyext.setReleaseDate(oldData.getDocpubtime());
+					copyBean.setSortDate(oldData.getDocpubtime());
+					String html=oldData.getDocpubhtmlcon();
+					if(!StringUtils.isEmpty(html)){
+						html=OldFileUtil.replaceFiePath(html);
+						copytxt.setTxt(html);
+					}
+					
+					//BeanUtils.copyProperties(copyext,bean.getContentExt());
+					//BeanUtils.copyProperties(copytxt,bean.getContentTxt());
+					//处理数据 end
+					
+					// 加上模板前缀
+					CmsSite site = CmsUtils.getSite(request);
+					CmsUser user = CmsUtils.getUser(request);
+					String tplPath = site.getTplPath();
+					if (!StringUtils.isBlank(copyext.getTplContent())) {
+						copyext.setTplContent(tplPath + copyext.getTplContent());
+					}
+					copyBean.setAttr(RequestUtils.getRequestMap(request, "attr_"));
+					String[] tagArr = StrUtils.splitAndTrim(tagStr, ",", MessageResolver
+							.getMessage(request, "content.tagStr.split"));
+					if(copytxt!=null&&copyimg!=null&&copyimg){
+						copytxt=copyContentTxtImg(copytxt, site);
+					}
+					copyBean = manager.save(copyBean, copyext, copytxt,channelIds, topicIds, viewGroupIds,
+							tagArr, attachmentPathsNew, attachmentNamesNew, attachmentFilenamesNew,
+							picPaths, picDescs, channelId, typeId, draft,false, user, false);
+					//微信消息发送
+					weiXinSvc.sendMessage(sendType, selectImg, weixinImg, copyBean, copyext, copytxt);
+					//处理附件
+					fileMng.updateFileByPaths(attachmentPaths,picPaths,copyext.getMediaPath(),copyext.getTitleImg(),copyext.getTypeImg(),copyext.getContentImg(),true,copyBean);
+					log.info("save Content id={}", copyBean.getId());
+					cmsLogMng.operating(request, "content.log.save", "id=" + copyBean.getId()
+							+ ";title=" + copyBean.getTitle());
+					if (cid != null) {
+						model.addAttribute("cid", cid);
+					}
+					//return add(cid,modelId, request, model);
+				}
+			}
+		}else{
+			// 加上模板前缀
+			CmsSite site = CmsUtils.getSite(request);
+			CmsUser user = CmsUtils.getUser(request);
+			String tplPath = site.getTplPath();
+			if (!StringUtils.isBlank(ext.getTplContent())) {
+				ext.setTplContent(tplPath + ext.getTplContent());
+			}
+			bean.setAttr(RequestUtils.getRequestMap(request, "attr_"));
+			String[] tagArr = StrUtils.splitAndTrim(tagStr, ",", MessageResolver
+					.getMessage(request, "content.tagStr.split"));
+			if(txt!=null&&copyimg!=null&&copyimg){
+				txt=copyContentTxtImg(txt, site);
+			}
+			bean = manager.save(bean, ext, txt,channelIds, topicIds, viewGroupIds,
+					tagArr, attachmentPaths, attachmentNames, attachmentFilenames,
+					picPaths, picDescs, channelId, typeId, draft,false, user, false);
+			//微信消息发送
+			weiXinSvc.sendMessage(sendType, selectImg, weixinImg, bean, ext, txt);
+			//处理附件
+			fileMng.updateFileByPaths(attachmentPaths,picPaths,ext.getMediaPath(),ext.getTitleImg(),ext.getTypeImg(),ext.getContentImg(),true,bean);
+			log.info("save Content id={}", bean.getId());
+			cmsLogMng.operating(request, "content.log.save", "id=" + bean.getId()
+					+ ";title=" + bean.getTitle());
+			if (cid != null) {
+				model.addAttribute("cid", cid);
+			}
+			return add(cid,modelId, request, model);
+		}
+		
+		
+		//model.addAttribute("message", "global.success");
+		return add(cid,modelId, request, model);
+	}
 	@RequiresPermissions("content:o_save")
 	@RequestMapping("/content/o_save.do")
 	public String save(Content bean, ContentExt ext, ContentTxt txt,
@@ -1258,4 +1485,6 @@ public class ContentAct{
 	private ImageSvc imageSvc;
 	@Autowired
 	private WeiXinSvc weiXinSvc;
+	@Autowired
+	private TransferDataDao transferDataDao;
 }
