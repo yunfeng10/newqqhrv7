@@ -740,9 +740,17 @@ h2.big-title a {
     padding: 10px 0;
     font-family: "宋体";
     line-height: 2;
+	overflow-x: auto;
 }
 .content img {
     display: inline-block;
+}
+.content table {
+	border: 1px solid #ddd;
+}
+.content table tr th,
+.content table tr td {
+	border: 1px solid #ddd;
 }
 
 
@@ -987,6 +995,7 @@ h2.big-title a {
 }
 .reply-box table tr td {
     padding: 10px;
+	line-height: 20px;
 }
 
 
