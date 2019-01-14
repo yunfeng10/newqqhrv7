@@ -362,7 +362,7 @@ function submitContent(){
 
 <#elseif item.field=="title">
 <@p.td required="true" help=item.help helpPosition="${item.helpPosition!2}" label=item.label colspan=item.single?string("2","1") width="${item.single?string(100,50)}">
-<@p.text value="${item.defValue!}" class="required" maxlength="150" size="${item.size!70}" name=item.field onchange="generateTags()"/>
+<@p.text value="${item.defValue!}" class="required" maxlength="150" size="${item.size!70}" name=item.field onchange="generateTags()" value="1"/>
 <label><input type="checkbox" onclick="$('#linkDiv').toggle(this.checked);if(!this.checked){$('#link').val('');}"/><@s.m "content.link"/></label>
 <div id="linkDiv" style="display:none">url: <input type="text" id="link" name="link"  title="<@s.m 'contentLink.tip.title'/>" size="35" maxlength="255"/></div>
 </@p.td>

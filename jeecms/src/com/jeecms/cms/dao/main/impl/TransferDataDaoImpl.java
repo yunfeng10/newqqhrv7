@@ -21,7 +21,7 @@ public class TransferDataDaoImpl extends HibernateBaseDao<TransferData, Integer>
 
 	@Override
 	public List<TransferData> query(Integer tcid,Integer oldtype, Integer oldid) {
-		Finder f = Finder.create("from TransferData bean where docstatus=10");
+		Finder f = Finder.create("from TransferData bean where docstatus > 0");
 		f.append(" and bean.newchannelid=:newchannelid ");
 		f.setParam("newchannelid", tcid);
 		

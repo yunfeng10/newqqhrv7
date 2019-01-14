@@ -407,9 +407,9 @@ public class ContentAct{
 		return "content/edit";
 	}
 
-	@RequiresPermissions("content:o_savet")
-	@RequestMapping("/content/o_save.dot")
-	public String savet(Content bean,ContentExt ext, ContentTxt txt,
+	@RequiresPermissions("content:o_save1")
+	@RequestMapping("/content/o_save.do1")
+	public String save1(Content bean,ContentExt ext, ContentTxt txt,
 			Boolean copyimg,Integer sendType,Integer selectImg,String weixinImg,
 			Integer[] channelIds, Integer[] topicIds, Integer[] viewGroupIds,
 			String[] attachmentPaths, String[] attachmentNames,
@@ -429,8 +429,14 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					
 					copyext.setTitle(oldData.getDoctitle());
-					copyext.setReleaseDate(oldData.getDocpubtime());
-					copyBean.setSortDate(oldData.getDocpubtime());
+					if(oldData.getDocpubtime() == null){
+						copyext.setReleaseDate(oldData.getDocreltime());
+						copyBean.setSortDate(oldData.getDocreltime());
+					}else{
+						copyext.setReleaseDate(oldData.getDocpubtime());
+						copyBean.setSortDate(oldData.getDocpubtime());
+					}
+					
 					copytxt.setTxt(oldData.getDocpubhtmlcon());
 					// 加上模板前缀
 					CmsSite site = CmsUtils.getSite(request);
@@ -469,8 +475,13 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					//处理数据 begin
 					copyext.setTitle(oldData.getDoctitle());
-					copyext.setReleaseDate(oldData.getDocpubtime());
-					copyBean.setSortDate(oldData.getDocpubtime());
+					if(oldData.getDocpubtime() == null){
+						copyext.setReleaseDate(oldData.getDocreltime());
+						copyBean.setSortDate(oldData.getDocreltime());
+					}else{
+						copyext.setReleaseDate(oldData.getDocpubtime());
+						copyBean.setSortDate(oldData.getDocpubtime());
+					}
 					String html=oldData.getDocpubhtmlcon();
 					html=OldFileUtil.replaceFiePath(html);
 					copytxt.setTxt(html);
@@ -512,9 +523,19 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					//处理数据 begin
 					copyext.setTitle(oldData.getDoctitle());
-					copyext.setReleaseDate(oldData.getDocpubtime());
-					copyBean.setSortDate(oldData.getDocpubtime());
-					ext.setLink(oldData.getDocpuburl());
+					if(oldData.getDocpubtime() == null){
+						copyext.setReleaseDate(oldData.getDocreltime());
+						copyBean.setSortDate(oldData.getDocreltime());
+					}else{
+						copyext.setReleaseDate(oldData.getDocpubtime());
+						copyBean.setSortDate(oldData.getDocpubtime());
+					}
+					if(StringUtils.isEmpty(oldData.getDocpuburl())){
+						ext.setLink(oldData.getDoclink());
+					}else{
+						ext.setLink(oldData.getDocpuburl());
+					}
+					
 					//BeanUtils.copyProperties(copyext,bean.getContentExt());
 					//BeanUtils.copyProperties(copytxt,bean.getContentTxt());
 					//处理数据 end
@@ -549,7 +570,7 @@ public class ContentAct{
 				}
 			}else if(oldtype==40){
 				for(TransferData oldData:oldDataList){
-					String[] attachmentPathsNew = {"/oldfile/"+oldData.getDocfilename()} ;
+					String[] attachmentPathsNew = {"/everfile/"+oldData.getDocfilename()} ;
 					String[] attachmentNamesNew = {oldData.getDoctitle()};
 					String[] attachmentFilenamesNew = {};
 					Content copyBean= bean.cloneWithoutSet();
@@ -557,8 +578,13 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					//处理数据 begin
 					copyext.setTitle(oldData.getDoctitle());
-					copyext.setReleaseDate(oldData.getDocpubtime());
-					copyBean.setSortDate(oldData.getDocpubtime());
+					if(oldData.getDocpubtime() == null){
+						copyext.setReleaseDate(oldData.getDocreltime());
+						copyBean.setSortDate(oldData.getDocreltime());
+					}else{
+						copyext.setReleaseDate(oldData.getDocpubtime());
+						copyBean.setSortDate(oldData.getDocpubtime());
+					}
 					String html=oldData.getDocpubhtmlcon();
 					if(!StringUtils.isEmpty(html)){
 						html=OldFileUtil.replaceFiePath(html);
