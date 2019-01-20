@@ -429,7 +429,7 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					
 					copyext.setTitle(oldData.getDoctitle());
-					if(oldData.getDocpubtime() == null){
+					if(oldData.getDocreltime() != null){
 						copyext.setReleaseDate(oldData.getDocreltime());
 						copyBean.setSortDate(oldData.getDocreltime());
 					}else{
@@ -475,7 +475,7 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					//处理数据 begin
 					copyext.setTitle(oldData.getDoctitle());
-					if(oldData.getDocpubtime() == null){
+					if(oldData.getDocreltime() != null){
 						copyext.setReleaseDate(oldData.getDocreltime());
 						copyBean.setSortDate(oldData.getDocreltime());
 					}else{
@@ -523,7 +523,7 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					//处理数据 begin
 					copyext.setTitle(oldData.getDoctitle());
-					if(oldData.getDocpubtime() == null){
+					if(oldData.getDocreltime() != null){
 						copyext.setReleaseDate(oldData.getDocreltime());
 						copyBean.setSortDate(oldData.getDocreltime());
 					}else{
@@ -578,7 +578,7 @@ public class ContentAct{
 					ContentTxt copytxt =txt.expandClone();
 					//处理数据 begin
 					copyext.setTitle(oldData.getDoctitle());
-					if(oldData.getDocpubtime() == null){
+					if(oldData.getDocreltime() != null){
 						copyext.setReleaseDate(oldData.getDocreltime());
 						copyBean.setSortDate(oldData.getDocreltime());
 					}else{

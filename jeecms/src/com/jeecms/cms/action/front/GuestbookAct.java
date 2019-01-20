@@ -228,7 +228,7 @@ public class GuestbookAct {
 		}
 		String ip = RequestUtils.getIpAddr(request);
 		if (cxm == null || cxm.length() == 0) {
-			cxm = this.getRandomString(20);
+			cxm = this.getRandomString(8);
 		}
 		if (djcs == null) {
 			djcs = 0;
@@ -355,7 +355,7 @@ public class GuestbookAct {
 			log.warn("", e);
 			return;
 		}
-		ysqgk.setSearchNo(this.getRandomString(20));
+		ysqgk.setSearchNo(this.getRandomString(8));
 		ysqgk.setShenQingShiJian(new Date());
 		ysqgkMng.save(ysqgk);
 		json.put("searchno", ysqgk.getSearchNo());
