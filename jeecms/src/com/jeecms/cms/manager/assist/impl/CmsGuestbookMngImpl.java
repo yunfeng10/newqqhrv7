@@ -1,8 +1,11 @@
 package com.jeecms.cms.manager.assist.impl;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import com.jeecms.cms.dao.assist.CmsGuestbookDao;
 import com.jeecms.cms.dao.main.YsqgkDao;
 import com.jeecms.cms.entity.assist.CmsGuestbook;
 import com.jeecms.cms.entity.assist.CmsGuestbookExt;
+import com.jeecms.cms.entity.assist.SiteFileCount;
 import com.jeecms.cms.entity.main.Ysqgk;
 import com.jeecms.cms.entity.main.YsqgkFile;
 import com.jeecms.cms.manager.assist.CmsGuestbookCtgMng;
@@ -19,8 +23,10 @@ import com.jeecms.cms.manager.assist.CmsGuestbookExtMng;
 import com.jeecms.cms.manager.assist.CmsGuestbookMng;
 import com.jeecms.common.hibernate3.Updater;
 import com.jeecms.common.page.Pagination;
+import com.jeecms.core.entity.CmsSite;
 import com.jeecms.core.entity.CmsUser;
 import com.jeecms.core.manager.CmsSiteMng;
+import com.jeecms.core.web.util.CmsUtils;
 
 @Service
 @Transactional
@@ -206,6 +212,27 @@ public class CmsGuestbookMngImpl implements CmsGuestbookMng {
 		Updater<Ysqgk> updater = new Updater<Ysqgk>(entity);
 		entity = ysqgkDao.updateByUpdater(updater);
 		return entity;
+	}
+
+	@Override
+	public void countInformation(HttpServletRequest request, SiteFileCount count) {
+		// TODO Auto-generated method stub
+		CmsSite site = CmsUtils.getSite(request);
+		String year = count.getYear()+"";
+		String path = site.getUploadPath();
+		String cpath = request.getSession().getServletContext().getRealPath("");
+		File baseFile = new File(cpath+File.separator+path);
+		if(baseFile.exists()){
+			File[] baseList = baseFile.listFiles();
+			for(File baseItem :baseList){
+				if(baseItem.isDirectory() && baseItem.getName().startsWith(year)){
+					File[] itemList = baseItem.listFiles();
+					for(File item : itemList){
+						count.countFile(item.getName());
+					}
+				}
+			}
+		}
 	}
 
 }

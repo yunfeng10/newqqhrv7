@@ -2,6 +2,7 @@ package com.jeecms.cms.action.admin.assist;
 
 import static com.jeecms.common.page.SimplePage.cpn;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jeecms.cms.entity.assist.CmsGuestbook;
 import com.jeecms.cms.entity.assist.CmsGuestbookCtg;
 import com.jeecms.cms.entity.assist.CmsGuestbookExt;
+import com.jeecms.cms.entity.assist.SiteFileCount;
 import com.jeecms.cms.entity.main.Ysqgk;
 import com.jeecms.cms.manager.assist.CmsGuestbookCtgMng;
 import com.jeecms.cms.manager.assist.CmsGuestbookMng;
@@ -35,6 +37,29 @@ public class CmsGuestbookAct {
 	private static final Logger log = LoggerFactory
 			.getLogger(CmsGuestbookAct.class);
 
+	@RequiresPermissions("sitefilecount:count")
+	@RequestMapping("/sitefilecount/count.do")
+	public String siteFileCount(Integer year,HttpServletRequest request,ModelMap model){
+		CmsSite site = CmsUtils.getSite(request);
+		Integer countYear = null;
+		if(year == null){
+			Calendar calendar = Calendar.getInstance();
+			countYear = calendar.get(calendar.YEAR);
+		}else{
+			countYear=year;
+			
+		}
+		SiteFileCount count = new SiteFileCount(countYear);
+		manager.countInformation(request, count);
+		model.addAttribute("year", count.getYear());
+		model.addAttribute("totalFile", count.getTotalFile());
+		model.addAttribute("picFile", count.getPicFile());
+		model.addAttribute("docFile", count.getDocFile());
+		model.addAttribute("videoFile", count.getVideoFile());
+		model.addAttribute("otherFile", count.getOtherFile());
+		return "sitefilecount/count";
+	}
+	
 	@RequiresPermissions("ysqgk:v_list")
 	@RequestMapping("/ysqgk/v_list.do")
 	public String ysqgkList(Integer pageNo, HttpServletRequest request,

@@ -7,37 +7,19 @@
     <title>齐齐哈尔市自然资源局</title>
     <link rel="stylesheet" href="/${res}/css/reset.css">
     <link rel="stylesheet" href="/${res}/css/style.css">
-    <!-- <script src="/${res}/js/jQuery-1.11.3.min.js"></script> -->
     <script src="${resSys}/jquery.js" type="text/javascript"></script>
     <script src="/${res}/js/velocity.min.js"></script>
+    <script src="/${res}/js/nav.js"></script>
     <script src="/${res}/js/swiper.js"></script>
     <script src="/${res}/js/tab.js"></script>
 </head>
 <body>
-    [#include "../include/header.html"/]
+   [#include "../include/header.html"/]
     <!-- 页面主体 -->
-    <div class="main wp1080 clearfix">
+    <div class="main wp1080 clearfix home">
         <!-- 轮播图 -->
         <div class="swiper slider fl" id="swiper-01">
             <div class="swiper-wrapper">
-                <!-- 循环项 -->
-                <!-- <div class="swiper-slide">
-                    <a href="#1" class="box">
-                        <img src="/${res}/img/pic-01.jpg" alt="">
-                        <h4>
-                            <span class="cut_text_overflow">网站首页网站首页网站首页网站首页网站首页网站首页网站首页网站首页网站首页</span>
-                        </h4>
-                    </a>
-                </div>
-                循环项 end
-                <div class="swiper-slide">
-                    <a href="#2" class="box">
-                        <img src="/${res}/img/online-bg.jpg" alt="">
-                        <h4>
-                            <span class="cut_text_overflow">网站首页网站首页网站首页</span>
-                        </h4>
-                    </a>
-                </div> -->
                 [@cms_content_list channelId='274' orderBy='4' count='5' titLen='22' channelOption='0' dateFormat='yyyy-MM-dd']
                 	[#list tag_list as a]
                 		<div class="swiper-slide">
@@ -60,46 +42,13 @@
             </h2>
             <div class="title">
                 <span class="fl">工作动态</span>
-                <!-- <a href="#" class="fr">更多></a> -->
-                 [@cms_channel id='275']
+                [@cms_channel id='275']
 					<a href="${tag_bean.url}" class="fr" >更多></a>
 				[/@cms_channel]
             </div>
             <div class="list">
                 <ul>
-                    <!-- <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li>
-                    <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li>
-                    <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li>
-                    <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li>
-                    <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li>
-                    <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li>
-                    <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li>
-                    <li>
-                        <a href="#" class="cut_text_overflow" title="">群众办事百项堵点疏解行动——请你来投票</a>
-                        <span>2012-12-12</span>
-                    </li> -->
-                     [@cms_content_list channelId='275' count='8' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+                    [@cms_content_list channelId='275' count='8' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 						
 						[#list tag_list as a]
 						<li>
@@ -117,11 +66,10 @@
         <div class="zwgk clearfix">
             <div class="toper">
                 <h4 class="classify-title fl">
-                    <i class="icon-03"></i>
+                    <i class="kicon-01"></i>
                     <strong>政务公开</strong>
                 </h4>
-               <!--  <a href="#" class="more fr">更多></a> -->
-               [@cms_channel id='71']
+                [@cms_channel id='71']
 					<a href="${tag_bean.url}" class="more fr">更多></a>
 				[/@cms_channel]
             </div>
@@ -130,7 +78,6 @@
                 <div class="colum fl">
                     <div class="top">
                         <span class="selected">
-                            <!-- <a href="#">通知公告</a> -->
                             [@cms_channel id='89']
 									<a href="${tag_bean.url}" class="fr">通知公告</a>
 							[/@cms_channel]
@@ -138,10 +85,6 @@
                     </div>
                     <div class="list">
                         <ul>
-                            <!-- <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title=""#>群众办事百项堵点疏解行动——请你来投票</a></li> -->
                             [@cms_content_list channelId='89' count='4' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 								[#list tag_list as a]
 									<li class="cut_text_overflow"><a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a></li>
@@ -154,13 +97,11 @@
                 <div class="colum ml-15 fl">
                     <div class="top" id="tab01-zwgk-top">
                         <span class="selected">
-                           <!--  <a href="#">土地招拍挂出让公告</a> -->
-                           [@cms_channel id='129']
+                            [@cms_channel id='129']
 									<a href="${tag_bean.url}" >土地招拍挂出让公告</a>
 							[/@cms_channel]
                         </span>
                         <span>
-                            <!-- <a href="#">土地出让结果</a> -->
                             [@cms_channel id='130']
 									<a href="${tag_bean.url}" >土地出让结果</a>
 							[/@cms_channel]
@@ -189,13 +130,11 @@
                 <div class="colum fl">
                     <div class="top" id="tab02-zwgk-top">
                         <span class="selected">
-                            <!-- <a href="#">征收土地公告</a> -->
-                             [@cms_channel id='124']
+                           [@cms_channel id='124']
 									<a href="${tag_bean.url}" >征收土地公告</a>
 							[/@cms_channel]
                         </span>
                         <span>
-                            <!-- <a href="#">建设用地审批结果</a> -->
                             [@cms_channel id='126']
 									<a href="${tag_bean.url}" >建设用地审批结果</a>
 							[/@cms_channel]
@@ -204,10 +143,6 @@
                     <div class="list" id="tab02-zwgk-box">
                         <!-- ul 选项卡对用的容器 -->
                         <ul>
-                            <!-- <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">1群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li> -->
                             [@cms_content_list channelId='124' count='4' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 								[#list tag_list as a]
 									<li class="cut_text_overflow"><a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a></li>
@@ -228,7 +163,6 @@
                 <div class="colum ml-15 fl">
                     <div class="top" id="tab03-zwgk-top">
                         <span class="selected">
-                            <!-- <a href="#">矿业权招拍挂出让公告</a> -->
                             [@cms_channel id='137']
 									<a href="${tag_bean.url}" >矿业权招拍挂出让公告</a>
 							[/@cms_channel]
@@ -242,11 +176,7 @@
                     <div class="list" id="tab03-zwgk-box">
                         <!-- ul 选项卡对用的容器 -->
                         <ul>
-                            <!-- <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">1群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li>
-                            <li class="cut_text_overflow"><a href="#" title="">群众办事百项堵点疏解行动——请你来投票</a></li> -->
-                             [@cms_content_list channelId='137' count='4' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+                            [@cms_content_list channelId='137' count='4' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 								[#list tag_list as a]
 									<li class="cut_text_overflow"><a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a></li>
 								[/#list]
@@ -254,7 +184,7 @@
                         </ul>
                         <!-- ul 选项卡对用的容器 -->
                         <ul>
-                             [@cms_content_list channelId='138' count='4' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+                            [@cms_content_list channelId='138' count='4' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 								[#list tag_list as a]
 									<li class="cut_text_overflow"><a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a></li>
 								[/#list]
@@ -265,20 +195,16 @@
             </div>
             <div class="right fr">
                 <!-- 部门简介 -->
-                <div class="colum-tit">
-                    <span class="selected">
-                       <!--  <a href="#">部门简介</a> -->
-                       [@cms_channel id='70']
-							<a href="${tag_bean.url}">部门简介</a>
+                <div class="toper">
+                    <h4 class="classify-title fl">
+                        <strong>部门简介</strong>
+                    </h4>
+                    [@cms_channel id='70']
+							<a href="${tag_bean.url}" class="more fr">更多></a>
 						[/@cms_channel]
-                    </span>
                 </div>
                 <div class="simple-list">
                     <ul>
-                        <!-- <li><a href="#">领导简介</a></li>
-                        <li><a href="#">主要职能</a></li>
-                        <li><a href="#">组织机构</a></li>
-                        <li><a href="#">人事任免</a></li> -->
                         [@cms_channel id='82']
 							<li><a href="${tag_bean.url}">领导简介</a></li>
 						[/@cms_channel]
@@ -294,27 +220,13 @@
                     </ul>
                 </div>
                 <!-- 政府信息公开 -->
-                <div class="colum-tit">
-                    <span class="selected">
-                        <!-- <a href="#">政府信息公开</a> -->
-                        [@cms_channel id='71']
-							<a href="${tag_bean.url}">政府信息公开</a>
-						[/@cms_channel]
-                    </span>
+                <div class="toper">
+                    <h4 class="classify-title fl">
+                        <strong>政府信息公开</strong>
+                    </h4>
+                    <a href="#" class="more fr">更多></a>
                 </div>
                 <div class="info-list">
-                    <!-- <div class="btn">
-                        <a href="#" class="nicon-01">政府信息公开指南</a>
-                    </div>
-                    <div class="btn">
-                        <a href="#" class="nicon-02">政府信息公开指南</a>
-                    </div>
-                    <div class="btn">
-                        <a href="#" class="nicon-03">政府信息公开目录</a>
-                    </div>
-                    <div class="btn">
-                        <a href="#" class="nicon-04">依申请公开</a>
-                    </div> -->
                     [@cms_channel id='97']
                 	<div class="btn">
 						<a href="${tag_bean.url}" target="_blank" class="nicon-01">政府信息公开指南</a>
@@ -360,10 +272,9 @@
         <div class="wsbs clearfix fl">
             <div class="toper">
                 <h4 class="classify-title fl">
-                    <i class="icon-04"></i>
+                    <i class="kicon-02"></i>
                     <strong>网上办事</strong>
                 </h4>
-                <!-- <a href="#" class="more fr">更多></a> -->
                 [@cms_channel id='72']
 					<a href="${tag_bean.url}" class="more fr">更多></a>
 				[/@cms_channel]
@@ -374,31 +285,26 @@
                 </div>
                 <div class="btn-list">
                     <ul>
- 						<li>
-	                    	
-	                        <a href="./misdata/querymisstatus.jspx">办理状态查询</a>
-                        
-                    </li>
                         <li>
-                        <a href="./misdata/querymisresult.jspx">审批结果查询</a>
-                    </li>
-                    
+                            <a href="./misdata/querymisstatus.jspx"><img src="/${res}/img/btn-01.jpg"></a>
+                        </li>
+                        <li>
+                            <a href="./misdata/querymisresult.jspx"><img src="/${res}/img/btn-02.jpg"></a>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="right fr">
                 <h2 class="big-title tc">
                 [@cms_channel id='150']
-					<a href="${tag_bean.url}">我要办事</a>
+					<a href="${tag_bean.url}"><img src="/${res}/img/wybs.jpg"></a>
 				[/@cms_channel]
                     
                 </h2>
                 <div class="top" id="tab-wybs-top">
-                    <!-- <a href="#" class="selected">文件下载</a> -->
                     [@cms_channel id='314']
 							<a href="${tag_bean.url}" class="selected">文件下载</a>
 					[/@cms_channel]
-                    <!-- <a href="#">办事指南</a> -->
                     [@cms_channel id='148']
 						<a href="${tag_bean.url}">办事指南</a>
 					[/@cms_channel]
@@ -406,27 +312,7 @@
                 <div class="list" id="tab-wybs-box">
                     <!-- ul 选项卡对应的容器 -->
                     <ul>
-<!--                         <li>
-                            <a href="#" class="cut_text_overflow" title="">1土地权属争议案件授权委托书土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li> -->
-                         [@cms_content_list channelId='314' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+                        [@cms_content_list channelId='314' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 						
 							[#list tag_list as a]
 							<li>
@@ -439,26 +325,6 @@
                     </ul>
                     <!-- ul 选项卡对应的容器 -->
                     <ul>
-                        <!-- <li>
-                            <a href="#" class="cut_text_overflow" title="">2土地权属争议案件授权委托书土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li>
-                        <li>
-                            <a href="#" class="cut_text_overflow" title="">土地权属争议案件授权委托书</a>
-                            <span>2012-12-12</span>
-                        </li> -->
                         [@cms_content_list channelId='148' count='5' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 						
 							[#list tag_list as a]
@@ -477,33 +343,33 @@
         <div class="gzhd fr">
             <div class="toper">
                 <h4 class="classify-title fl">
-                    <i class="icon-05"></i>
+                    <i class="kicon-03"></i>
                     <strong>公众互动</strong>
                 </h4>
                 [@cms_channel id='73']
               <a href="${tag_bean.url}" class="more fr">更多></a>
               [/@cms_channel]
             </div>
-            <div class="list">
-               <div class="btn">
-              	[@cms_channel id='161']
-						<a href="${tag_bean.url}" class="gicon-01">在线访谈 | <i>ZAIXIAINFANGTAN</i></a>
-					[/@cms_channel]
+            <div class="list clearfix">
+                <div class="btn">
+                [@cms_channel id='161']
+                    <a href="${tag_bean.url}" class="gicon-01"><img src="/${res}/img/gzhd-01.png"></a>
+                    [/@cms_channel]
                 </div>
                 <div class="btn">
                 [@cms_channel id='311']
-                    <a href="${tag_bean.url}" class="gicon-02">局长信箱 | <i>JUZHANGXINXIANG</i></a>
-                    [/@cms_channel]
+                    <a href="${tag_bean.url}" class="gicon-01"><img src="/${res}/img/gzhd-02.png"></a>
+                     [/@cms_channel]
                 </div>
                 <div class="btn">
                 [@cms_channel id='312']
-                    <a href="${tag_bean.url}" class="gicon-03">在线咨询 | <i>ZAIXIANZIXUN</i></a>
-                    [/@cms_channel]
+                    <a href="${tag_bean.url}" class="gicon-01"><img src="/${res}/img/gzhd-03.png"></a>
+                     [/@cms_channel]
                 </div>
                 <div class="btn">
                 [@cms_channel id='313']
-                    <a href="${tag_bean.url}" class="gicon-04">网上调查 | <i>WANGSHANGDIAOCA</i></a>
-                    [/@cms_channel]
+                    <a href="${tag_bean.url}" class="gicon-01"><img src="/${res}/img/gzhd-04.png"></a>
+                     [/@cms_channel]
                 </div>
             </div>
         </div>
@@ -512,18 +378,14 @@
     </div>
     <!-- 页面主体 end -->
     [#include "../include/footer.html"/]
-     
+
+    
     <script>
-        // 导航轮播图
+
+        // 页面轮播图
         new Swiper({
-                 wrapper: $('#swiper-hd'),
-                 timeLen: 5
-             })
-             // 页面轮播图
-             new Swiper({
-                 wrapper: $('#swiper-01')
-             });
-       
+            wrapper: $('#swiper-01')
+        });
         
         new Tab({
             tabList: $('#tab01-zwgk-top > span'),

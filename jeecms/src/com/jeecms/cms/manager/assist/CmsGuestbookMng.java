@@ -2,12 +2,16 @@ package com.jeecms.cms.manager.assist;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jeecms.cms.entity.assist.CmsGuestbook;
 import com.jeecms.cms.entity.assist.CmsGuestbookExt;
+import com.jeecms.cms.entity.assist.SiteFileCount;
 import com.jeecms.cms.entity.main.Ysqgk;
 import com.jeecms.common.page.Pagination;
+import com.jeecms.core.entity.CmsSite;
 import com.jeecms.core.entity.CmsUser;
 
 public interface CmsGuestbookMng {
@@ -49,4 +53,6 @@ public interface CmsGuestbookMng {
 	public Ysqgk queryYsqgkById(Integer id);
 	
 	public void deleteYsqgkById(Integer id);
+	
+	public void countInformation(HttpServletRequest request,SiteFileCount count);
 }
