@@ -8,21 +8,21 @@
     <!-- 导航，可被 include -->
     <div class="naver">
         <ul class="w1100 clearfix">
-            <li><a href="${base}/">网站首页</a></li>
+            <li><a href="${base}/"><span>网站首页</span></a></li>
             [@cms_channel id='173']
-            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">专栏首页</a></li>
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}"><span>专栏首页</span></a></li>
             [/@cms_channel]
             [@cms_channel id='267']
-            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">部门概况</a></li>
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}"><span>部门概况</span></a></li>
             [/@cms_channel]
             [@cms_channel id='268']
-            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">通知公告</a></li>
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}"><span>通知公告</span></a></li>
             [/@cms_channel]
             [@cms_channel id='269']
-            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">图片新闻</a></li>
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}"><span>图片新闻</span></a></li>
             [/@cms_channel]
             [@cms_channel id='270']
-            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}">工作动态</a></li>
+            <li [#if channel.id==tag_bean.id] class="selected" [/#if]><a href="${tag_bean.url}"><span>工作动态</span></a></li>
             [/@cms_channel]
         </ul>
     </div>

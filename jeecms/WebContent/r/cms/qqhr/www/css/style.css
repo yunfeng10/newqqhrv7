@@ -783,7 +783,10 @@ h2.big-title a {
 
 .video-box {
     margin-top: 20px;
-    min-height: 300px;
+    text-align: center;
+}
+.video-box .box {
+    display: inline-block;
 }
 
 .content {
@@ -1498,6 +1501,7 @@ h2.big-title a {
     height: 26px;
     border-radius: 50%;
     background: url(../img/sea-btn.png) 7px center no-repeat;
+    border: none;
     cursor: pointer;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
