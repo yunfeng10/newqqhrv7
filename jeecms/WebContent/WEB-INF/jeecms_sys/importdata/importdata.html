@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+<#include "/jeecms_sys/head.html"/>
+<script type="text/javascript">
+function submitFile(){
+	if($("#mediaPath").val()){
+		$.post("dealFile.do", {
+			filepath:$("#mediaPath").val()
+		}, function(data) {
+			console.info(data);
+		}, "json");
+	}
+	
+}
+</script>
+
 </head>
 <body>
 
+<div class="box-positon">
+	<div class="rpos"><@s.m "global.position"/>: <@s.m "importdata.file"/> </div>
+	<div class="clear"></div>
+</div>
+<div class="body-box">
+<#include "media_upload.html"/>
+<@p.form labelWidth="10">
+<@p.td label="importdata.file" colspan="1" width="50" noHeight="true">
+<div>
+	<input type="text" id="mediaPath" name="mediaPath" style="width:265px"/>
+</div>
+<div>
+	<span id="mfc" style="position:relative;display:block;width:300px;*width:300px;">
+	<input type='text' id='mediaFileText'/>  
+	<input class="browse" type='button' value='<@s.m "global.browse"/>'/>
+	<input onchange="$('#mediaFileText').val(this.value)" size="19" type="file" name="mediaFile" id="mediaFile" style="height:24px;opacity:0;filter:alpha(opacity=0);position:absolute;right:79px;top:2px;"/>
+	<input type="button" value="<@s.m "imageupload.upload"/>" onclick="uploadMedia();" class="upload-button"/>
+	</span> 
+</div>
+</@p.td>
+<@p.tr/>
+<@p.td colspan="2">
+	<@p.button code="global.submit" onclick="submitFile()"/>
+</@p.td>
+</@p.form>
+</div>
 </body>
 </html>

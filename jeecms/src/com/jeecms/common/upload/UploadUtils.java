@@ -27,6 +27,10 @@ public class UploadUtils {
 		return path + MONTH_FORMAT.format(new Date())
 				+ RandomStringUtils.random(4, Num62.N36_CHARS) + "." + ext;
 	}
+	public static String generateFilename2(String path, String ext) {
+		return path+"/importdata"+MONTH_FORMAT.format(new Date())
+				+ RandomStringUtils.random(4, Num62.N36_CHARS) + "." + ext;
+	}
 	
 	public static String generateMonthname() {
 		return YEAR_MONTH_FORMAT.format(new Date());

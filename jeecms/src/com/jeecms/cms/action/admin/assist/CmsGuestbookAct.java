@@ -4,33 +4,49 @@ import static com.jeecms.cms.Constants.INDEXTITLE_PATH;
 import static com.jeecms.common.page.SimplePage.cpn;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jeecms.cms.entity.assist.CmsGuestbook;
 import com.jeecms.cms.entity.assist.CmsGuestbookCtg;
 import com.jeecms.cms.entity.assist.CmsGuestbookExt;
 import com.jeecms.cms.entity.assist.SiteFileCount;
 import com.jeecms.cms.entity.main.Ysqgk;
+import com.jeecms.cms.manager.assist.CmsFileMng;
 import com.jeecms.cms.manager.assist.CmsGuestbookCtgMng;
 import com.jeecms.cms.manager.assist.CmsGuestbookMng;
 import com.jeecms.common.page.Pagination;
+import com.jeecms.common.upload.FileRepository;
+import com.jeecms.common.util.StrUtils;
 import com.jeecms.common.web.CookieUtils;
 import com.jeecms.common.web.RequestUtils;
+import com.jeecms.common.web.ResponseUtils;
 import com.jeecms.core.entity.CmsSite;
+import com.jeecms.core.entity.CmsUser;
+import com.jeecms.core.entity.Ftp;
 import com.jeecms.core.manager.CmsLogMng;
+import com.jeecms.core.manager.CmsUserMng;
+import com.jeecms.core.manager.DbFileMng;
 import com.jeecms.core.web.WebErrors;
 import com.jeecms.core.web.util.CmsUtils;
 
@@ -38,7 +54,15 @@ import com.jeecms.core.web.util.CmsUtils;
 public class CmsGuestbookAct {
 	private static final Logger log = LoggerFactory
 			.getLogger(CmsGuestbookAct.class);
-
+	@Autowired
+	private DbFileMng dbFileMng;
+	@Autowired
+	private FileRepository fileRepository;
+	@Autowired
+	private CmsUserMng cmsUserMng;
+	@Autowired
+	private CmsFileMng fileMng;
+	
 	@RequiresPermissions("sitefilecount:count")
 	@RequestMapping("/sitefilecount/count.do")
 	public String siteFileCount(Integer year,HttpServletRequest request,ModelMap model){
@@ -78,6 +102,55 @@ public class CmsGuestbookAct {
 		cpath = cpath+File.separator+INDEXTITLE_PATH;
 		IndexTitleUtil.saveTitle(indextitle);
 		return "redirect:title.do";
+	}
+	@RequiresPermissions("importdata:import")
+	@RequestMapping("/importdata/import.do")
+	public String importData(HttpServletRequest request,ModelMap model){
+		CmsSite site = CmsUtils.getSite(request);
+
+		return "importdata/importdata";
+	}
+	@RequiresPermissions("importdata:dealFile")
+	@RequestMapping("/importdata/dealFile.do")
+	public void generateTags(String filepath,HttpServletResponse response) throws JSONException {
+		JSONObject json = new JSONObject();
+		System.out.println(filepath);
+		//json.put("tags", tags);
+		ResponseUtils.renderJson(response, json.toString());
+	}
+	@RequiresPermissions("importdata:o_upload_media")
+	@RequestMapping("/importdata/o_upload_media.do")
+	public String uploadMedia(
+			@RequestParam(value = "mediaFile", required = false) MultipartFile file,
+			String filename, HttpServletRequest request, ModelMap model) {
+		CmsSite site = CmsUtils.getSite(request);
+		CmsUser user = CmsUtils.getUser(request);
+		String origName = file.getOriginalFilename();
+		String ext = FilenameUtils.getExtension(origName).toLowerCase(
+				Locale.ENGLISH);
+		// TODO 检查允许上传的后缀
+		try {
+			String fileUrl;
+			String ctx = request.getContextPath();
+			fileUrl = fileRepository.storeByExt2(site.getUploadPath(),
+					ext, file);
+			// 加上部署路径
+			fileUrl = ctx + fileUrl;
+			
+			/*cmsUserMng.updateUploadSize(user.getId(), Integer.parseInt(String.valueOf(file.getSize()/1024)));
+			if(fileMng.findByPath(fileUrl)!=null){
+				fileMng.saveFileByPath(fileUrl, origName, false);
+			}*/
+			model.addAttribute("mediaPath", fileUrl);
+			model.addAttribute("mediaExt", ext);
+		} catch (IllegalStateException e) {
+			model.addAttribute("error", e.getMessage());
+			log.error("upload file error!", e);
+		} catch (IOException e) {
+			model.addAttribute("error", e.getMessage());
+			log.error("upload file error!", e);
+		}
+		return "importdata/media_iframe";
 	}
 	
 	@RequiresPermissions("ysqgk:v_list")
