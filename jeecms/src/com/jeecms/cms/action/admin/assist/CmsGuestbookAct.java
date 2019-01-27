@@ -1,7 +1,9 @@
 package com.jeecms.cms.action.admin.assist;
 
+import static com.jeecms.cms.Constants.INDEXTITLE_PATH;
 import static com.jeecms.common.page.SimplePage.cpn;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -58,6 +60,24 @@ public class CmsGuestbookAct {
 		model.addAttribute("videoFile", count.getVideoFile());
 		model.addAttribute("otherFile", count.getOtherFile());
 		return "sitefilecount/count";
+	}
+	@RequiresPermissions("indextitle:title")
+	@RequestMapping("/indextitle/title.do")
+	public String indexTitle(HttpServletRequest request,ModelMap model){
+		CmsSite site = CmsUtils.getSite(request);
+		String fpath = site.getContextPath() == null ? "" : site.getContextPath();
+		fpath = fpath+File.separator+INDEXTITLE_PATH;
+		model.addAttribute("indextitle", IndexTitleUtil.getTitle());
+		return "indextitle/title";
+	}
+	@RequiresPermissions("indextitle:o_savetitle")
+	@RequestMapping("/indextitle/o_savetitle.do")
+	public String indexTitle(String indextitle,HttpServletRequest request,ModelMap model){
+		//System.out.println(indextitle);
+		String cpath = request.getSession().getServletContext().getRealPath("");
+		cpath = cpath+File.separator+INDEXTITLE_PATH;
+		IndexTitleUtil.saveTitle(indextitle);
+		return "redirect:title.do";
 	}
 	
 	@RequiresPermissions("ysqgk:v_list")

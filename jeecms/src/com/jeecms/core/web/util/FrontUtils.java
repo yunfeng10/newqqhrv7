@@ -1,6 +1,7 @@
 package com.jeecms.core.web.util;
 
 import static com.jeecms.cms.Constants.RES_PATH;
+import static com.jeecms.cms.Constants.INDEXTITLE_PATH;
 import static com.jeecms.cms.Constants.TPLDIR_COMMON;
 import static com.jeecms.cms.Constants.TPLDIR_STYLE_LIST;
 import static com.jeecms.cms.Constants.TPLDIR_TAG;
@@ -23,6 +24,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.propertyeditors.LocaleEditor;
 import org.springframework.context.MessageSource;
 
+import com.jeecms.cms.action.admin.assist.IndexTitleUtil;
 import com.jeecms.common.web.RequestUtils;
 import com.jeecms.common.web.freemarker.DirectiveUtils;
 import com.jeecms.common.web.springmvc.MessageResolver;
@@ -62,6 +64,8 @@ public class FrontUtils {
 	 * 系统资源路径
 	 */
 	public static final String RES_SYS = "resSys";
+	
+	public static final String INDEX_TITLE = "indextitle";
 	/**
 	 * 模板资源路径
 	 */
@@ -326,6 +330,7 @@ public class FrontUtils {
 		String ctx = site.getContextPath() == null ? "" : site.getContextPath();
 		map.put(BASE, ctx);
 		map.put(RES_SYS, ctx + RES_PATH);
+		map.put(INDEX_TITLE, IndexTitleUtil.getTitle());
 		String res = ctx + RES_PATH + "/" + site.getPath() + "/"
 				+ site.getTplSolution();
 		// res路径需要去除第一个字符'/'

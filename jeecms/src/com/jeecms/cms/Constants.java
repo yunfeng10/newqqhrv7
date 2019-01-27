@@ -107,6 +107,7 @@ public class Constants {
 	 * 资源路径
 	 */
 	public static final String RES_PATH = "/r/cms";
+	public static final String INDEXTITLE_PATH = "/r/indextitle/title.txt";
 	/**
 	 * 模板路径
 	 */
