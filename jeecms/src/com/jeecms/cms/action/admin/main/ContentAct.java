@@ -1308,9 +1308,9 @@ public class ContentAct{
 		if (errors.ifNotExist(channel, Channel.class, channelId)) {
 			return errors;
 		}
-		if (channel.getChild().size() > 0) {
+		/*if (channel.getChild().size() > 0) {
 			errors.addErrorCode("content.error.notLeafChannel");
-		}
+		}*/
 		//所选发布内容模型不在栏目模型范围内
 		if(bean.getModel().getId()!=null){
 			CmsModel m=bean.getModel();

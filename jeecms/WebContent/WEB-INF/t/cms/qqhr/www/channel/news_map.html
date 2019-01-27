@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>齐齐哈尔市自然资源局</title>
+    <link rel="stylesheet" href="/${res}/css/reset.css">
+    <link rel="stylesheet" href="/${res}/css/style.css">
+    <script src="${resSys}/jquery.js" type="text/javascript"></script>
+    <script src="/${res}/js/velocity.min.js"></script>
+    <script src="/${res}/js/nav.js"></script>
+    <script src="/${res}/js/swiper.js"></script>
+    <script src="/${res}/js/tab.js"></script>
+</head>
+<body>
+   [#include "../include/header.html"/]
+    <div class="main wp1080 clearfix">
+        <div class="location">
+            当前位置：<a href="${base}/">首页</a> > 网站地图
+        </div>
+        <div class="map-wrapper">
+            <div class="item">
+                <h3 class="colum-title">
+                	[@cms_channel id='70']
+                    <a href="${tag_bean.url}" title="">${tag_bean.name}</a>
+                    [/@cms_channel]
+                </h3>
+                <ul>
+                	[@cms_channel_list parentId=70]
+                   		[#list tag_list as c2]
+                   			<li>
+		                        <a href="${c2.url}" title="">${c2.name}</a>
+		                    </li>
+                   		[/#list] 
+                   	[/@cms_channel_list]
+                    
+                </ul>
+            </div>
+            <div class="item">
+                <h3 class="colum-title">
+                    [@cms_channel id='71']
+                    <a href="${tag_bean.url}" title="">${tag_bean.name}</a>
+                    [/@cms_channel]
+                </h3>
+                <ul>
+                    [@cms_channel_list parentId=71]
+                   		[#list tag_list as c2]
+                   			<li>
+		                        <a href="${c2.url}" title="">${c2.name}</a>
+		                    </li>
+                   		[/#list] 
+                   	[/@cms_channel_list]
+                </ul>
+            </div>
+            <div class="item">
+                <h3 class="colum-title">
+                    [@cms_channel id='72']
+                    <a href="${tag_bean.url}" title="">${tag_bean.name}</a>
+                    [/@cms_channel]
+                </h3>
+                <ul>
+                    [@cms_channel_list parentId=72]
+                   		[#list tag_list as c2]
+                   			<li>
+		                        <a href="${c2.url}" title="">${c2.name}</a>
+		                    </li>
+                   		[/#list] 
+                   	[/@cms_channel_list]
+                </ul>
+            </div>
+            <div class="item">
+                <h3 class="colum-title">
+                    [@cms_channel id='73']
+                    <a href="${tag_bean.url}" title="">${tag_bean.name}</a>
+                    [/@cms_channel]
+                </h3>
+                <ul>
+                    [@cms_channel_list parentId=73]
+                   		[#list tag_list as c2]
+                   			<li>
+		                        <a href="${c2.url}" title="">${c2.name}</a>
+		                    </li>
+                   		[/#list] 
+                   	[/@cms_channel_list]
+                </ul>
+            </div>
+            <div class="item">
+                <h3 class="colum-title">
+                    [@cms_channel id='74']
+                    <a href="${tag_bean.url}" title="">${tag_bean.name}</a>
+                    [/@cms_channel]
+                </h3>
+                <ul>
+                    [@cms_channel_list parentId=74]
+                   		[#list tag_list as c2]
+                   			<li>
+		                        [#if c2.id=172]
+				                    <a href="http://zd.hljlr.gov.cn/component/query/?view=main&city=1011451&1498715649=true" title="">${c2.name}</a>
+		       					[/#if]
+		       					[#if c2.id!=172]
+									<a href="${c2.url}" title="">${c2.name}</a>
+		       					[/#if]
+		                    </li>
+                   		[/#list] 
+                   	[/@cms_channel_list]
+                </ul>
+            </div>
+        </div>
+    </div>
+    [#include "../include/footer.html"/]
+
+    
+    <script>
+
+    </script>
+</body>
+</html>

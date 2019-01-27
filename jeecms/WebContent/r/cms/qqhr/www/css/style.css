@@ -81,6 +81,12 @@ em, i {
 .tr {
     text-align: right;
 }
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
 .bor {
     border: 1px solid #ddd;
 }
@@ -730,7 +736,7 @@ h2.big-title a {
 }
 .footer .ft-box {
     width: 810px;
-    margin-top: 65px;
+    margin-top: 60px;
 }
 .footer .ft-box ul li {
     width: 33.33%;
@@ -1624,6 +1630,30 @@ h2.big-title a {
     line-height: 34px;
     background: url(../img/dot-bg.jpg) 0 50% no-repeat;
     padding-left: 10px;
+}
+
+
+.map-wrapper .item {
+    margin-top: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.map-wrapper .item ul {
+    padding: 0 0 10px 18px;
+    overflow: hidden;
+}
+.map-wrapper .item ul li {
+    margin-right: 20px;
+    float: left;
+    line-height: 30px;
+}
+
+
+.head-banner {
+    padding: 10px 0;
+    background-color: #fff;
+}
+.head-banner .text {
+    line-height: 1.5;
 }
 
 

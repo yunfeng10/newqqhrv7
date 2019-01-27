@@ -131,6 +131,18 @@ public class GuestbookAct {
 
 		return site.getSolutionPath() + "/detail/news_jzxx_detail.html";
 	}
+	
+	@RequestMapping(value = "siteMap.jspx", method = RequestMethod.GET)
+	public String siteMap(HttpServletRequest request, HttpServletResponse response,
+			ModelMap model) {
+		CmsSite site = CmsUtils.getSite(request);
+		
+
+		FrontUtils.frontData(request, model, site);
+		FrontUtils.frontPageData(request, model);
+
+		return site.getSolutionPath() + "/channel/news_map.html";
+	}
 
 	@RequestMapping(value = "news_zxzx_detail.jspx", method = RequestMethod.GET)
 	public String news_zxzx_detail(Integer dataId, HttpServletRequest request, HttpServletResponse response,

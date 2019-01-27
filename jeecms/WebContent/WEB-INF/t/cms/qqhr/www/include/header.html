@@ -3,14 +3,14 @@
         <div class="wrapper w1100">
             <div class="link fl">
                 <a href="http://www.gov.cn/" target="_blank">中央人民政府</a>
-                <a href="http://www.harbin.gov.cn/" target="_blank">哈尔滨人民政府</a>
                 <a href="http://www.mnr.gov.cn/" target="_blank">自然资源部</a>
+                <a href="http://www.qqhr.gov.cn/" target="_blank">齐齐哈尔人民政府</a>
             </div>
             <div class="date fr" id="hd-date"></div>
             <div class="search fr">
             	<form action="${base}/search.jspx" target="_blank" id="searchForm">
-                	<input type="text" name="q" class="inp" placeholder="请输入关键字">
-                	<inpput type="submit" value="" class="icon"/>
+                	<input type="text" name="q" class="inp" placeholder="请输入关键字"/>
+                	<input type="submit" value="" class="icon"/>
                 </form>
             </div>
         </div>
@@ -48,7 +48,7 @@
             </li>
             <li>
             	[@cms_channel id='70']
-                <a href="${tag_bean.url}"><span class="icon-02">部门概况</span></a>
+                <a href="${tag_bean.url}"><span class="icon-02">${tag_bean.name}</span></a>
                 [/@cms_channel]
                 <div class="sub-nav">
                     <div class="box clearfix">
@@ -98,7 +98,7 @@
             </li>
             <li>
             	[@cms_channel id='71']
-                <a href="${tag_bean.url}"><span class="icon-03">政务公开</span></a>
+                <a href="${tag_bean.url}"><span class="icon-03">${tag_bean.name}</span></a>
                 [/@cms_channel]
                 <div class="sub-nav">
                     <div class="box clearfix">
@@ -129,12 +129,12 @@
                         </div>
                         <div class="list fl">
                             <h4 class="top">
-                            	[@cms_channel id='90']
+                            	[@cms_channel id='124']
                                 <a href="${tag_bean.url}">${tag_bean.name}</a>
                                 [/@cms_channel]
                             </h4>
                             <dl>
-                            	[@cms_content_list channelId='90' count='8' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+                            	[@cms_content_list channelId='124' count='8' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
 									[#list tag_list as a]
 			                        <dd class="cut_text_overflow">
 	                                    <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
@@ -148,7 +148,7 @@
             </li>
             <li>
             	[@cms_channel id='72']
-                <a href="${tag_bean.url}"><span class="icon-04">网上办事</span></a>
+                <a href="${tag_bean.url}"><span class="icon-04">${tag_bean.name}</span></a>
                 [/@cms_channel]
                 <div class="sub-nav">
                     <div class="box clearfix">
@@ -159,22 +159,6 @@
                             			<dd><a href="${c2.url}">${c2.name}</a></dd>
                             		[/#list] 
                             	[/@cms_channel_list]
-                            </dl>
-                        </div>
-                        <div class="list fl">
-                            <h4 class="top">
-                            	[@cms_channel id='145']
-                                <a href="${tag_bean.url}">${tag_bean.name}</a>
-                                [/@cms_channel]
-                            </h4>
-                            <dl>
-                            	[@cms_content_list channelId='145' count='8' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
-									[#list tag_list as a]
-			                        <dd class="cut_text_overflow">
-	                                    <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
-	                                </dd>
-									[/#list]
-								[/@cms_content_list]
                             </dl>
                         </div>
                         <div class="list fl">
@@ -193,12 +177,28 @@
 								[/@cms_content_list]
                             </dl>
                         </div>
+                        <div class="list fl">
+                            <h4 class="top">
+                            	[@cms_channel id='314']
+                                <a href="${tag_bean.url}">${tag_bean.name}</a>
+                                [/@cms_channel]
+                            </h4>
+                            <dl>
+                            	[@cms_content_list channelId='314' count='8' titLen='20' dateFormat='yyyy-MM-dd' append='...' channelOption='1'] 
+									[#list tag_list as a]
+			                        <dd class="cut_text_overflow">
+	                                    <a href="${a.url}" title="">[@text_cut s=a.title len=titLen append=append/]</a>
+	                                </dd>
+									[/#list]
+								[/@cms_content_list]
+                            </dl>
+                        </div>
                     </div>
                 </div>
             </li>
             <li>
             	[@cms_channel id='73']
-                <a href="${tag_bean.url}"><span class="icon-05">公众互动</span></a>
+                <a href="${tag_bean.url}"><span class="icon-05">${tag_bean.name}</span></a>
                 [/@cms_channel]
                 <div class="sub-nav">
                     <div class="box clearfix">
@@ -248,17 +248,23 @@
             </li>
             <li>
             	[@cms_channel id='74']
-                <a href="${tag_bean.url}"><span class="icon-06">专题信息</span></a>
+                <a href="${tag_bean.url}"><span class="icon-06">${tag_bean.name}</span></a>
                 [/@cms_channel]
                 <div class="sub-nav">
                     <div class="box clearfix">
                         <div class="classify fl">
                             <dl>
-                                [@cms_channel_list parentId=74]
-                            		[#list tag_list as c2]
-                            			<dd><a href="${c2.url}">${c2.name}</a></dd>
-                            		[/#list] 
-                            	[/@cms_channel_list]
+                              [@cms_channel_list parentId='74']
+					[#list tag_list as c2]
+       					[#if c2.id=172]
+       						<dd><a href="http://zd.hljlr.gov.cn/component/query/?view=main&city=1011451&1498715649=true" target=_blank>${c2.name}</a></dd>
+       					[/#if]
+       					[#if c2.id!=172]
+							<dd><a href="${c2.url}">${c2.name}</a></dd>
+       					[/#if]
+
+ 					[/#list] 
+				[/@cms_channel_list]							  
                             </dl>
                         </div>
                         <div class="list fl">

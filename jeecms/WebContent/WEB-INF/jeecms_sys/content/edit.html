@@ -23,7 +23,8 @@ function typeChange(n) {
 }
 $.validator.methods.leafChannel = function(value, element, param) {
 	var i = element.selectedIndex;
-	return $(element.options[i]).attr("class")!="sel-disabled";
+	//return $(element.options[i]).attr("class")!="sel-disabled";
+	return true;
 }
 $(function() {
 	$("#titleColor").colorPicker();
