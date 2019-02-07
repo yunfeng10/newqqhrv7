@@ -78,9 +78,9 @@
                                 <input type="button" value="查询" id="query-btn">
                             </form>
                         </td>
-                        <td>累计办结：202</td>
-                        <td>上月办结：9</td>
-                        <td>当年办结：66</td>
+                        <td id="resultTotal">累计办结：0</td>
+                        <td id="resultMonth">上月办结：0</td>
+                        <td id="resultYear">当年办结：0</td>
                     </tr>
                 </table>
             </div>
@@ -193,6 +193,21 @@
     				window.location.href='./misresultdetail.jspx?dataId='+id;
     			}
     		});
+    		//数据统计
+    		var fl = $("#fl").val();
+    		var options = {
+    				url : '../countbljg.jspx?fl='+fl,
+    				dataType : 'json',
+    				success : function(data) {
+    					var str1="累计办结："+data.resultTotal;
+						$("#resultTotal").html(str1);
+						var str2="上月办结："+data.resultMonth;
+						$("#resultMonth").html(str2);
+						var str3="当年办结："+data.resultYear;
+						$("#resultYear").html(str3);
+    				}
+    			};
+    			$.ajax(options);
         });
        
 

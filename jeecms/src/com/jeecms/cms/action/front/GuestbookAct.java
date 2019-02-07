@@ -2,6 +2,7 @@ package com.jeecms.cms.action.front;
 
 import static com.jeecms.cms.Constants.TPLDIR_SPECIAL;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jeecms.cms.dao.assist.CmsGuestbookDao;
+import com.jeecms.cms.dao.assist.MisResultDao;
+import com.jeecms.cms.dao.assist.MisStatus1Dao;
+import com.jeecms.cms.dao.assist.MisStatus2Dao;
 import com.jeecms.cms.entity.assist.CmsGuestbook;
 import com.jeecms.cms.entity.assist.CmsGuestbookCtg;
 import com.jeecms.cms.entity.assist.CmsGuestbookExt;
@@ -329,7 +333,14 @@ public class GuestbookAct {
 	private CmsGuestbookExtMng cmsGuestbookExtMng;
 	@Autowired
 	private CmsGuestbookDao cmsGuestbookDao;
-
+	
+	@Autowired
+	private MisResultDao resultDao;
+	@Autowired
+	private MisStatus1Dao status1Dao;
+	@Autowired
+	private MisStatus2Dao status2Dao;
+	
 	@Autowired
 	private YsqgkMng ysqgkMng;
 
@@ -386,5 +397,37 @@ public class GuestbookAct {
 		json.put("dataId", dataId);
 		ResponseUtils.renderJson(response, json.toString());
 	}
+	
+	@RequestMapping(value = "/countbljg.jspx")
+	public void countbljg(String fl, HttpServletRequest request, HttpServletResponse response,
+			ModelMap model) throws JSONException {
+		JSONObject json = new JSONObject();
+		BigInteger resultTotal = resultDao.countTotalValue(fl);
+		BigInteger resultMonth = resultDao.countMonthValue(fl);
+		BigInteger resultYear = resultDao.countYearValue(fl);
+		json.put("resultTotal",resultTotal);
+		json.put("resultMonth",resultMonth);
+		json.put("resultYear",resultYear);
+		ResponseUtils.renderJson(response, json.toString());
+	}
+	@RequestMapping(value = "/countblzt.jspx")
+	public void countblzt(String fl, HttpServletRequest request, HttpServletResponse response,
+			ModelMap model) throws JSONException {
+		JSONObject json = new JSONObject();
+	
+		BigInteger totalReceive = status1Dao.countTotalReceive(fl);
+		BigInteger totalComplete = status1Dao.countTotalComplete(fl);
+		BigInteger lastReceive = status1Dao.countLastReceive(fl);
+		BigInteger lastComplete = status1Dao.countLastComplete(fl);
+		BigInteger yearReceive = status1Dao.countYearReceive(fl);
+		BigInteger yearComplete = status1Dao.countYearComplete(fl);
 
+		json.put("totalReceive",totalReceive);
+		json.put("totalComplete",totalComplete);
+		json.put("lastReceive",lastReceive);
+		json.put("lastComplete",lastComplete);
+		json.put("yearReceive",yearReceive);
+		json.put("yearComplete",yearComplete);
+		ResponseUtils.renderJson(response, json.toString());
+	}
 }

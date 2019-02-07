@@ -1,5 +1,6 @@
 package com.jeecms.cms.dao.assist;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import com.jeecms.cms.entity.assist.MisResult;
@@ -16,5 +17,11 @@ public interface MisResultDao {
 	public void deleteByDataId(String dataId);
 	
 	public void saveEntity(MisResult entity);
+	
+	public BigInteger countTotalValue(String fl);
+	
+	public BigInteger countMonthValue(String fl);
+	
+	public BigInteger countYearValue(String fl);
 
 }

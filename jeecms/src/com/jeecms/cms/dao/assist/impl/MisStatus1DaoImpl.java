@@ -1,7 +1,10 @@
 package com.jeecms.cms.dao.assist.impl;
 
+import java.math.BigInteger;
+import java.util.Calendar;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -79,5 +82,111 @@ public class MisStatus1DaoImpl extends HibernateBaseDao<MisStatus1, String>  imp
 	public void saveEntity(MisStatus1 entity) {
 		// TODO Auto-generated method stub
 		getSession().save(entity);
+	}
+
+	@Override
+	public BigInteger countTotalReceive(String fl) {
+		// TODO Auto-generated method stub
+		String sql = "select count(1) from misstatus1 a where 1=1";
+
+		if (!StringUtils.isEmpty(fl)) {
+			sql = sql + " and fl='" + fl + "'";
+		}
+
+		Query query = getSession().createSQLQuery(sql);
+		List result = query.list();
+		return (BigInteger) result.get(0);
+	}
+
+	@Override
+	public BigInteger countTotalComplete(String fl) {
+		// TODO Auto-generated method stub
+		String sql = "select count(1) from misstatus1 a where blzt='0'";
+
+		if (!StringUtils.isEmpty(fl)) {
+			sql = sql + " and fl='" + fl + "'";
+		}
+
+		Query query = getSession().createSQLQuery(sql);
+		List result = query.list();
+		return (BigInteger) result.get(0);
+	}
+
+	@Override
+	public BigInteger countLastReceive(String fl) {
+		// TODO Auto-generated method stub
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		if (month == 0) {
+			year = year - 1;
+			month = 12;
+		}
+		String sql = "select count(1) from misstatus1 a where date_format(slsj,'%Y') =" + year
+				+ " and date_format(slsj,'%m')=" + month;
+
+		if (!StringUtils.isEmpty(fl)) {
+			sql = sql + " and fl='" + fl + "'";
+		}
+
+		Query query = getSession().createSQLQuery(sql);
+		List result = query.list();
+		return (BigInteger) result.get(0);
+		
+	}
+
+	@Override
+	public BigInteger countLastComplete(String fl) {
+		// TODO Auto-generated method stub
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		if (month == 0) {
+			year = year - 1;
+			month = 12;
+		}
+		String sql = "select count(1) from misstatus1 a where a.blzt='0' and date_format(blsj,'%Y') =" + year
+				+ " and date_format(blsj,'%m')=" + month;
+
+		if (!StringUtils.isEmpty(fl)) {
+			sql = sql + " and fl='" + fl + "'";
+		}
+
+		Query query = getSession().createSQLQuery(sql);
+		List result = query.list();
+		return (BigInteger) result.get(0);
+	}
+
+	@Override
+	public BigInteger countYearReceive(String fl) {
+		// TODO Auto-generated method stub
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		String sql = "select count(1) from misstatus1 a where date_format(slsj,'%Y') =" + year;
+
+		if (!StringUtils.isEmpty(fl)) {
+			sql = sql + " and fl='" + fl + "'";
+		}
+
+		Query query = getSession().createSQLQuery(sql);
+		List result = query.list();
+		return (BigInteger) result.get(0);
+	}
+
+	@Override
+	public BigInteger countYearComplete(String fl) {
+		// TODO Auto-generated method stub
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		
+		String sql = "select count(1) from misstatus1 a where a.blzt='0' and date_format(blsj,'%Y') =" + year;
+
+		if (!StringUtils.isEmpty(fl)) {
+			sql = sql + " and fl='" + fl + "'";
+		}
+
+		Query query = getSession().createSQLQuery(sql);
+		List result = query.list();
+		return (BigInteger) result.get(0);
 	}
 }

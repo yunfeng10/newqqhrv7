@@ -80,14 +80,14 @@
                                 <input type="button" value="查询" id="query-btn">
                             </form>
                         </td>
-                        <td>累计收件：210</td>
-                        <td>上月收件：11</td>
-                        <td>当年收件：72</td>
+                        <td id="totalReceive">累计收件：0</td>
+                        <td id="lastReceive">上月收件：0</td>
+                        <td id="yearReceive">当年收件：0</td>
                     </tr>
                     <tr>
-                        <td>累计办结：202</td>
-                        <td>上月办结：9</td>
-                        <td>当年办结：66</td>
+                        <td id="totalComplete">累计办结：0</td>
+                        <td id="lastComplete">上月办结：0</td>
+                        <td id="yearComplete">当年办结：0</td>
                     </tr>
                 </table>
             </div>
@@ -224,6 +224,27 @@
     			}
     				
     		});
+    		//数据统计
+    		var fl = $("#fl").val();
+    		var options = {
+    				url : '../countblzt.jspx?fl='+fl,
+    				dataType : 'json',
+    				success : function(data) {
+    					var str1="累计收件："+data.totalReceive;
+						$("#totalReceive").html(str1);
+						var str2="累计办结："+data.totalComplete;
+						$("#totalComplete").html(str2);
+						var str3="上月收件："+data.lastReceive;
+						$("#lastReceive").html(str3);
+						var str4="上月办结："+data.lastComplete;
+						$("#lastComplete").html(str4);
+						var str5="上月办结："+data.yearReceive;
+						$("#yearReceive").html(str5);
+						var str6="当年办结："+data.yearComplete;
+						$("#yearComplete").html(str6);
+    				}
+    			};
+    			$.ajax(options);
         });
     </script>
     [#include "../include/footer.html"/]
