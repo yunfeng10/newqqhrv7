@@ -65,4 +65,19 @@ public class MisResultDaoImpl extends HibernateBaseDao<MisResult, String>  imple
 		f.append(" order by bean.dataid desc");
 		return f;
 	}
+
+	@Override
+	public void deleteByDataId(String dataId) {
+		// TODO Auto-generated method stub
+		MisResult entity = super.get(dataId);
+		if (entity != null) {
+			getSession().delete(entity);
+		}
+	}
+
+	@Override
+	public void saveEntity(MisResult entity) {
+		// TODO Auto-generated method stub
+		getSession().save(entity);
+	}
 }

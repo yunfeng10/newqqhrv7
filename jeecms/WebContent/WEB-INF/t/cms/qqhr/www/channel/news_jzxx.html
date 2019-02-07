@@ -12,6 +12,8 @@
 <script src="/${res}/js/nav.js"></script>
 <script src="/${res}/js/swiper.js"></script>
 <script src="/${res}/js/tab.js"></script>
+<script src="/${res}/js/PG.js"></script>
+    <script src="/${res}/js/alert.js"></script>
 <link rel="stylesheet"
 	href="/${res}/datatable/css/jquery.dataTables.css">
 <script src="/${res}/datatable/js/jquery.dataTables.js"></script>
@@ -123,7 +125,7 @@
 						</tr>
 						<tr>
 							<td colspan="4" class="tc"><input type="button" value="重 置 "
-								id="reset-btn"> <input type="submit" value="提 交 "
+								id="reset-btn"> <input type="button" value="提 交 "
 								id="submit-btn"></td>
 						</tr>
 					</table>
@@ -206,15 +208,27 @@
 				for (var i = 0; i < message.length; i++) {
 					var valText = $.trim(message[i].el.val())
 					if (valText == '') {
-						alert(message[i].msg)
+						Alert({
+                            AMsg: message[i].msg,
+                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+                                // 点击关闭后执行的代码
+                                message[i].el.focus()
+                            }}]
+                        })
+                        return false
 					} else if (typeof message[i].reg !== 'undefined'
 							&& !message[i].reg.test(valText)) {
-						alert(message[i].msg2)
+						Alert({
+                            AMsg: message[i].msg2,
+                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+                                // 点击关闭后执行的代码
+                                message[i].el.focus()
+                            }}]
+                        })
+                        return false
 					} else {
 						continue
 					}
-					message[i].el.focus()
-					return false
 				}
 				var options = {
 					url : '../guestbook.jspx',
@@ -223,11 +237,25 @@
 					data : $("#guestbookForm").serialize(),
 					success : function(data) {
 						if (data.status == 0) {
-							alert("留言成功您的查询码为:"+data.searchno);
-							location.href = location.href;
+							//alert("留言成功您的查询码为:"+data.searchno);
+							//location.href = location.href;
+							Alert({
+	                            AMsg: "留言成功您的查询码为:"+data.searchno,
+	                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+	                                // 点击关闭后执行的代码
+	                            	location.href = location.href;
+	                            }}]
+	                        })
 						} else if (data.status == 1) {
-							alert("验证码错误");
-							$("#guestbookCaptcha").click();
+							//alert("验证码错误");
+							//$("#guestbookCaptcha").click();
+							Alert({
+	                            AMsg: "验证码错误",
+	                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+	                                // 点击关闭后执行的代码
+	                            	$("#guestbookCaptcha").click();
+	                            }}]
+	                        })
 						}
 					}
 				};

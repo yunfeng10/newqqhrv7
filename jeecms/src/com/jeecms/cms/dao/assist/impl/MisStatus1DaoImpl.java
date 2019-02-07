@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import com.jeecms.cms.dao.assist.MisResultDao;
 import com.jeecms.cms.dao.assist.MisStatus1Dao;
-import com.jeecms.cms.entity.assist.MisResult;
 import com.jeecms.cms.entity.assist.MisStatus1;
 import com.jeecms.common.hibernate3.Finder;
 import com.jeecms.common.hibernate3.HibernateBaseDao;
@@ -66,5 +64,20 @@ public class MisStatus1DaoImpl extends HibernateBaseDao<MisStatus1, String>  imp
 		}
 		f.append(" order by bean.dataid desc");
 		return f;
+	}
+	
+	@Override
+	public void deleteByDataId(String dataId) {
+		// TODO Auto-generated method stub
+		MisStatus1 entity = super.get(dataId);
+		if (entity != null) {
+			getSession().delete(entity);
+		}
+	}
+
+	@Override
+	public void saveEntity(MisStatus1 entity) {
+		// TODO Auto-generated method stub
+		getSession().save(entity);
 	}
 }

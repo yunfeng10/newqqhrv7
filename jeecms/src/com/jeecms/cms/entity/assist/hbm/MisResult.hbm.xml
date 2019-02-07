@@ -4,22 +4,21 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.jeecms.cms.entity.assist">
-	<class name="MisResult" table="mis_result">
+	<class name="MisResult" table="misresult">
 		<meta attribute="sync-DAO">false</meta>
 		<cache usage="read-write"/>
 		<id name="dataid" column="dataid" type="string" />
 		<property name="fl" column="fl" type="string" />
+		<property name="flms" column="flms" type="string" />
 		<property name="bh" column="bh" type="string" />
 		<property name="xmmc" column="xmmc" type="string" />
 		<property name="sqsj" column="sqsj" type="timestamp" />
 		<property name="blzt" column="blzt" type="string" />
-		<property name="sqdw" column="sqdw" type="string" />
-		<property name="xmlx" column="xmlx" type="string" />
+		<property name="blztms" column="blztms" type="string" />
+		<property name="xmlxms" column="xmlxms" type="string" />
 		<property name="sqhpzmj" column="sqhpzmj" type="string" />
 		<property name="pzsj" column="pzsj" type="timestamp" />
-		<property name="pzwh" column="pzwh" type="string" />
-		<property name="ztc" column="ztc" type="string" />
-		<property name="dqmlzt" column="dqmlzt" type="string" />
-		<property name="flvalue" column="flvalue" type="string" />
+		<property name="sqdw" column="sqdw" type="string" />
+		<property name="xkzh" column="xkzh" type="string" />
 	</class>
 </hibernate-mapping>

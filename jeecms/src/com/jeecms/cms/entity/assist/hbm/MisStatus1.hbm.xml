@@ -4,21 +4,22 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.jeecms.cms.entity.assist">
-	<class name="MisStatus1" table="mis_status1">
+	<class name="MisStatus1" table="misstatus1">
 		<id name="dataid" column="dataid" type="string" />
-		<property name="slsj" column="slsj" type="timestamp" />
-		<property name="blsj" column="blsj" type="timestamp" />
 		<property name="fl" column="fl" type="string" />
+		<property name="flms" column="flms" type="string" />
 		<property name="bh" column="bh" type="string" />
 		<property name="xmmc" column="xmmc" type="string" />
 		<property name="sbdw" column="sbdw" type="string" />
+		<property name="slsj" column="slsj" type="timestamp" />
+		<property name="blsj" column="blsj" type="timestamp" />
 		<property name="blzt" column="blzt" type="string" />
+		<property name="blztms" column="blztms" type="string" />
 		<property name="blcs" column="blcs" type="string" />
 		<property name="sbsx" column="sbsx" type="string" />
 		<property name="slbm" column="slbm" type="string" />
 		<property name="bldd" column="bldd" type="string" />
 		<property name="cnqx" column="cnqx" type="string" />
 		<property name="dqblbm" column="dqblbm" type="string" />
-		<property name="flvalue" column="flvalue" type="string" />
 	</class>
 </hibernate-mapping>

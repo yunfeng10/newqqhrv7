@@ -17,8 +17,8 @@ public class MisStatus2DaoImpl extends HibernateBaseDao<MisStatus2, String>  imp
 		// TODO Auto-generated method stub
 		Finder f = Finder.create("from MisStatus2 bean where 1=1");
 		if(dataId!=null){
-			f.append(" and bean.dataid=:dataid ");
-			f.setParam("dataid", dataId);
+			f.append(" and bean.refid=:refid ");
+			f.setParam("refid", dataId);
 		}
 		f.append(" order by bean.blsj asc");
 		return find(f);
@@ -28,6 +28,21 @@ public class MisStatus2DaoImpl extends HibernateBaseDao<MisStatus2, String>  imp
 	protected Class<MisStatus2> getEntityClass() {
 		// TODO Auto-generated method stub
 		return MisStatus2.class;
+	}
+
+	@Override
+	public void deleteByDataId(String dataId) {
+		// TODO Auto-generated method stub
+		MisStatus2 entity = super.get(dataId);
+		if (entity != null) {
+			getSession().delete(entity);
+		}
+	}
+
+	@Override
+	public void saveEntity(MisStatus2 entity) {
+		// TODO Auto-generated method stub
+		getSession().save(entity);
 	}
 
 }

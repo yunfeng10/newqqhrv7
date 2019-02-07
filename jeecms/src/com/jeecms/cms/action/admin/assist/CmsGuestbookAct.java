@@ -112,10 +112,12 @@ public class CmsGuestbookAct {
 	}
 	@RequiresPermissions("importdata:dealFile")
 	@RequestMapping("/importdata/dealFile.do")
-	public void generateTags(String filepath,HttpServletResponse response) throws JSONException {
+	public void generateTags(String filepath,HttpServletRequest request,HttpServletResponse response) throws JSONException {
 		JSONObject json = new JSONObject();
-		System.out.println(filepath);
-		//json.put("tags", tags);
+		String ctx = request.getSession().getServletContext().getRealPath("");
+		String filePath = ctx+File.separator+filepath;
+		String message = manager.importExcel(filePath);
+		json.put("message", message);
 		ResponseUtils.renderJson(response, json.toString());
 	}
 	@RequiresPermissions("importdata:o_upload_media")

@@ -41,11 +41,15 @@
     </div>
     <!-- 头部 end -->
     [#if indextitle??]
+    [#if indextitle?length gt 0]
     <div class="head-banner">
-        <div class="text w1100">
-            ${indextitle}
+        <div class="w1100">
+            <marquee onMouseOut="this.start()" onMouseOver="this.stop()">
+                <div class="text">${indextitle}</div>
+            </marquee>
         </div>
     </div>
+     [/#if]
     [/#if]
     
     <!-- 导航，可被 include -->

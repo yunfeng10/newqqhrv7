@@ -55,4 +55,6 @@ public interface CmsGuestbookMng {
 	public void deleteYsqgkById(Integer id);
 	
 	public void countInformation(HttpServletRequest request,SiteFileCount count);
+	
+	public String importExcel(String filePath);
 }

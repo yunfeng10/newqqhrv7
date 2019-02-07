@@ -10,7 +10,11 @@ function submitFile(){
 		$.post("dealFile.do", {
 			filepath:$("#mediaPath").val()
 		}, function(data) {
-			console.info(data);
+			if(data.message){
+				alert(data.message);
+			}else{
+				alert("导入失败");
+			}
 		}, "json");
 	}
 	
@@ -42,7 +46,7 @@ function submitFile(){
 </@p.td>
 <@p.tr/>
 <@p.td colspan="2">
-	<@p.button code="global.submit" onclick="submitFile()"/>
+	<@p.button code="global.submit" onclick="submitFile()" class="upload-button"/>
 </@p.td>
 </@p.form>
 </div>

@@ -13,6 +13,8 @@
     <script src="/${res}/js/nav.js"></script>
     <script src="/${res}/js/swiper.js"></script>
     <script src="/${res}/js/tab.js"></script>
+    <script src="/${res}/js/PG.js"></script>
+    <script src="/${res}/js/alert.js"></script>
 </head>
 <body>
     [#include "../include/header.html"/]
@@ -56,7 +58,7 @@
         </div>
         <div class="tab-box" id="tab-box">
             <div class="item">
-                <form id="dataForm">
+                <form id="dataForm" >
                     <table width="100%">
                         <tr>
                             <th rowspan="6" align="center" width="60">
@@ -174,14 +176,14 @@
                                 <p>验<br>证<br>码</p>
                             </th>
                             <td colspan="4">
-                            <input type="text" name="captcha" size="10"><img
+                            <input type="text" id="captcha" name="captcha" size="10"><img
 								id="addCaptcha" src="${base}/captcha.svl"
 								onclick="this.src='${base}/captcha.svl?d='+new Date()" /></td>
                         </tr>
                         <tr>
                             <td colspan="5" class="tc">
                                 <input type="button" value="重 置 " id="reset-btn">
-                                <input type="submit" value="提 交 " id="submit-btn">
+                                <input type="button" value="提 交 " id="submit-btn">
                             </td>
                         </tr>
                     </table>
@@ -303,7 +305,8 @@
             { el: $('#yzcode'), msg: '邮政编码不能为空', reg: ybcodeRegExp, msg2: '邮政编码格式不正确' },
             { el: $('#email'), msg: '邮箱不能为空', reg: emailRegExp, msg2: '邮箱格式不正确' },
             { el: $('#content'), msg: '所需信息的描述不能为空' },
-            { el: $('#purpose'), msg: '所需信息的用途不能为空' }
+            { el: $('#purpose'), msg: '所需信息的用途不能为空' },
+            { el: $('#captcha'), msg: '验证码不能为空' }
         ];
         var message2 = [
                        { el: $('#qtMingCheng'), msg: '组织名称不能为空' },
@@ -315,7 +318,9 @@
                        { el: $('#qtDianZiYouXiang'), msg: '邮箱不能为空', reg: emailRegExp, msg2: '邮箱格式不正确' },
                        { el: $('#qtLianXiDiZhi'), msg: '联系地址不能为空' },
                        { el: $('#content'), msg: '所需信息的描述不能为空' },
-                       { el: $('#purpose'), msg: '所需信息的用途不能为空' }
+                       { el: $('#purpose'), msg: '所需信息的用途不能为空' },
+                       { el: $('#captcha'), msg: '验证码不能为空' }
+                       
                    ];
         
         // 提交事件
@@ -327,27 +332,51 @@
             	for (var i = 0; i < message.length; i++){
                     var valText = $.trim(message[i].el.val())
                     if (valText == ''){
-                        alert(message[i].msg)
+                    	 Alert({
+                             AMsg: message[i].msg,
+                             ABtnArr: [{name: '关闭', className: '', callback: function(){
+                                 // 点击关闭后执行的代码
+                                 message[i].el.focus()
+                             }}]
+                         })
+                         return false
                     } else if (typeof message[i].reg !== 'undefined' && !message[i].reg.test(valText)){
-                        alert(message[i].msg2)
+                    	Alert({
+                            AMsg: message[i].msg2,
+                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+                                // 点击关闭后执行的代码
+                                message[i].el.focus()
+                            }}]
+                        })
+                        return false
                     } else {
                         continue
                     }
-                    message[i].el.focus()
-                    return false
                 }
             }else{
             	for (var i = 0; i < message2.length; i++){
                     var valText = $.trim(message2[i].el.val())
                     if (valText == ''){
-                        alert(message2[i].msg)
+                    	Alert({
+                            AMsg: message2[i].msg,
+                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+                                // 点击关闭后执行的代码
+                                message[i].el.focus()
+                            }}]
+                        })
+                        return false
                     } else if (typeof message2[i].reg !== 'undefined' && !message2[i].reg.test(valText)){
-                        alert(message2[i].msg2)
+                    	Alert({
+                            AMsg: message2[i].msg2,
+                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+                                // 点击关闭后执行的代码
+                                message[i].el.focus()
+                            }}]
+                        })
+                        return false
                     } else {
                         continue
                     }
-                    message2[i].el.focus()
-                    return false
                 }
             }
             var options = {
@@ -356,13 +385,31 @@
 					dataType : 'json',
 					data : $("#dataForm").serialize(),
 					success : function(data) {
+						
 						if (data.status == 0) {
-							alert("申请成功您的查询码为:"+data.searchno);
-							location.href = location.href;
+							//alert("申请成功您的查询码为:"+data.searchno);
+							//location.href = location.href;
+							console.log(888)
+							Alert({
+	                            AMsg: "申请成功您的查询码为:"+data.searchno,
+	                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+	                            	console.log(999)
+	                            	location.href = location.href;
+	                            }}]
+	                        });
 						} else if (data.status == 1) {
-							alert("验证码错误");
-							$("#addCaptcha").click();
+							//alert("验证码错误");
+							//location.href = location.href;
+							Alert({
+	                            AMsg: "验证码错误",
+	                            ABtnArr: [{name: '关闭', className: '', callback: function(){
+	                            	//location.href = location.href;
+	                            	$("#addCaptcha").click();
+	                            	
+	                            }}]
+	                        });
 						}
+						return false
 					}
 				};
 				$.ajax(options);
@@ -431,19 +478,30 @@
     			if(type==0){
     				param=$("#queryName").val();
     				if(!param){
-    					alert("请输入姓名");
+    					
+    					Alert({
+                            AMsg: "请输入姓名",
+                            ABtnArr: [{name: '关闭', className: '', callback: null}]
+                        })
     					return;
     				}
     			}else{
     				param=$("#queryJgdm").val();
     				if(!param){
-    					alert("请输入机构名称");
+    					Alert({
+                            AMsg: "请输入机构名称",
+                            ABtnArr: [{name: '关闭', className: '', callback: null}]
+                        })
     					return;
     				}
     			}
     			searchNo = $("#querySearchNo").val();
     			if(!searchNo){
-    				alert("请输入查询码");
+    				//alert("请输入查询码");
+    				Alert({
+                        AMsg: "请输入查询码",
+                        ABtnArr: [{name: '关闭', className: '', callback: null}]
+                    })
 					return;
     			}
     			var options = {
@@ -454,13 +512,20 @@
 	                    success:  function (data) {
 		                	if(data.status==0) {
 		                		if(data.dataId==0){
-		                			alert("未查询到数据");
+		                			Alert({
+				                        AMsg: "未查询到数据",
+				                        ABtnArr: [{name: '关闭', className: '', callback: null}]
+				                    })
 		                		}else{
 		                			window.location.href='../ysqgkdetail.jspx?id='+data.dataId;
 		                		}
 			                   	
 			                } else{	
-			                	alert("未查询到数据");
+			                	//alert("未查询到数据");
+			                	Alert({
+			                        AMsg: "未查询到数据",
+			                        ABtnArr: [{name: '关闭', className: '', callback: null}]
+			                    })
 			                }
 	                    }
 	                };

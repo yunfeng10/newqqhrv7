@@ -5,68 +5,95 @@ import java.util.Date;
 
 public class MisStatus2 implements Serializable {
 
-	private String fl;
-	private String bh;
-	private String hjmc;
-	private String blbm;
-	private Date jssj;
-	private Date blsj;
-	private String bljg;
 	private String dataid;
-	public String getFl() {
-		return fl;
-	}
-	public void setFl(String fl) {
-		this.fl = fl;
-	}
-	public String getBh() {
-		return bh;
-	}
-	public void setBh(String bh) {
-		this.bh = bh;
-	}
-	public String getHjmc() {
-		return hjmc;
-	}
-	public void setHjmc(String hjmc) {
-		this.hjmc = hjmc;
-	}
-	public String getBlbm() {
-		return blbm;
-	}
-	public void setBlbm(String blbm) {
-		this.blbm = blbm;
-	}
-	public Date getJssj() {
-		return jssj;
-	}
-	public void setJssj(Date jssj) {
-		this.jssj = jssj;
-	}
-	public Date getBlsj() {
-		return blsj;
-	}
-	public void setBlsj(Date blsj) {
-		this.blsj = blsj;
-	}
-	public String getBljg() {
-		return bljg;
-	}
-	public void setBljg(String bljg) {
-		this.bljg = bljg;
-	}
+	
+	private String refid;
+	
+	private String hjmc;
+	
+	private String blbm;
+	
+	private Date jssj;
+	
+	private String jssjstr;
+	
+	private Date blsj;
+	
+	private String blsjstr;
+	
+	private String bljg;
+
 	public String getDataid() {
 		return dataid;
 	}
+
 	public void setDataid(String dataid) {
 		this.dataid = dataid;
 	}
+
+	public String getRefid() {
+		return refid;
+	}
+
+	public void setRefid(String refid) {
+		this.refid = refid;
+	}
+
+	public String getHjmc() {
+		return hjmc;
+	}
+
+	public void setHjmc(String hjmc) {
+		this.hjmc = hjmc;
+	}
+
+	public String getBlbm() {
+		return blbm;
+	}
+
+	public void setBlbm(String blbm) {
+		this.blbm = blbm;
+	}
+
+	public Date getJssj() {
+		return jssj;
+	}
+
+	public void setJssj(Date jssj) {
+		this.jssj = jssj;
+	}
+
+	public Date getBlsj() {
+		return blsj;
+	}
+
+	public void setBlsj(Date blsj) {
+		this.blsj = blsj;
+	}
+
+	public String getBljg() {
+		return bljg;
+	}
+
+	public void setBljg(String bljg) {
+		this.bljg = bljg;
+	}
+
+	public String getJssjstr() {
+		return jssjstr;
+	}
+
+	public void setJssjstr(String jssjstr) {
+		this.jssjstr = jssjstr;
+	}
+
+	public String getBlsjstr() {
+		return blsjstr;
+	}
+
+	public void setBlsjstr(String blsjstr) {
+		this.blsjstr = blsjstr;
+	}
 	
-	private String flvalue;
-	public String getFlvalue() {
-		return flvalue;
-	}
-	public void setFlvalue(String flvalue) {
-		this.flvalue = flvalue;
-	}
+	
 }

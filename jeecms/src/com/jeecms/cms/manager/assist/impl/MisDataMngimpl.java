@@ -99,7 +99,7 @@ public class MisDataMngimpl implements MisDataMng {
 				m.put("sqsj", "");
 			}
 			
-			m.put("blzt", item.getBlzt());
+			m.put("blzt", item.getBlztms());
 			mapList.add(m);
 		}
 		json.put("aaData", mapList);
@@ -128,7 +128,7 @@ public class MisDataMngimpl implements MisDataMng {
 			}else{
 				m.put("bjsj", "");
 			}
-			m.put("blzt", item.getBlzt());
+			m.put("blzt", item.getBlztms());
 			m.put("blcs", item.getBlcs());
 			mapList.add(m);
 		}
@@ -142,19 +142,19 @@ public class MisDataMngimpl implements MisDataMng {
 		MisResult result = misReaultDao.findByDataId(dataId);
 		if(result!=null){
 			model.addAttribute("fl", result.getFl());
-			model.addAttribute("flvalue", result.getFlvalue());
+			model.addAttribute("flvalue", result.getFlms());
 			model.addAttribute("bh", result.getBh());
 			model.addAttribute("sqdw", result.getSqdw());
 			model.addAttribute("xmmc", result.getXmmc());
-			model.addAttribute("xmlx", result.getXmlx());
+			model.addAttribute("xmlx", result.getXmlxms());
 			model.addAttribute("sqhpzmj", result.getSqhpzmj());
-			model.addAttribute("pzwh", result.getPzwh());
+			model.addAttribute("pzwh", result.getXkzh());
 			if(result.getPzsj()!=null){
 				model.addAttribute("pzsj", formatter2.format(result.getPzsj()));
 			}else{
 				model.addAttribute("pzsj", "");
 			}
-			model.addAttribute("dqmlzt", result.getDqmlzt());
+			model.addAttribute("dqmlzt", result.getBlztms());
 		}
 	}
 
@@ -165,7 +165,7 @@ public class MisDataMngimpl implements MisDataMng {
 		if(misStatus1!=null){
 			List<MisStatus2> list = misStatus2Dao.findByDataId(dataId);
 			model.addAttribute("fl", misStatus1.getFl());
-			model.addAttribute("flvalue", misStatus1.getFlvalue());
+			model.addAttribute("flvalue", misStatus1.getFlms());
 			model.addAttribute("bh", misStatus1.getBh());
 			model.addAttribute("sbdw", misStatus1.getSbdw());
 			model.addAttribute("xmmc", misStatus1.getXmmc());

@@ -4,14 +4,11 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.jeecms.cms.entity.assist">
-	<class name="MisStatus2" table="mis_status2">
+	<class name="MisStatus2" table="misstatus2">
 		
-		<composite-id>
-		<key-property name="dataid" column="dataid" type="string" />
-		<key-property name="hjmc" column="hjmc" type="string" />
-		</composite-id>
-		<property name="fl" column="fl" type="string" />
-		<property name="bh" column="bh" type="string" />
+		<id name="dataid" column="dataid" type="string" />
+		<property name="refid" column="refid" type="string" />
+		<property name="hjmc" column="hjmc" type="string" />
 		<property name="blbm" column="blbm" type="string" />
 		<property name="jssj" column="jssj" type="timestamp" />
 		<property name="blsj" column="blsj" type="timestamp" />

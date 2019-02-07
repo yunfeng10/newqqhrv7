@@ -5,7 +5,11 @@ import java.util.Date;
 
 public class MisResult implements Serializable {
 
+	private String dataid;
+	
 	private String fl;
+	
+	private String flms;
 	
 	private String bh;
 	
@@ -13,23 +17,31 @@ public class MisResult implements Serializable {
 	
 	private Date sqsj;
 	
+	private String sqsjstr;
+	
 	private String blzt;
 	
-	private String sqdw;
+	private String blztms;
 	
-	private String xmlx;
+	private String xmlxms;
 	
 	private String sqhpzmj;
 	
 	private Date pzsj;
 	
-	private String pzwh;
+	private String pzsjstr;
 	
-	private String ztc;
+	private String xkzh;
 	
-	private String dqmlzt;
-	
-	private String dataid;
+	private String sqdw;
+
+	public String getDataid() {
+		return dataid;
+	}
+
+	public void setDataid(String dataid) {
+		this.dataid = dataid;
+	}
 
 	public String getFl() {
 		return fl;
@@ -37,6 +49,14 @@ public class MisResult implements Serializable {
 
 	public void setFl(String fl) {
 		this.fl = fl;
+	}
+
+	public String getFlms() {
+		return flms;
+	}
+
+	public void setFlms(String flms) {
+		this.flms = flms;
 	}
 
 	public String getBh() {
@@ -71,20 +91,20 @@ public class MisResult implements Serializable {
 		this.blzt = blzt;
 	}
 
-	public String getSqdw() {
-		return sqdw;
+	public String getBlztms() {
+		return blztms;
 	}
 
-	public void setSqdw(String sqdw) {
-		this.sqdw = sqdw;
+	public void setBlztms(String blztms) {
+		this.blztms = blztms;
 	}
 
-	public String getXmlx() {
-		return xmlx;
+	public String getXmlxms() {
+		return xmlxms;
 	}
 
-	public void setXmlx(String xmlx) {
-		this.xmlx = xmlx;
+	public void setXmlxms(String xmlxms) {
+		this.xmlxms = xmlxms;
 	}
 
 	public String getSqhpzmj() {
@@ -103,46 +123,40 @@ public class MisResult implements Serializable {
 		this.pzsj = pzsj;
 	}
 
-	public String getPzwh() {
-		return pzwh;
+	public String getXkzh() {
+		return xkzh;
 	}
 
-	public void setPzwh(String pzwh) {
-		this.pzwh = pzwh;
+	public void setXkzh(String xkzh) {
+		this.xkzh = xkzh;
+	}
+	
+
+	public String getSqdw() {
+		return sqdw;
 	}
 
-	public String getZtc() {
-		return ztc;
+	public void setSqdw(String sqdw) {
+		this.sqdw = sqdw;
 	}
 
-	public void setZtc(String ztc) {
-		this.ztc = ztc;
+	public String getSqsjstr() {
+		return sqsjstr;
 	}
 
-	public String getDqmlzt() {
-		return dqmlzt;
+	public void setSqsjstr(String sqsjstr) {
+		this.sqsjstr = sqsjstr;
 	}
 
-	public void setDqmlzt(String dqmlzt) {
-		this.dqmlzt = dqmlzt;
+	public String getPzsjstr() {
+		return pzsjstr;
 	}
 
-	public String getDataid() {
-		return dataid;
+	public void setPzsjstr(String pzsjstr) {
+		this.pzsjstr = pzsjstr;
 	}
-
-	public void setDataid(String dataid) {
-		this.dataid = dataid;
-	}
-	private String flvalue;
-
-	public String getFlvalue() {
-		return flvalue;
-	}
-
-	public void setFlvalue(String flvalue) {
-		this.flvalue = flvalue;
-	}
+	
+	
 	
 	
 }

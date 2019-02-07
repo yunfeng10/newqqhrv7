@@ -12,5 +12,9 @@ public interface MisResultDao {
 	public List<MisResult> findByParam(String fl,String param);
 	
 	public Pagination getWebPage(String fl, String param, int pageNo, int pageSize);
+	
+	public void deleteByDataId(String dataId);
+	
+	public void saveEntity(MisResult entity);
 
 }
