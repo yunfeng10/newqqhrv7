@@ -29,6 +29,28 @@ function jsddm_canceltimer()
 		closetimer = null;
 	}
 }
+function doOperate(action,msg) { 
+
+	var contentIds=getContentIds(); 
+	    var channelIds=getChannelIds(); 
+	    if(contentIds.length<=0){ 
+	      $.alert("<@s.m 'global.prompt'/>","<@s.m 'content.noselectcontent'/>"); 
+	   }else{ 
+	     if(channelIds.length<=0){ 
+	   $.alert("<@s.m 'global.prompt'/>","<@s.m 'content.noselectchannel'/>"); 
+	      }else{ 
+	    	  $.post(action, { 
+	    	contentIds:contentIds, 
+	    	channelId:channelIds[0] 
+	    	}, function(data) { 
+	    	if(data.pass){ 
+	    	$.alert("<@s.m 'global.prompt'/>",msg); 
+	    	} 
+	    	}, 
+	    	"json"); 
+	      } 
+	    } 
+	}
 document.onclick = jsddm_close;
 $(function() {
 	$("#tableForm").validate();
