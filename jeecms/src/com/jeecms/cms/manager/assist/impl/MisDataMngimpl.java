@@ -178,7 +178,7 @@ public class MisDataMngimpl implements MisDataMng {
 				model.addAttribute("slsj", "");
 			}
 			model.addAttribute("cnqx", misStatus1.getCnqx());
-			model.addAttribute("blzt", misStatus1.getCnqx());
+			model.addAttribute("blzt", misStatus1.getBlztms());
 			model.addAttribute("dqblbm", misStatus1.getDqblbm());
 			List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
 			for(MisStatus2 status2 : list){
