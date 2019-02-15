@@ -1660,6 +1660,30 @@ h2.big-title a {
 }
 
 
+.home-aside {
+    position: fixed;
+    left: 50%;
+    margin-left: 570px;
+    top: 350px;
+    z-index: 2;
+    width: 56px;
+}
+.home-aside ul li {
+    margin-bottom: 4px;
+}
+
+.home-aside .closeBtn {
+    position: absolute;
+    right: -4px;
+    bottom: -20px;
+    width: 15px;
+    height: 15px;
+    background: url(../img/closebut.jpg) 50% 50% no-repeat;
+    padding: 4px;
+    cursor: pointer;
+}
+
+
 /*
 * pager index
 */
