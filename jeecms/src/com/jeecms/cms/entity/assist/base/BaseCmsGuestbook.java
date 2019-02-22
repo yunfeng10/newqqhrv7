@@ -1,6 +1,9 @@
 package com.jeecms.cms.entity.assist.base;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.jeecms.cms.entity.assist.GuestBookFile;
 
 
 /**
@@ -26,7 +29,18 @@ public abstract class BaseCmsGuestbook  implements Serializable {
 	public static String PROP_ADMIN = "admin";
 	public static String PROP_MEMBER = "member";
 	public static String PROP_ID = "id";
+	
+	private List<GuestBookFile> fileList;
 
+	
+
+	public List<GuestBookFile> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<GuestBookFile> fileList) {
+		this.fileList = fileList;
+	}
 
 	// constructors
 	public BaseCmsGuestbook () {

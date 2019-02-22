@@ -4,10 +4,72 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
 <#include "/jeecms_sys/head.html"/>
+<script src="${base}/thirdparty/swfupload/swfupload.js" type="text/javascript"></script>
+<script src="${base}/thirdparty/swfupload/swfupload.queue.js" type="text/javascript"></script>
+<script src="${base}/thirdparty/swfupload/fileprogress.js" type="text/javascript"></script>
+<script src="${base}/thirdparty/swfupload/handlers.js" type="text/javascript"></script>
+<link href="${base}/thirdparty/swfupload/process.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
 $(function() {
 	$("#jvForm").validate();
 });
+var swfu;
+window.onload=function() {
+	var uploadPicsUrl = "../common/o_swfPicsUpload.do";
+	var uploadAttachsUrl = "../common/o_swfAttachsUpload.do";
+	//在firefox、chrome下，上传不能保留登录信息，所以必须加上jsessionid。
+	var jsessionid = $.cookie("JSESSIONID");
+	if(jsessionid) {
+		uploadPicsUrl += ";jsessionid="+jsessionid;
+		uploadAttachsUrl += ";jsessionid="+jsessionid;
+	}
+
+	swfau=new SWFUpload({
+		upload_url : uploadAttachsUrl,
+		flash_url : "${base}/thirdparty/swfupload/swfupload.swf",
+		file_size_limit : "2000 MB",
+		file_types : "*.*",
+		file_types_description : "All Types",
+		file_queue_limit : 0,
+		custom_settings : {
+			progressTarget : "afsUploadProgress",
+			cancelButtonId : "abtnCancel"
+		},
+		debug: false,
+		
+		button_image_url : "${base}/res/common/img/theme/menu_search.jpg",
+		button_placeholder_id : "aspanButtonPlaceHolder",
+		button_text: "<span class='btnText'><@s.m "content.pictures.upload"/></span>",
+		button_width: 52,
+		button_height: 19,
+		button_text_top_padding: 2,
+		button_text_left_padding: 0,
+		button_text_style: '.btnText{color:#666666;}',
+		
+		file_queued_handler : fileQueued,
+		file_queue_error_handler : fileQueueError,
+		file_dialog_complete_handler : fileDialogComplete,
+		upload_progress_handler : uploadProgress,
+		upload_error_handler : uploadError,
+		upload_success_handler : uploadAttachSuccess,
+		upload_complete_handler : uploadComplete,
+		queue_complete_handler : queueComplete
+	});
+};
+function uploadAttachSuccess(file,data) {
+	var jsonData=eval("("+data+")");//转换为json对象 
+	if(jsonData.error!=null){
+		$.alert("<@s.m 'global.prompt'/>",jsonData.error);
+	}else{
+		addAttachLine();
+		var index = attachIndex - 1;
+		
+		var attachUrl=jsonData.attachUrl;
+		var attachName=jsonData.attachName;
+		$("#attachmentPaths"+index).val(attachUrl);
+		$("#attachmentNames"+index).val(attachName);
+	}
+}
 </script>
 </head>
 <body>
@@ -20,12 +82,76 @@ $(function() {
 	<div class="clear"></div>
 </div>
 <div class="body-box">
+<#include "../content/attachment_upload2.html"/>
 <@p.form id="jvForm" action="o_update.do"labelWidth="12">
 <input type="hidden" name="queryCtgId" value="${queryCtgId!}"/>
 <@p.select colspan="2" label="cmsGuestbook.ctg" name="ctgId" value=cmsGuestbook.ctg.id list=ctgList listKey="id" listValue="name" required="true"/><@p.tr/>
 <@p.text colspan="2" label="cmsGuestbook.title" name="title" value=cmsGuestbook.title size="70" maxlength="255"/><@p.tr/>
 <@p.textarea colspan="2" label="cmsGuestbook.content" name="content" value=cmsGuestbook.content rows="5" cols="70" maxlength="255"/><@p.tr/>
 <@p.textarea colspan="2" label="cmsGuestbook.reply" name="reply" value=cmsGuestbook.reply rows="5" cols="70" maxlength="800"/><@p.tr/>
+
+
+<@p.td label="附件" colspan="2" noHeight="true">
+<div>
+<span id="aspanButtonPlaceHolder"></span>
+<span style="display: none;"><input class="cancel" id="abtnCancel" type="button" value="<@s.m "global.cancel"/>" onclick="swfu.cancelQueue();" disabled="disabled" /></span>
+<div id="afsUploadProgress" style="display: none;"></div>
+</div>
+<table id="attachTable" border="0">
+<tr>
+	<td align="center"></td>
+	<td align="center"><@s.m "content.attachmentName"/></td>
+	<td align="center"><@s.m "content.attachmentPath"/></td>
+	<td align="center"><@s.m "content.fileUpload"/></td>
+	
+</tr>
+<#list cmsGuestbook.fileList as attach>
+<tr id="attachTr${attach_index}">
+	<td align="center"><a onclick="$('#attachTr${attach_index}').remove();" href="javascript:void(0);" class="pn-opt"><@s.m "content.attachmentDelLine"/></a></td>
+	<td align="center"><input type="text" id="attachmentNames${attach_index}" name="attachmentNames" value="${attach.attachmentNames!}"/></td>
+	<td align="center"><input type="text" id="attachmentPaths${attach_index}" name="attachmentPaths" value="${attach.attachmentPaths!}"/></td>
+	<td align="center">
+		<span id="afc${attach_index}" style="position:relative;display:block;width:300px;*width:300px;">
+		<input type='text' id='attachmentText${attach_index}'/>  
+		<input class="browse" type='button' value='<@s.m "global.browse"/>'/>
+		<input onchange="$('#attachmentText${attach_index}').val(this.value)" size="19" type="file" name="attachmentFile" id="attachmentFile${attach_index}" class="file-button-other"/>
+		<input type="button" value="<@s.m "content.fileUpload"/>" onclick="uploadAttachment(${attach_index});" class="upload-button"/>
+		</span>
+		<input type="hidden" id="attachmentFilenames${attach_index}" name="attachmentFilenames" value="${attach.filename!}"/>
+	</td>
+</tr>
+<input type="hidden" name="oldattachmentPaths" value="${attach.path!}"/>
+</#list>
+</table>
+<textarea id="attachTr" style="display:none">
+<tr id="attachTr{0}">
+	<td align="center"><a onclick="$('#attachTr{0}').remove();" href="javascript:void(0);" class="pn-opt"><@s.m "content.attachmentDelLine"/></a></td>
+	<td align="center"><input type="text" id="attachmentNames{0}" name="attachmentNames"/></td>
+	<td align="center"><input type="text" id="attachmentPaths{0}" name="attachmentPaths"/></td>
+	<td align="center">
+		<span id="afc{0}" style="position:relative;display:block;width:300px;*width:300px;">
+		<input type='text' id='attachmentText{0}'/>  
+		<input class="browse" type='button' value='<@s.m "global.browse"/>'/>
+		<input onchange="$('#attachmentText{0}').val(this.value)" size="19" type="file" name="attachmentFile" id="attachmentFile{0}" style="height:24px;opacity:0;filter:alpha(opacity=0);position:absolute;right:69px;top:2px;"/>
+		<input type="button" value="<@s.m "content.fileUpload"/>" onclick="uploadAttachment({0});" class="upload-button"/>
+		</span>
+		<input type="hidden" id="attachmentFilenames{0}" name="attachmentFilenames"/>
+	</td>
+</tr>
+</textarea>
+<script type="text/javascript">
+var attachIndex = 1;
+var attachTpl = $.format($("#attachTr").val());
+function addAttachLine() {
+	$('#attachTable').append(attachTpl(attachIndex++));
+}
+</script>
+</@p.td>
+<@p.tr/>
+
+
+
+
 <@p.text colspan="1" width="50" label="cmsGuestbook.xm" name="xm" value=cmsGuestbook.xm maxlength="100"/>
 <@p.text colspan="1" width="50" label="cmsGuestbook.wtfsd" name="wtfsd" value=cmsGuestbook.wtfsd maxlength="100"/><@p.tr/>
 <@p.text colspan="1" width="50" label="cmsGuestbook.txdz" name="txdz" value=cmsGuestbook.txdz maxlength="100"/>

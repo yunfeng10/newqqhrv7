@@ -31,6 +31,7 @@ import com.jeecms.cms.dao.assist.MisStatus2Dao;
 import com.jeecms.cms.dao.main.YsqgkDao;
 import com.jeecms.cms.entity.assist.CmsGuestbook;
 import com.jeecms.cms.entity.assist.CmsGuestbookExt;
+import com.jeecms.cms.entity.assist.GuestBookFile;
 import com.jeecms.cms.entity.assist.MisResult;
 import com.jeecms.cms.entity.assist.MisStatus1;
 import com.jeecms.cms.entity.assist.MisStatus2;
@@ -71,11 +72,26 @@ public class CmsGuestbookMngImpl implements CmsGuestbookMng {
 		return entity;
 	}
 
-	public CmsGuestbook save(CmsGuestbook bean, CmsGuestbookExt ext, Integer ctgId, String ip) {
+	public CmsGuestbook save(CmsGuestbook bean, CmsGuestbookExt ext, Integer ctgId, String ip,String[] attachmentPaths, String[] attachmentNames) {
+		
 		bean.setCtg(cmsGuestbookCtgMng.findById(ctgId));
 		bean.setIp(ip);
 		bean.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		bean.init();
+		dao.save(bean);
+		List<GuestBookFile> fileList = new ArrayList<GuestBookFile>();
+		if (attachmentPaths != null && attachmentPaths.length > 0) {
+			for (int i = 0, len = attachmentPaths.length; i < len; i++) {
+				if (attachmentPaths[i] != "") {
+					GuestBookFile file = new GuestBookFile();
+					file.setId(bean.getId());
+					file.setAttachmentNames(attachmentNames[i]);
+					file.setAttachmentPaths(attachmentPaths[i]);
+					fileList.add(file);
+				}
+			}
+		}
+		bean.setFileList(fileList);
 		dao.save(bean);
 		cmsGuestbookExtMng.save(ext, bean);
 		return bean;
@@ -102,10 +118,23 @@ public class CmsGuestbookMngImpl implements CmsGuestbookMng {
 		ext.setXjsfgk(xjsfgk);
 		ext.setCxm(cxm);
 		ext.setDjcs(djcs);
-		return save(guestbook, ext, ctgId, ip);
+		return save(guestbook, ext, ctgId, ip,null,null);
 	}
 
-	public CmsGuestbook update(CmsGuestbook bean, CmsGuestbookExt ext, Integer ctgId) {
+	public CmsGuestbook update(CmsGuestbook bean, CmsGuestbookExt ext, Integer ctgId,String[] attachmentPaths, String[] attachmentNames) {
+		List<GuestBookFile> fileList = new ArrayList<GuestBookFile>();
+		if (attachmentPaths != null && attachmentPaths.length > 0) {
+			for (int i = 0, len = attachmentPaths.length; i < len; i++) {
+				if (attachmentPaths[i] != "") {
+					GuestBookFile file = new GuestBookFile();
+					file.setId(bean.getId());
+					file.setAttachmentNames(attachmentNames[i]);
+					file.setAttachmentPaths(attachmentPaths[i]);
+					fileList.add(file);
+				}
+			}
+		}
+		bean.setFileList(fileList);
 		Updater<CmsGuestbook> updater = new Updater<CmsGuestbook>(bean);
 		bean = dao.updateByUpdater(updater);
 		bean.setCtg(cmsGuestbookCtgMng.findById(ctgId));

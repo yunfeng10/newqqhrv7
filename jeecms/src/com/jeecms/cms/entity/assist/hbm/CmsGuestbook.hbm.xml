@@ -15,5 +15,14 @@
 		<many-to-one name="admin" column="admin_id" class="com.jeecms.core.entity.CmsUser" not-null="false"></many-to-one>
 		<many-to-one name="site" column="site_id" class="com.jeecms.core.entity.CmsSite" not-null="true"></many-to-one>
 		<many-to-one name="ctg" column="guestbookctg_id" class="CmsGuestbookCtg" not-null="true"></many-to-one>
+		<list name="fileList" table="jc_guestbook_file">
+		<cache usage="read-write"/>
+			<key column="id"/>
+			<list-index column="priority"/>
+			<composite-element class="GuestBookFile">
+				<property name="attachmentPaths" column="attachmentPaths" type="string" />
+				<property name="attachmentNames" column="attachmentNames" type="string" />
+			</composite-element>
+		</list>
 	</class>
 </hibernate-mapping>

@@ -27,14 +27,14 @@ public interface CmsGuestbookMng {
 	public CmsGuestbook findById(Integer id);
 
 	public CmsGuestbook save(CmsGuestbook bean, CmsGuestbookExt ext,
-			Integer ctgId, String ip);
+			Integer ctgId, String ip,String[] attachmentPaths, String[] attachmentNames);
 
 	public CmsGuestbook save(CmsUser member, Integer siteId, Integer ctgId,
 			String ip, String title, String content, String email,
 			String phone, String qq,String grxxgk,String xm,String wtfsd,String txdz,String yb,String xjsfgk,String cxm,Integer djcs);
 
 	public CmsGuestbook update(CmsGuestbook bean, CmsGuestbookExt ext,
-			Integer ctgId);
+			Integer ctgId,String[] attachmentPaths, String[] attachmentNames);
 
 	public CmsGuestbook deleteById(Integer id);
 

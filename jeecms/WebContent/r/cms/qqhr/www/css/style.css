@@ -1653,7 +1653,6 @@ h2.big-title a {
 }
 .head-banner marquee {
     display: block;
-    height: 100%;
 }
 .head-banner .text {
     line-height: 1.5;
@@ -1670,6 +1669,9 @@ h2.big-title a {
 }
 .home-aside ul li {
     margin-bottom: 4px;
+}
+.home-aside ul li img {
+	width: 100%;
 }
 
 .home-aside .closeBtn {

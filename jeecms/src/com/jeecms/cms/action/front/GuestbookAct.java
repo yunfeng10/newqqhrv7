@@ -96,19 +96,30 @@ public class GuestbookAct {
 		CmsGuestbook guestbook = null;
 		guestbook = cmsGuestbookMng.findById(dataId);
 		if (guestbook != null) {
-			model.addAttribute("title", guestbook.getTitle());
-			model.addAttribute("content", guestbook.getContent());
-			model.addAttribute("createTime", formatter.format(guestbook.getCreateTime()));
-			model.addAttribute("xm", guestbook.getXm());
-			model.addAttribute("wtfsd", guestbook.getWtfsd());
-			model.addAttribute("phone", guestbook.getPhone());
-			model.addAttribute("txdz", guestbook.getTxdz());
-			model.addAttribute("yb", guestbook.getYb());
-			model.addAttribute("email", guestbook.getEmail());
-			model.addAttribute("reply", guestbook.getReply());
-			model.addAttribute("replyTime", formatter.format(guestbook.getReplayTime()));
-			model.addAttribute("grxxgk", guestbook.getGrxxgk());
-			model.addAttribute("xjsfgk", guestbook.getXjsfgk());
+			model.addAttribute("title", guestbook.getTitle()+"");
+			model.addAttribute("content", guestbook.getContent()+"");
+			if(guestbook.getCreateTime()!=null){
+				model.addAttribute("createTime", formatter.format(guestbook.getCreateTime()));
+			}else{
+				model.addAttribute("createTime", "");
+			}
+			
+			model.addAttribute("xm", guestbook.getXm()==null?"":guestbook.getXm());
+			model.addAttribute("wtfsd", guestbook.getWtfsd()==null?"":guestbook.getWtfsd());
+			model.addAttribute("phone", guestbook.getPhone()==null?"":guestbook.getPhone());
+			model.addAttribute("txdz", guestbook.getTxdz()==null?"":guestbook.getTxdz());
+			model.addAttribute("yb", guestbook.getYb()==null?"":guestbook.getYb());
+			model.addAttribute("email", guestbook.getEmail()==null?"":guestbook.getEmail());
+			model.addAttribute("reply", guestbook.getReply()==null?"":guestbook.getReply());
+			if(guestbook.getReplayTime()!=null){
+				model.addAttribute("replyTime", formatter.format(guestbook.getReplayTime()));
+			}else{
+				model.addAttribute("replyTime", "");
+			}
+			
+			model.addAttribute("grxxgk", guestbook.getGrxxgk()==null?"":guestbook.getGrxxgk());
+			model.addAttribute("xjsfgk", guestbook.getXjsfgk()==null?"":guestbook.getXjsfgk());
+			model.addAttribute("fileList",guestbook.getFileList());
 			int cs = guestbook.getDjcs();
 			CmsGuestbookExt ext = new CmsGuestbookExt();
 			ext.setId(dataId);
@@ -155,19 +166,30 @@ public class GuestbookAct {
 		CmsGuestbook guestbook = null;
 		guestbook = cmsGuestbookMng.findById(dataId);
 		if (guestbook != null) {
-			model.addAttribute("title", guestbook.getTitle());
-			model.addAttribute("content", guestbook.getContent());
-			model.addAttribute("createTime", formatter.format(guestbook.getCreateTime()));
-			model.addAttribute("xm", guestbook.getXm());
-			model.addAttribute("wtfsd", guestbook.getWtfsd());
-			model.addAttribute("phone", guestbook.getPhone());
-			model.addAttribute("txdz", guestbook.getTxdz());
-			model.addAttribute("yb", guestbook.getYb());
-			model.addAttribute("email", guestbook.getEmail());
-			model.addAttribute("reply", guestbook.getReply());
-			model.addAttribute("replyTime", formatter.format(guestbook.getReplayTime()));
-			model.addAttribute("grxxgk", guestbook.getGrxxgk());
-			model.addAttribute("xjsfgk", guestbook.getXjsfgk());
+			model.addAttribute("title", guestbook.getTitle()+"");
+			model.addAttribute("content", guestbook.getContent()+"");
+			if(guestbook.getCreateTime()!=null){
+				model.addAttribute("createTime", formatter.format(guestbook.getCreateTime()));
+			}else{
+				model.addAttribute("createTime", "");
+			}
+			
+			model.addAttribute("xm", guestbook.getXm()==null?"":guestbook.getXm());
+			model.addAttribute("wtfsd", guestbook.getWtfsd()==null?"":guestbook.getWtfsd());
+			model.addAttribute("phone", guestbook.getPhone()==null?"":guestbook.getPhone());
+			model.addAttribute("txdz", guestbook.getTxdz()==null?"":guestbook.getTxdz());
+			model.addAttribute("yb", guestbook.getYb()==null?"":guestbook.getYb());
+			model.addAttribute("email", guestbook.getEmail()==null?"":guestbook.getEmail());
+			model.addAttribute("reply", guestbook.getReply()==null?"":guestbook.getReply());
+			if(guestbook.getReplayTime()!=null){
+				model.addAttribute("replyTime", formatter.format(guestbook.getReplayTime()));
+			}else{
+				model.addAttribute("replyTime", "");
+			}
+			
+			model.addAttribute("grxxgk", guestbook.getGrxxgk()==null?"":guestbook.getGrxxgk());
+			model.addAttribute("xjsfgk", guestbook.getXjsfgk()==null?"":guestbook.getXjsfgk());
+			model.addAttribute("fileList",guestbook.getFileList());
 			int cs = guestbook.getDjcs();
 			CmsGuestbookExt ext = new CmsGuestbookExt();
 			ext.setId(dataId);

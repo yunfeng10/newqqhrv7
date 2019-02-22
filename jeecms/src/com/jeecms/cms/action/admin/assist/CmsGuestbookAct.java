@@ -241,14 +241,14 @@ public class CmsGuestbookAct {
 
 	@RequiresPermissions("guestbook:o_save")
 	@RequestMapping("/guestbook/o_save.do")
-	public String save(CmsGuestbook bean, CmsGuestbookExt ext, Integer ctgId,Integer queryCtgId,
+	public String save(CmsGuestbook bean, CmsGuestbookExt ext, Integer ctgId,Integer queryCtgId,String[] attachmentPaths, String[] attachmentNames,
 			HttpServletRequest request, ModelMap model) {
 		WebErrors errors = validateSave(bean, request);
 		if (errors.hasErrors()) {
 			return errors.showErrorPage(model);
 		}
 		String ip = RequestUtils.getIpAddr(request);
-		bean = manager.save(bean, ext, ctgId, ip);
+		bean = manager.save(bean, ext, ctgId, ip,attachmentPaths,attachmentNames);
 		log.info("save CmsGuestbook id={}", bean.getId());
 		cmsLogMng.operating(request, "cmsGuestbook.log.save", "id="
 				+ bean.getId() + ";title=" + bean.getTitle());
@@ -259,7 +259,7 @@ public class CmsGuestbookAct {
 	@RequestMapping("/guestbook/o_update.do")
 	public String update(Integer queryCtgId, Boolean queryRecommend,
 			Boolean queryChecked, String oldreply,CmsGuestbook bean, CmsGuestbookExt ext,
-			Integer ctgId, Integer pageNo, HttpServletRequest request,
+			Integer ctgId, Integer pageNo,String[] attachmentPaths, String[] attachmentNames, HttpServletRequest request,
 			ModelMap model) {
 		WebErrors errors = validateUpdate(bean.getId(), request);
 		if (errors.hasErrors()) {
@@ -276,7 +276,7 @@ public class CmsGuestbookAct {
 				bean.setAdmin(CmsUtils.getUser(request));
 			}
 		}
-		bean = manager.update(bean, ext, ctgId);
+		bean = manager.update(bean, ext, ctgId,attachmentPaths,attachmentNames);
 		log.info("update CmsGuestbook id={}.", bean.getId());
 		cmsLogMng.operating(request, "cmsGuestbook.log.update", "id="
 				+ bean.getId() + ";title=" + bean.getTitle());
