@@ -89,21 +89,20 @@
                     </tr>
                 </table>
             </div>
+            [#if fileList??]
             <div class="desc">
 	            <h4 class="colum-title">附件下载</h4>
 	        </div>
 	        <div class="fj-download">
 	            <ul>
-	            	[#if fileList??]
-	                    	[#list fileList as file]
-	                    	<li>
-				                    <a href="${file.attachmentPaths}">${file.attachmentNames}</a>
-				                </li>
-	                    	[/#list]
-	                    [/#if]
-	
+                   	[#list fileList as file]
+                   	<li>
+		                    <a href="${file.attachmentPaths}">${file.attachmentNames}</a>
+		                </li>
+                   	[/#list]
 	            </ul>
 	        </div>
+	        [/#if]
         </div>
     </div>
     <!-- 页面主体 end -->
